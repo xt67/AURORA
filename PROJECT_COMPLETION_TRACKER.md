@@ -11,10 +11,13 @@ Updated 10 November 2026. Working branch: `aurora-refinement`.
 | Verification | Artificial fixture and regression checks documented in [test report](docs/TEST_REPORT.md); they do not validate medical images |
 | Repository | Obsolete download/baseline scripts, duplicate planning docs, stale requirements, generated logs/results and exploratory split removed from public tracking; local copies preserved |
 | Research | 206 pair decisions unresolved; canonical dataset, split, protocol and first run require actual researcher approval |
+| Pair screening | All 206 pairs visually screened by AI: 203 provisional distinct-image recommendations, 3 unresolved; local notes remain separate from human decisions |
 | Manuscript | Working draft with methods and references; results and conclusions pending experiments; no supervisor or clinical review claimed |
 | Deployment | Local package/app checks passed previously; Docker and account-based public hosting still unverified |
 
 No publication experiments or paper submission have occurred. A sole researcher can perform technical review and approve their study; published papers cannot supply case-specific decisions or clinical validation. The protocol amendment is proposed, not approved.
+
+The researcher has authorized publication experiments and chosen to retain all 800 images, completing pair review before training. File-integrity checks passed for all 800. No final manual decision CSV or canonical manifest exists yet. AI screening is complete but is not human approval: MR-066, MR-067 and MR-088 remain ambiguous after closer original-image display inspection; the other 203 recommendations also require researcher approval. No exclusions, relabelling or publication training occurred. The review UI can display hash-bound, read-only AI notes without filling decision fields.
 
 ## Remaining scope
 

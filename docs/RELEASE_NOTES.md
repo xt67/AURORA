@@ -1,5 +1,7 @@
 # MediSyn 0.2.0 — software release candidate
 
+Local review assistance now supports hash-bound AI screening notes in a collapsed, read-only panel and a filter for uncertain recommendations. Notes cannot populate or save human decisions. Actual medical images and per-pair notes remain local; no publication run is implied.
+
 This release contains software and research documentation, not a completed scientific study or published paper.
 
 ## Implemented

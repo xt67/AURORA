@@ -12,6 +12,7 @@ METRICS_CSV = ROOT / "outputs" / "provenance" / "nlm_candidate_metrics.csv"
 REVIEW_CSV = ROOT / "outputs" / "provenance" / "nlm_near_duplicate_review.csv"
 MANIFEST_CSV = ROOT / "data" / "reference" / "nlm_original" / "reference_manifest.csv"
 DECISIONS_CSV = ROOT / "outputs" / "provenance" / "manual_review_decisions.csv"
+AI_REVIEW_JSON = ROOT / "outputs" / "provenance" / "ai_review_recommendations.json"
 CONTACT_DIRS = [
     ROOT / "outputs" / "provenance" / "manual_review_contact_sheets",
     ROOT / "outputs" / "provenance" / "contact_sheets",
@@ -81,8 +82,32 @@ def image_meta(cohort, filename):
         "path": str(path),
     }
 
+def load_ai_recommendations():
+    """Read-only assistance; stale/malformed notes never become human decisions."""
+    try:
+        bundle = json.loads(AI_REVIEW_JSON.read_text(encoding="utf-8"))
+        if bundle.get("status") != "AI_ASSISTED_RECOMMENDATIONS_NOT_HUMAN_DECISIONS":
+            return {}
+        for key, path in (("index_sha256", INDEX_CSV), ("reference_sha256", MANIFEST_CSV)):
+            if bundle.get(key) != hashlib.sha256(path.read_bytes()).hexdigest():
+                return {}
+        recommendations = bundle["recommendations"]
+        by_id = {r["pair_id"]: r for r in recommendations}
+        if len(by_id) != len(recommendations):
+            return {}
+        for pair in load_csv(INDEX_CSV):
+            row = by_id.get(pair["pair_id"])
+            if row and (row["image_a_filename"] != pair["file1"] or row["image_b_filename"] != pair["file2"]
+                        or row["recommendation"] not in {"SIMILAR_BUT_DISTINCT", "UNRESOLVED"}):
+                return {}
+        return by_id
+    except (OSError, ValueError, KeyError, TypeError, AttributeError):
+        return {}
+
+
 def build_pairs():
     pairs = []
+    assistance = load_ai_recommendations()
     for r in load_csv(INDEX_CSV):
         key = (r["cohort1"], r["file1"], r["cohort2"], r["file2"])
         m = METRICS.get(key, {})
@@ -91,6 +116,7 @@ def build_pairs():
         cs = resolve_contact_sheet(r.get("contact_sheet", ""))
         pairs.append({
             "pair_id": r["pair_id"],
+            "ai_assistance": assistance.get(r["pair_id"]),
             "priority": r["priority"],
             "image_a": a,
             "image_b": b,

@@ -24,6 +24,8 @@ Latest pass includes A3 fixture training, deterministic duplication, non-integer
 Latest reporting checks cover complete-grid enforcement, rejection of exploratory/config-mismatched inputs, private-field omission, frozen-file hash checks, overwrite refusal, and measured-report display in Streamlit.
 
 ## Coverage
+
+Follow-up review-assistance check: **23 targeted review/data/study-runner tests passed in 13.01s** (13 dependency warnings). The new test verifies that assistance does not write human decisions and that changed hashes, mismatched image identities and malformed JSON invalidate notes. The previous 72-test full-suite result predates this UI assistance change.
 Dataset transforms and labels; immutable split preservation; high-bit-depth rejection; finite binary metric inputs; isolated logs; CPU/CUDA GAN and WGAN-GP optimization; critic group independence; checkpoint round trips; deterministic generation; valid PNG encoding; classifier synthetic-batch progression; CPU and CUDA fixed-update classification; all A0/A1/A2/A3/G1 fixture arms; nested budgets; reviewed duplicate grouping; changed-image/hash leakage detection; missing/changed approval rejection; validation-selected thresholds; grouped bootstrap, paired identity checks and calibration; KID estimator arithmetic; nearest-neighbour matching; local review history/path safety; all demo pages, actual fixture-model generation and corrupt checkpoint handling.
 
 All training tests use small artificial images and untrained/tiny fixture models. They do not use unresolved NLM images to claim experimental success. Human review decisions in tests are explicitly artificial fixtures and are never written into the actual review package.

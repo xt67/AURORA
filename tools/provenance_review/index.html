@@ -43,6 +43,7 @@
     <select id="filterStatus">
       <option value="">All</option>
       <option value="unreviewed">Unreviewed</option>
+      <option value="ai_uncertain">AI flagged for closer inspection</option>
       <option value="reviewed">Reviewed</option>
       <option value="CONFIRMED_DUPLICATE">Confirmed</option>
       <option value="PROBABLE_DUPLICATE">Probable</option>
@@ -110,6 +111,11 @@
 </section>
 
 <section id="decision" class="card">
+  <details>
+    <summary>AI-assisted screening notes (not a human decision)</summary>
+    <p id="aiAssistance">No AI assistance available.</p>
+    <p>Inspect the images yourself. These provisional notes do not validate diagnoses or patient independence. Nothing is automatically selected or saved.</p>
+  </details>
   <h2>Human Decision</h2>
   <p>No decision is preselected. The researcher must explicitly choose.</p>
   <div class="decision-buttons">

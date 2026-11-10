@@ -48,6 +48,7 @@ function applyFilters() {
     if (cohort && !cohortMatch(pair, cohort)) return false;
     if (labels && labelCombo(pair) !== labels) return false;
     const reviewed = isReviewed(pair);
+    if (status === "ai_uncertain") return pair.ai_assistance?.recommendation === "UNRESOLVED";
     if (status === "unreviewed" && reviewed) return false;
     if (status === "reviewed" && !reviewed) return false;
     if (status && status !== "unreviewed" && status !== "reviewed") {
@@ -101,6 +102,10 @@ function renderCurrent() {
   document.getElementById("mSsim").textContent = pair.ssim_512;
   document.getElementById("mEcc").textContent = pair.ecc;
   document.getElementById("mStatus").textContent = pair.existing_status;
+  const assistance = pair.ai_assistance;
+  document.getElementById("aiAssistance").textContent = assistance
+    ? `${assistance.recommendation} (AI suggestion only). ${assistance.basis} ${assistance.cross_label_note} Inspection: ${assistance.inspection}.`
+    : "No current AI screening notes are available for this pair.";
 
   const contact = document.getElementById("mContact");
   if (pair.contact_sheet_name) {
