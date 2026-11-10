@@ -14,8 +14,11 @@ def setup_logger(name: str = "aurora", log_dir: str = "outputs/logs") -> logging
     Returns:
         Configured logger instance.
     """
-    logger = logging.getLogger(name)
+    # Each experiment owns its handlers; reusing a name must not redirect logs
+    # into the first experiment's directory.
+    logger = logging.getLogger(f"{name}:{Path(log_dir).resolve()}")
     logger.setLevel(logging.DEBUG)
+    logger.propagate = False
     
     if logger.handlers:
         return logger

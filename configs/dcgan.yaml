@@ -19,11 +19,12 @@ beta2: 0.999
 
 epochs: 200
 d_steps: 1
-batch_size: 32
+batch_size: 16
 label_smoothing: 0.9
 
 # Mixed precision training
-use_amp: true
+# Current sigmoid/BCE implementation runs in full precision.
+use_amp: false
 
 # Loss type: "bce" or "wgan-gp"
 loss_type: "bce"

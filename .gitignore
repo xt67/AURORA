@@ -53,3 +53,15 @@ outputs/logs/
 # Jupyter
 .ipynb_checkpoints/
 *.ipynb
+
+# Local research material and generated artifacts (never publish by accident)
+data/reference/
+data/final/
+outputs/
+*.docx
+.venv*/
+.pytest_cache/
+opencode.json
+.env
+.env.*
+!configs/*.example.json

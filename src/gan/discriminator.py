@@ -10,27 +10,31 @@ class Discriminator(nn.Module):
         nc: Number of input channels (1 for grayscale).
     """
     
-    def __init__(self, ndf: int = 64, nc: int = 1):
+    def __init__(self, ndf: int = 64, nc: int = 1, loss_type: str = "bce"):
         super(Discriminator, self).__init__()
+        if loss_type not in ("bce", "wgan-gp"):
+            raise ValueError(f"Unsupported loss: {loss_type}")
+        # Gradient penalties require per-example scores, without batch coupling.
+        norm = nn.BatchNorm2d if loss_type == "bce" else lambda _: nn.Identity()
         
         self.main = nn.Sequential(
             nn.Conv2d(nc, ndf, 4, 2, 1, bias=False),
             nn.LeakyReLU(0.2, inplace=True),
             
             nn.Conv2d(ndf, ndf * 2, 4, 2, 1, bias=False),
-            nn.BatchNorm2d(ndf * 2),
+            norm(ndf * 2),
             nn.LeakyReLU(0.2, inplace=True),
             
             nn.Conv2d(ndf * 2, ndf * 4, 4, 2, 1, bias=False),
-            nn.BatchNorm2d(ndf * 4),
+            norm(ndf * 4),
             nn.LeakyReLU(0.2, inplace=True),
             
             nn.Conv2d(ndf * 4, ndf * 8, 4, 2, 1, bias=False),
-            nn.BatchNorm2d(ndf * 8),
+            norm(ndf * 8),
             nn.LeakyReLU(0.2, inplace=True),
             
             nn.Conv2d(ndf * 8, 1, 4, 1, 0, bias=False),
-            nn.Sigmoid()
+            nn.Sigmoid() if loss_type == "bce" else nn.Identity()
         )
         
         self.apply(self._weights_init)

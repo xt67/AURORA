@@ -13,10 +13,19 @@ def compute_metrics(y_true: np.ndarray, y_pred: np.ndarray, y_probs: np.ndarray 
     Returns:
         Dictionary containing metrics.
     """
-    cm = confusion_matrix(y_true, y_pred)
+    y_true, y_pred = np.asarray(y_true), np.asarray(y_pred)
+    if y_true.ndim != 1 or y_pred.shape != y_true.shape or len(y_true) == 0:
+        raise ValueError("Expected nonempty, aligned one-dimensional labels")
+    if not np.isin(y_true, [0, 1]).all() or not np.isin(y_pred, [0, 1]).all():
+        raise ValueError("Binary labels must be 0 or 1")
+    if y_probs is not None:
+        y_probs = np.asarray(y_probs)
+        if y_probs.shape != y_true.shape or not np.isfinite(y_probs).all() or ((y_probs < 0) | (y_probs > 1)).any():
+            raise ValueError("Expected aligned finite positive-class probabilities in [0, 1]")
+    cm = confusion_matrix(y_true, y_pred, labels=[0, 1])
     if cm.size == 4:
         tn, fp, fn, tp = cm.ravel().tolist()
-        specificity = (tn / (tn + fp)) if (tn + fp) > 0 else 0.0
+        specificity = (tn / (tn + fp)) if (tn + fp) > 0 else None
     else:
         specificity = None
 
@@ -30,6 +39,9 @@ def compute_metrics(y_true: np.ndarray, y_pred: np.ndarray, y_probs: np.ndarray 
     }
 
     if y_probs is not None:
+        if len(np.unique(y_true)) < 2:
+            metrics.update(roc_auc=None, auprc=None)
+            return metrics
         try:
             metrics["roc_auc"] = roc_auc_score(y_true, y_probs)
         except ValueError:

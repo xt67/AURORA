@@ -36,12 +36,20 @@ def train_gan(
     """
     with open(config_path, "r") as f:
         config = yaml.safe_load(f)
+    if len(data_loader) == 0:
+        raise ValueError("Training loader must be nonempty")
+    if config.get("image_size", 128) != 128:
+        raise ValueError("This generator requires image_size=128")
+    if config.get("checkpoint_every", 10) < 1:
+        raise ValueError("checkpoint_every must be positive")
     
     seed = config.get("seed", 42)
     set_seed(seed)
     
     output_path = Path(output_dir)
     output_path.mkdir(parents=True, exist_ok=True)
+    (output_path / "models").mkdir(exist_ok=True)
+    (output_path / "config.yaml").write_text(yaml.safe_dump(config))
     
     logger = setup_logger("gan_train", str(output_path / "logs"))
     writer = SummaryWriter(str(output_path / "runs")) if SummaryWriter is not None else None
@@ -54,11 +62,16 @@ def train_gan(
     epochs = config["epochs"]
     d_steps = config.get("d_steps", 1)
     label_smoothing = config.get("label_smoothing", 0.9)
-    use_amp = config.get("use_amp", True) and (device.type == "cuda")
+    # Sigmoid+BCELoss is unsafe under autocast; GP also runs in FP32.
+    use_amp = False
     loss_type = config.get("loss_type", "bce")
+    if loss_type not in ("bce", "wgan-gp"):
+        raise ValueError("loss_type must be bce or wgan-gp")
+    if epochs < 1 or d_steps < 1:
+        raise ValueError("epochs and d_steps must be positive")
     
     netG = Generator(z_dim=z_dim, ngf=config.get("ngf", 64), nc=1).to(device)
-    netD = Discriminator(ndf=config.get("ndf", 64), nc=1).to(device)
+    netD = Discriminator(ndf=config.get("ndf", 64), nc=1, loss_type=loss_type).to(device)
     
     optimizerG = optim.Adam(netG.parameters(), lr=lr_g, betas=(beta1, beta2))
     optimizerD = optim.Adam(netD.parameters(), lr=lr_d, betas=(beta1, beta2))
@@ -67,7 +80,7 @@ def train_gan(
     
     oom_guard = OOMGuard(logger)
     
-    fixed_noise = torch.randn(64, z_dim, 1, 1, device=device)
+    fixed_noise = torch.randn(16, z_dim, 1, 1, device=device)
     
     g_losses = []
     d_losses = []
@@ -82,6 +95,10 @@ def train_gan(
         for i, (real_images, _) in enumerate(data_loader):
             batch_size = real_images.size(0)
             real_images = real_images.to(device)
+            if real_images.shape[1:] != (1, 128, 128):
+                raise ValueError("Expected grayscale 128x128 input")
+            if not torch.isfinite(real_images).all() or real_images.min() < -1 or real_images.max() > 1:
+                raise ValueError("Expected finite GAN inputs normalized to [-1, 1]")
             
             noise = torch.randn(batch_size, z_dim, 1, 1, device=device)
             
@@ -94,10 +111,11 @@ def train_gan(
                 for _ in range(d_steps):
                     netD.zero_grad()
                     
-                    with torch.amp.autocast(device_type="cuda", enabled=use_amp):
+                    with torch.cuda.amp.autocast(enabled=use_amp):
                         output_real = netD(real_images)
                         
-                        fake_images = netG(noise).detach()
+                        with torch.no_grad():
+                            fake_images = netG(noise)
                         output_fake = netD(fake_images)
                         
                         lossD = criterion.discriminator_loss(
@@ -106,28 +124,35 @@ def train_gan(
                     
                     if loss_type == "wgan-gp":
                         gp = compute_gradient_penalty(netD, real_images, fake_images, device)
-                        lossD = lossD + 10 * gp
+                        lossD = lossD + config.get("lambda_gp", 10.0) * gp
                     
+                    if not torch.isfinite(lossD):
+                        raise FloatingPointError("Non-finite discriminator loss before update")
                     lossD.backward()
+                    if any(p.grad is not None and not torch.isfinite(p.grad).all() for p in netD.parameters()):
+                        raise FloatingPointError("Non-finite discriminator gradient before update")
                     if loss_type == "bce":
                         torch.nn.utils.clip_grad_norm_(netD.parameters(), 1.0)
                     optimizerD.step()
             
             netG.zero_grad()
             
-            with torch.amp.autocast(device_type="cuda", enabled=use_amp):
+            netD.requires_grad_(False)
+            netD.eval()
+            with torch.cuda.amp.autocast(enabled=use_amp):
                 fake_images = netG(noise)
                 output_fake = netD(fake_images)
                 lossG = criterion.generator_loss(output_fake, target_real=True)
             
+            if not torch.isfinite(lossG):
+                raise FloatingPointError("Non-finite generator loss before update")
             lossG.backward()
+            if any(p.grad is not None and not torch.isfinite(p.grad).all() for p in netG.parameters()):
+                raise FloatingPointError("Non-finite generator gradient before update")
             torch.nn.utils.clip_grad_norm_(netG.parameters(), 1.0)
             optimizerG.step()
-            
-            # Skip if NaN detected
-            if torch.isnan(lossG) or torch.isnan(lossD):
-                logger.warning(f"NaN detected at epoch {epoch}, batch {i}. Skipping update.")
-                continue
+            netD.requires_grad_(True)
+            netD.train()
             
             epoch_g_loss += lossG.item()
             epoch_d_loss += lossD.item()
@@ -148,32 +173,35 @@ def train_gan(
             writer.add_scalar("Loss/Generator", avg_g_loss, epoch)
             writer.add_scalar("Loss/Discriminator", avg_d_loss, epoch)
         
-        if (epoch + 1) % 10 == 0:
+        if (epoch + 1) % config.get("checkpoint_every", 10) == 0 or epoch + 1 == epochs:
             checkpoint_dir = output_path / "checkpoints"
             checkpoint_dir.mkdir(exist_ok=True)
             torch.save({
-                "epoch": epoch,
+                "epoch": epoch + 1,
+                "config": config,
                 "netG_state": netG.state_dict(),
                 "netD_state": netD.state_dict(),
                 "optimizerG_state": optimizerG.state_dict(),
                 "optimizerD_state": optimizerD.state_dict(),
             }, checkpoint_dir / f"checkpoint_epoch_{epoch+1}.pth")
             
+            netG.eval()
             with torch.no_grad():
                 fake = netG(fixed_noise)
                 save_image_grid(
                     fake,
                     str(output_path / "samples" / f"epoch_{epoch+1}.png"),
-                    nrow=8
+                    nrow=4
                 )
-        
-        if (epoch + 1) % 25 == 0:
-            torch.save(netG.state_dict(), output_path / "models" / "generator_latest.pth")
+            netG.train()
         
         # Ensure models directory exists
         (output_path / "models").mkdir(exist_ok=True)
-        torch.save(netG.state_dict(), output_path / "models" / "generator_best.pth")
-    logger.info("Training complete! Best model saved.")
+        torch.save({"netG_state": netG.state_dict(), "config": config, "epoch": epoch + 1},
+                   output_path / "models" / "generator_latest.pth")
+    if writer is not None:
+        writer.close()
+    logger.info("Training complete! Latest model saved (no quality-based selection performed).")
     
     np.save(output_path / "g_losses.npy", np.array(g_losses))
     np.save(output_path / "d_losses.npy", np.array(d_losses))
@@ -185,7 +213,16 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", type=str, default="configs/dcgan.yaml")
     parser.add_argument("--device", type=str, default="cuda" if torch.cuda.is_available() else "cpu")
+    parser.add_argument("--data-dir", required=True, help="Training partition only, containing class folders")
+    parser.add_argument("--target-class", default="Tuberculosis")
+    parser.add_argument("--output-dir", default="outputs/gan")
     args = parser.parse_args()
     
     device = torch.device(args.device)
     print(f"Using device: {device}")
+    from src.data_loader import MedicalImageDataset, get_transforms
+    config = yaml.safe_load(Path(args.config).read_text())
+    dataset = MedicalImageDataset(args.data_dir, get_transforms(is_training=False), [args.target_class])
+    loader = torch.utils.data.DataLoader(dataset, batch_size=config.get("batch_size", 16),
+                                         shuffle=True, num_workers=0, drop_last=False)
+    train_gan(args.config, loader, device, args.output_dir)

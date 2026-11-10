@@ -1,187 +1,63 @@
+"""MediSyn research demo: only measured results and trained checkpoints."""
+import json
+import os
+from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
 import streamlit as st
 import torch
-import torchvision.utils as vutils
-from pathlib import Path
-import numpy as np
-import plotly.express as px
-import pandas as pd
+from src.gan.inference import load_generator, generate_images, png_grid
 
-from src.gan.generator import Generator
-from src.utils.seed import set_seed
-
-
-st.set_page_config(page_title="MediSyn - AURORA", layout="wide")
-
-
-@st.cache_resource
-def load_generator(model_path: str, device: torch.device):
-    """Load pre-trained generator model."""
-    if not Path(model_path).exists():
-        return None
-    
-    netG = Generator(z_dim=100, ngf=64, nc=1)
-    netG.load_state_dict(torch.load(model_path, map_location=device))
-    netG.eval()
-    return netG
-
-
-def generate_images(netG, num_images: int, z_dim: int, device: torch.device):
-    """Generate synthetic images."""
-    with torch.no_grad():
-        noise = torch.randn(num_images, z_dim, 1, 1, device=device)
-        fake_images = netG(noise)
-    return fake_images
+st.set_page_config(page_title="MediSyn | AURORA", layout="wide")
 
 
 def main():
-    st.title("MediSyn")
-    st.markdown("### AURORA — Synthetic Medical Image Generation for Rare Diseases")
-    
-    st.sidebar.title("Navigation")
-    page = st.sidebar.radio("Go to", ["Overview", "Generator", "Results", "Technical"])
-    
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    
+    st.title("MediSyn | AURORA")
+    st.caption("Synthetic chest X-ray augmentation research")
+    st.warning("Research prototype. Generated images are synthetic and are not validated for diagnosis or clinical use.")
+    page = st.sidebar.radio("Navigation", ["Overview", "Generator", "Results"])
     if page == "Overview":
-        st.markdown("""
-        ## Problem Statement
-        Medical imaging datasets are severely imbalanced. Rare conditions like Tuberculosis (TB)
-        have very few annotated images, causing AI classifiers to underperform exactly where they
-        are needed most.
-        
-        **AURORA (MediSyn)** solves this by generating statistically realistic synthetic X-ray images
-        that can balance training sets while addressing privacy concerns.
-        
-        ### Key Features
-        - Privacy-preserving (no real patient data needed)
-        - GAN-based synthetic image generation
-        - Quantitative evaluation with FID scores
-        - Downstream classifier improvement demonstration
-        """)
-        
-        st.markdown("### Sample Real Images")
-        st.info("Place sample images in data/samples/ to display here.")
-        
+        st.markdown("AURORA investigates whether synthetic TB-labelled training images improve a classifier under controlled data scarcity.")
+        st.markdown("Generators learn from real training images. Synthetic output does not by itself guarantee privacy or preserve diagnostic findings.")
+        st.info("The current NLM research protocol has unresolved duplicate review. Earlier mixed-source smoke results are not final paper evidence.")
+        st.markdown("[Project repository](https://github.com/xt67/medimage-synth)")
     elif page == "Generator":
-        st.markdown("## Synthetic Image Generator")
-        
-        model_path = "outputs/models/generator_best.pth"
-        netG = load_generator(model_path, device)
-        
-        if netG is None:
-            st.error("Model not loaded - please run GAN training first.")
-            st.markdown("""
-            To generate synthetic images:
-            1. Train the GAN using `python src/gan/train_gan.py --config configs/dcgan.yaml`
-            2. The model will be saved to `outputs/models/generator_best.pth`
-            """)
+        checkpoint = Path(os.environ.get("AURORA_CHECKPOINT", str(ROOT / "outputs/gan/models/generator_latest.pth")))
+        if not checkpoint.is_file():
+            st.info("No trained checkpoint is installed. Generation will be available after training and model review.")
             return
-        
-        col1, col2 = st.columns([1, 3])
-        
-        with col1:
-            num_images = st.slider("Number of images", 1, 8, 4)
-            seed_val = st.number_input("Random seed", value=42)
-            
-            generate_btn = st.button("Generate Synthetic X-ray")
-            
-            if generate_btn:
-                set_seed(seed_val)
-                fake_images = generate_images(netG, num_images, 100, device)
-                
-                st.session_state.fake_images = fake_images
-                st.session_state.generated = True
-        
-        with col2:
-            if st.session_state.get("generated"):
-                st.markdown("### Generated Images")
-                images = st.session_state.fake_images
-                
-                grid = vutils.make_grid(images, nrow=4, normalize=True, range=(-1, 1))
-                grid_np = grid.permute(1, 2, 0).cpu().numpy()
-                st.image(grid_np, clamp=True, use_container_width=True)
-
-                st.download_button(
-                    "Download Images",
-                    data=vutils.make_grid(images, nrow=4, normalize=True, range=(-1, 1)).cpu().numpy().tobytes(),
-                    file_name="synthetic_xrays.png"
-                )
-                
-    elif page == "Results":
-        st.markdown("## Classifier Comparison Dashboard")
-        
-        st.markdown("### Baseline vs Augmented Comparison")
-        
-        baseline_data = {
-            "Metric": ["Accuracy", "Precision", "Recall", "F1 Score"],
-            "Value": [0.82, 0.78, 0.65, 0.71],
-            "Experiment": ["Baseline"] * 4
-        }
-        
-        augmented_data = {
-            "Metric": ["Accuracy", "Precision", "Recall", "F1 Score"],
-            "Value": [0.88, 0.85, 0.82, 0.83],
-            "Experiment": ["Augmented"] * 4
-        }
-        
-        df = pd.DataFrame(baseline_data["Metric"])
-        df["Baseline"] = baseline_data["Value"]
-        df["Augmented"] = augmented_data["Value"]
-        df["Improvement"] = df["Augmented"] - df["Baseline"]
-        
-        st.dataframe(df, use_container_width=True)
-        
-        fig = px.bar(
-            df, x="Metric", y=["Baseline", "Augmented"],
-            barmode="group", title="Baseline vs Augmented Performance",
-            labels={"value": "Score", "variable": "Experiment"}
-        )
-        st.plotly_chart(fig, use_container_width=True)
-        
-        improvement = df[df["Metric"] == "Recall"]["Improvement"].values[0]
-        st.success(f"Augmentation improved minority-class recall by {improvement*100:.1f}%!")
-        
-    elif page == "Technical":
-        st.markdown("## Technical Details")
-        
-        st.markdown("### DCGAN Architecture")
-        st.markdown("""
-        - Generator: 5-layer ConvTranspose2d with BatchNorm + ReLU
-        - Discriminator: 5-layer Conv2d with BatchNorm + LeakyReLU
-        - Input: 100D noise vector
-        - Output: 128x128 grayscale images
-        """)
-        
-        st.markdown("### Training Configuration")
-        st.code("""
-z_dim: 100
-lr_g: 0.0002
-lr_d: 0.0002
-epochs: 200
-batch_size: 32
-loss_type: BCE
-        """)
-        
-        fid_path = "outputs/fid_log.csv"
-        if Path(fid_path).exists():
-            fid_df = pd.read_csv(fid_path)
-            fig = px.line(fid_df, x="epoch", y="fid_score", title="FID Score Over Epochs")
-            st.plotly_chart(fig, use_container_width=True)
-        
-        st.markdown("### Links")
-        st.markdown("[GitHub Repository](#)")
-        st.markdown("[BTech Report](#)")
-        
-        st.markdown("""
-        ### Ethical Considerations
-        - This project uses ONLY publicly available, ethically approved datasets
-        - Synthetic images are generated de-novo from noise
-        - NOT for clinical use - research tool only
-        """)
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        try:
+            model, config = load_generator(checkpoint, device)
+        except (ValueError, RuntimeError, KeyError, OSError) as exc:
+            st.error(f"Unable to load the configured model: {exc}")
+            return
+        count = st.slider("Synthetic images", 1, 8, 4)
+        seed = st.number_input("Seed", min_value=0, max_value=2147483647, value=42)
+        if st.button("Generate synthetic images"):
+            images = generate_images(model, count, config["z_dim"], int(seed))
+            st.session_state["png"] = png_grid(images)
+        if "png" in st.session_state:
+            st.image(st.session_state["png"], caption="Synthetic research images", use_column_width=True)
+            st.download_button("Download synthetic PNG grid", st.session_state["png"],
+                               file_name="aurora_synthetic_grid.png", mime="image/png")
+    else:
+        path = Path(os.environ.get("AURORA_RESULTS", str(ROOT / "outputs/paper_results.json")))
+        if not path.is_file():
+            st.info("No verified experiment results have been published. No performance improvement is claimed.")
+            return
+        try:
+            report = json.loads(path.read_text())
+            if report.get("status") != "verified" or not report.get("protocol") or not report.get("experiments"):
+                raise ValueError("Results require verified status, protocol, and measured experiments")
+        except (ValueError, OSError, AttributeError) as exc:
+            st.error(f"Results cannot be displayed: {exc}")
+            return
+        st.caption(f"Protocol: {report['protocol']}")
+        st.json(report)
 
 
 if __name__ == "__main__":
-    if "generated" not in st.session_state:
-        st.session_state.generated = False
-    
     main()

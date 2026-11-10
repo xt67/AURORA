@@ -21,7 +21,7 @@ def save_image_grid(images: torch.Tensor, filepath: str, nrow: int = 8, normaliz
     output_path = Path(filepath)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     
-    grid = vutils.make_grid(images, nrow=nrow, normalize=normalize, range=range)
+    grid = vutils.make_grid(images, nrow=nrow, normalize=normalize, value_range=range)
     vutils.save_image(grid, output_path)
 
 

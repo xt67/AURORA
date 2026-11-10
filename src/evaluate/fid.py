@@ -21,7 +21,7 @@ def compute_fid(real_images_path: str, fake_images_path: str, device: str = "cud
     return fid_score
 
 
-def compute_fid_from_tensors(real_images: torch.Tensor, fake_images: torch.Tensor, device: str = "cuda") -> float:
+def compute_fid_from_tensors(real_images: torch.Tensor, fake_images: torch.Tensor, device: str = "cuda", input_range: tuple = (-1, 1)) -> float:
     """Compute FID score from image tensors.
     
     Args:
@@ -34,20 +34,20 @@ def compute_fid_from_tensors(real_images: torch.Tensor, fake_images: torch.Tenso
     """
     import tempfile
     
-    real_path = Path(tempfile.mkdtemp())
-    fake_path = Path(tempfile.mkdtemp())
-    
     from torchvision.utils import save_image
-    
-    for i, img in enumerate(real_images):
-        save_image(img, real_path / f"real_{i}.png")
-    for i, img in enumerate(fake_images):
-        save_image(img, fake_path / f"fake_{i}.png")
-    
-    fid_score = compute_fid(str(real_path), str(fake_path), device)
-    
-    import shutil
-    shutil.rmtree(real_path)
-    shutil.rmtree(fake_path)
-    
-    return fid_score
+    low, high = input_range
+    if high <= low:
+        raise ValueError("input_range must be increasing")
+    for images in (real_images, fake_images):
+        if len(images) < 2 or not torch.isfinite(images).all():
+            raise ValueError("FID requires at least two finite images in each set")
+        if images.min() < low or images.max() > high:
+            raise ValueError("Images are outside input_range")
+    with tempfile.TemporaryDirectory() as folder:
+        real_path, fake_path = Path(folder) / "real", Path(folder) / "fake"
+        real_path.mkdir()
+        fake_path.mkdir()
+        for images, destination in ((real_images, real_path), (fake_images, fake_path)):
+            for i, img in enumerate(images):
+                save_image((img.detach().cpu() - low) / (high - low), destination / f"{i}.png")
+        return compute_fid(str(real_path), str(fake_path), device)

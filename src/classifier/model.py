@@ -32,6 +32,8 @@ class MedicalImageClassifier(nn.Module):
         self.model.fc = nn.Linear(in_features, num_classes)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
+        # Handle both grayscale (1-channel) and RGB (3-channel) inputs
+        # For 1-channel input (GAN-style), repeat to 3 channels
         if x.shape[1] == 1:
             x = x.repeat(1, 3, 1, 1)
         return self.model(x)
@@ -45,15 +47,37 @@ def create_classifier(num_classes: int = 2, pretrained: bool = True) -> MedicalI
 def get_class_weights(dataset, num_classes: int = 2) -> torch.Tensor:
     """Compute class weights inversely proportional to class frequency.
 
-    Handles torch.utils.data.Subset and datasets exposing `.labels`.
+    Handles:
+    - torch.utils.data.Subset wrapping a dataset with `.labels` or `.targets`
+    - torch.utils.data.Subset wrapping a TensorDataset (has `.tensors[1]` for targets)
+    - TensorDataset directly (has `.tensors[1]` for targets)
+    - Datasets exposing `.labels` or `.targets`
+    - Fall back to iterating (may be slow but robust).
     """
     from collections import Counter
 
     labels = []
-    if hasattr(dataset, "labels") and dataset.labels is not None:
+    
+    # Subset wrapping a dataset with labels
+    if hasattr(dataset, "indices"):
+        base_ds = dataset.dataset
+        # Subset of TensorDataset
+        if hasattr(base_ds, "tensors") and len(base_ds.tensors) > 1:
+            labels = [base_ds.tensors[1][i].item() for i in dataset.indices]
+        # Subset of dataset with labels
+        elif hasattr(base_ds, "labels") and base_ds.labels is not None:
+            labels = [base_ds.labels[i] for i in dataset.indices]
+        # Subset of dataset with targets
+        elif hasattr(base_ds, "targets") and base_ds.targets is not None:
+            labels = [base_ds.targets[i] for i in dataset.indices]
+    # TensorDataset directly
+    elif hasattr(dataset, "tensors") and len(dataset.tensors) > 1:
+        labels = dataset.tensors[1].tolist()
+    # Direct labels/targets attribute
+    elif hasattr(dataset, "labels") and dataset.labels is not None:
         labels = list(dataset.labels)
-    elif hasattr(dataset, "indices") and hasattr(dataset.dataset, "labels"):
-        labels = [dataset.dataset.labels[i] for i in dataset.indices]
+    elif hasattr(dataset, "targets") and dataset.targets is not None:
+        labels = list(dataset.targets)
     else:
         # Fall back to iterating (may be slow but robust).
         for _, label in dataset:

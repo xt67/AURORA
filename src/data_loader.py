@@ -2,7 +2,7 @@ import os
 import json
 import logging
 from pathlib import Path
-from typing import Tuple, Optional, Callable, List
+from typing import Tuple, Optional, Callable, List, Dict, Any
 
 import torch
 from torch.utils.data import Dataset, DataLoader, random_split
@@ -32,16 +32,20 @@ class MedicalImageDataset(Dataset):
         self.transform = transform
         self.images = []
         self.labels = []
-        self.classes = sorted([d for d in self.root_dir.iterdir() if d.is_dir()])
+        
+        # Deterministic: sort class directories by name
+        self.classes = sorted([d for d in self.root_dir.iterdir() if d.is_dir()], key=lambda x: x.name)
+        self.class_to_idx = {c.name: i for i, c in enumerate(self.classes)}
         
         if target_classes:
             self.classes = [c for c in self.classes if c.name in target_classes]
         
-        self.class_to_idx = {c.name: i for i, c in enumerate(self.classes)}
         
         skipped_files = []
         for class_dir in self.classes:
-            for img_path in class_dir.iterdir():
+            # Deterministic: sort image paths by name
+            img_paths = sorted([p for p in class_dir.iterdir() if p.is_file()], key=lambda x: x.name)
+            for img_path in img_paths:
                 if img_path.suffix.lower() in [".png", ".jpg", ".jpeg"]:
                     try:
                         img = Image.open(img_path)
@@ -76,14 +80,18 @@ class MedicalImageDataset(Dataset):
 def get_transforms(
     image_size: int = 128,
     is_training: bool = True,
-    normalize_range: Tuple[float, float] = (-1, 1)
+    normalize_range: Tuple[float, float] = (-1, 1),
+    augmentation_mode: str = "conventional",
+    for_classifier: bool = False
 ) -> transforms.Compose:
     """Create image transforms.
     
     Args:
         image_size: Target image size.
         is_training: Whether for training (with augmentation).
-        normalize_range: Range for normalization.
+        normalize_range: Range for normalization (used for GAN: [-1, 1]).
+        augmentation_mode: "none" | "conventional" | "synthetic" - controls stochastic augmentations.
+        for_classifier: If True, use ImageNet normalization for pretrained ResNet.
     
     Returns:
         Composed transforms.
@@ -93,21 +101,30 @@ def get_transforms(
         transforms.CenterCrop(image_size),
     ]
     
-    if is_training:
+    # Only apply stochastic augmentations during training AND when mode permits
+    if augmentation_mode not in ("none", "conventional", "synthetic"):
+        raise ValueError("Unknown augmentation_mode")
+    if is_training and augmentation_mode == "conventional":
         transform_list.extend([
             transforms.RandomHorizontalFlip(p=0.5),
             transforms.RandomAffine(degrees=5, translate=(0.05, 0.05)),
             transforms.ColorJitter(brightness=0.1, contrast=0.1),
         ])
     
-    transform_list.extend([
-        transforms.ToTensor(),
-        transforms.Normalize(
-            mean=[0.5],
-            std=[0.5],
-            inplace=True
-        ),
-    ])
+    transform_list.append(transforms.ToTensor())
+    
+    if for_classifier:
+        # Convert grayscale to 3-channel for pretrained ResNet
+        transform_list.append(repeat_grayscale_channels)
+        # ImageNet normalization for pretrained ResNet-18
+        transform_list.append(
+            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+        )
+    else:
+        # GAN normalization: grayscale [-1, 1]
+        transform_list.append(
+            transforms.Normalize(mean=[0.5], std=[0.5], inplace=True)
+        )
     
     return transforms.Compose(transform_list)
 
@@ -120,7 +137,10 @@ def create_dataloaders(
     train_ratio: float = 0.7,
     val_ratio: float = 0.15,
     seed: int = 42,
-    target_classes: Optional[List[str]] = None
+    target_classes: Optional[List[str]] = None,
+    augmentation_mode: str = "conventional",
+    for_classifier: bool = False,
+    manifest_path: Optional[str] = None,
 ) -> Tuple[DataLoader, DataLoader, DataLoader]:
     """Create train/val/test dataloaders.
     
@@ -133,12 +153,21 @@ def create_dataloaders(
         val_ratio: Ratio of validation data.
         seed: Random seed for splitting.
         target_classes: Classes to include.
+        augmentation_mode: "none" | "conventional" - controls stochastic augmentations on train set.
+        for_classifier: If True, use ImageNet normalization (3-channel) for pretrained ResNet.
     
     Returns:
         Tuple of (train_loader, val_loader, test_loader).
     """
-    train_transform = get_transforms(image_size, is_training=True)
-    val_transform = get_transforms(image_size, is_training=False)
+    if not (0 < train_ratio < 1 and 0 < val_ratio < 1 and train_ratio + val_ratio < 1):
+        raise ValueError("Split ratios must be positive and sum to less than one")
+    # For GAN: grayscale [-1,1]; for Classifier: 3-channel ImageNet normalization
+    train_transform = get_transforms(
+        image_size, is_training=True, augmentation_mode=augmentation_mode, for_classifier=for_classifier
+    )
+    val_transform = get_transforms(
+        image_size, is_training=False, augmentation_mode="none", for_classifier=for_classifier
+    )
 
     # Use one dataset instance for metadata/splitting (transform unused for split).
     base_dataset = MedicalImageDataset(data_dir, None, target_classes)
@@ -182,7 +211,8 @@ def create_dataloaders(
         shuffle=True,
         num_workers=num_workers,
         pin_memory=True,
-        drop_last=True
+        drop_last=False,
+        generator=torch.Generator().manual_seed(seed)
     )
     
     val_loader = DataLoader(
@@ -203,20 +233,37 @@ def create_dataloaders(
         drop_last=False
     )
     
-    splits = {
-        "train": train_len,
-        "val": val_len,
-        "test": test_len,
+    # Persist split manifest with actual indices and filenames for reproducibility
+    split_manifest = {
+        "train": {"count": train_len, "indices": train_idx},
+        "val": {"count": val_len, "indices": val_idx},
+        "test": {"count": test_len, "indices": test_idx},
         "seed": seed,
         "stratified": True,
-        "deduplicated": True
+        "deduplicated": False,
+        "protocol": "exploratory-image-level-random-split",
+        "filenames": {
+            "train": [base_dataset.images[i].name for i in train_idx],
+            "val": [base_dataset.images[i].name for i in val_idx],
+            "test": [base_dataset.images[i].name for i in test_idx],
+        }
     }
-    splits_path = Path(data_dir).parent / "splits.json"
-    with open(splits_path, "w") as f:
-        json.dump(splits, f, indent=2)
+    # Never silently overwrite the canonical study split during loader creation.
+    if manifest_path is not None:
+        with open(manifest_path, "x") as f:
+            json.dump(split_manifest, f, indent=2)
+    
+    # Verify disjoint splits
+    train_set = set(train_idx)
+    val_set = set(val_idx)
+    test_set = set(test_idx)
+    assert len(train_set & val_set) == 0, "Train/val overlap!"
+    assert len(train_set & test_set) == 0, "Train/test overlap!"
+    assert len(val_set & test_set) == 0, "Val/test overlap!"
     
     class_counts = {}
-    for i, c in enumerate(train_full.classes):
+    for c in train_full.classes:
+        i = train_full.class_to_idx[c.name]
         class_counts[c.name] = sum(1 for label in train_full.labels if label == i)
     logger.info(f"Dataset class distribution: {class_counts}")
     
@@ -224,6 +271,11 @@ def create_dataloaders(
         logger.warning(f"Some classes have fewer than 50 samples. Consider oversampling.")
     
     return train_loader, val_loader, test_loader
+
+
+def repeat_grayscale_channels(image: torch.Tensor) -> torch.Tensor:
+    """Pickleable transform for Windows DataLoader workers."""
+    return image.repeat(3, 1, 1) if image.shape[0] == 1 else image
 
 
 def grayscale_to_rgb(image: torch.Tensor) -> torch.Tensor:
