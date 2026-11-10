@@ -46,7 +46,7 @@ def select_rows(reference, pairs):
     for key, row in sorted(by_id.items()):
         if key in membership:
             excluded.append(dict(row, pair_ids=";".join(sorted(membership[key])),
-                                 exclusion_reason="Automated similarity-based exclusion: participant in flagged candidate pair; not a confirmed duplicate"))
+                                 exclusion_reason="Automated similarity-based exclusion: image in flagged candidate pair; not a confirmed duplicate"))
         else:
             kept.append(dict(row))
     return kept, excluded

@@ -44,6 +44,8 @@ def test_excludes_union_and_preserves_every_pair_membership(selection_fixture):
     row = next(r for r in excluded if r["source_cohort"] == "shenzhen" and r["label_inferred"] == "normal")
     assert row["pair_ids"] == "P1;P2"
     assert "not a confirmed duplicate" in row["exclusion_reason"]
+    assert "image in flagged candidate pair" in row["exclusion_reason"]
+    assert "participant" not in row["exclusion_reason"]
     split = propose_split(kept)
     assert split == propose_split(list(reversed(kept)))
     selections = [budget_rows(split["rows"], b, 42) for b in (.25, .5, 1.)]
