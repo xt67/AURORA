@@ -6,5 +6,6 @@ authors:
   - name: "AURORA contributors"
 version: 0.2.0
 date-released: 2026-11-10
-repository-code: "https://github.com/xt67/medimage-synth"
+repository-code: "https://github.com/xt67/AURORA"
 abstract: "A local research toolkit for reviewed dataset preparation, controlled augmentation experiments and reproducible evaluation. Publication experiments remain pending human review and approval."
+license: Apache-2.0

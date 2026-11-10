@@ -1,10 +1,24 @@
-# AURORA / MediSyn
+# AURORA
+
+**Synthetic chest X-ray augmentation research · MediSyn demo**
+
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 
 A research prototype for evaluating synthetic chest X-ray augmentation under limited TB-labelled training data. MediSyn is the companion Streamlit demo.
 
 This is an experimental comparison: it reports what selected methods do under defined conditions. Positive, negative and inconclusive findings are valid outcomes. Demonstrating a universally best method or clinical readiness is not a completion requirement.
 
-**Status: simplified v2 dataset and protocol prepared; training awaits researcher review.** See [execution tracker](PROJECT_COMPLETION_TRACKER.md) and [test report](docs/TEST_REPORT.md) for measured software checks and remaining limitations. The demo displays no invented performance metrics.
+**Status: the approved two-epoch DCGAN feasibility run completed; publication experiments remain pending.** See [execution tracker](PROJECT_COMPLETION_TRACKER.md) and [test report](docs/TEST_REPORT.md) for measured software checks and remaining limitations. The demo displays no invented performance metrics.
+
+## Project images
+
+![AURORA dataset selection and experimental workflow](docs/images/aurora-workflow.png)
+
+The workflow distinguishes the completed feasibility run from the proposed four-condition publication study. Counts refer to images, not unique patients.
+
+![Measured losses from the two-epoch DCGAN feasibility run](docs/images/feasibility-losses.png)
+
+Actual epoch means from the approved run on 52 TB training images (seed 42). Two epochs establish execution feasibility only; these losses do not measure image quality or clinical utility. [Execution details](docs/FEASIBILITY_V2.md#first-real-feasibility-execution).
 
 ## Research scope
 
@@ -14,7 +28,7 @@ Synthetic images are learned from real training images. They do not automaticall
 
 ## Environment
 
-Use Python 3.10–3.12 and the pinned dependencies:
+Use Python 3.10â€“3.12 and the pinned dependencies:
 
 ```powershell
 python -m venv .venv
@@ -60,13 +74,13 @@ The revised study runner is implemented and tested on artificial fixtures. Diffu
 
 ## Current preparation boundary
 
-The simplified proposal compares real-only training, random real-TB oversampling, TB-only conventional augmentation and one DCGAN method. There are three nested TB budgets and three seeds: 36 proposed classifier fits and nine GAN fits. No revised publication or feasibility training has started.
+The simplified proposal compares real-only training, random real-TB oversampling, TB-only conventional augmentation and one DCGAN method. There are three nested TB budgets and three seeds: 36 proposed classifier fits and nine GAN fits. The separate two-epoch feasibility run completed on the RTX 4050 using 52 real TB training images, with no holdout image reads. Publication training has not started. See [feasibility results](docs/FEASIBILITY_V2.md).
 
 ```powershell
 python -m src.study.selection --reference data/reference/nlm_original/reference_manifest.csv --index outputs/provenance/manual_review_index.csv --root data/reference/nlm_original --output outputs/provenance
 ```
 
-The command verifies original hashes/dimensions, preserves all source files, writes retained/exclusion manifests and a proposed 413/89/88 split, and refuses existing output files. Use a new directory for reproduction. Review these outputs before approving the first training run. The v2 configuration is proposal-only; the historical runner has not been adapted to its automated-exclusion gate, TB-only transforms or revised count rule. Do not use fabricated human decisions to pass the old gate. [Prior protocol history](docs/protocol_history/EXPERIMENT_PROTOCOL_v1_1.md) is preserved.
+The command verifies original hashes/dimensions, preserves all source files, writes retained/exclusion manifests and a proposed 413/89/88 split, and refuses existing output files. Use a new directory for reproduction. Review reproduced outputs before granting approval for a new run. The v2 configuration is proposal-only; the historical runner has not been adapted to its automated-exclusion gate, TB-only transforms or revised count rule. Do not use fabricated human decisions to pass the old gate. [Prior protocol history](docs/protocol_history/EXPERIMENT_PROTOCOL_v1_1.md) is preserved.
 
 Further documentation: [architecture](docs/ARCHITECTURE.md), [NLM dataset card](docs/DATASET_NLM.md), [model card](docs/MODEL_CARD.md), [release notes](docs/RELEASE_NOTES.md), [software citation](CITATION.cff). Raw/reference datasets and private reviewer records stay local.
 
@@ -80,4 +94,6 @@ The exporter requires the complete configured run grid, checks frozen-file hashe
 
 ## Release and license
 
-No software license has yet been selected. Data and model redistribution rights must be checked before publication. Do not interpret publicly accessible source images as unrestricted redistribution permission.
+Project code and original documentation are licensed under the [Apache License 2.0](LICENSE). Third-party datasets, dependencies and externally sourced model weights retain their respective terms; this license does not grant redistribution rights to them. Raw medical images and trained checkpoints are not included in this repository.
+
+The [research manuscript](paper/manuscript.md) is a working draft, not a published paper. Publication experiments and research conclusions remain pending.
