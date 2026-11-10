@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AURORA Provenance Review</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <h1>AURORA Near-Duplicate Review</h1>
+  <p class="subtitle">Local offline review. Decisions are saved separately and immediately.</p>
+</header>
+
+<section id="dashboard" class="card">
+  <h2>Dashboard</h2>
+  <div class="stats">
+    <div>Total pairs: <span id="statTotal">0</span></div>
+    <div>Priority 1: <span id="statP1">0</span></div>
+    <div>Priority 2: <span id="statP2">0</span></div>
+    <div>Priority 3: <span id="statP3">0</span></div>
+    <div>Reviewed: <span id="statReviewed">0</span></div>
+    <div>Remaining: <span id="statRemaining">0</span></div>
+    <div>Confirmed: <span id="statConfirmed">0</span></div>
+    <div>Probable: <span id="statProbable">0</span></div>
+    <div>Similar: <span id="statSimilar">0</span></div>
+    <div>Unresolved: <span id="statUnresolved">0</span></div>
+    <div>Label conflicts: <span id="statConflicts">0</span></div>
+  </div>
+</section>
+
+<section id="filters" class="card">
+  <h2>Filters</h2>
+  <label>Priority
+    <select id="filterPriority">
+      <option value="">All</option>
+      <option value="Priority 1">Priority 1</option>
+      <option value="Priority 2">Priority 2</option>
+      <option value="Priority 3">Priority 3</option>
+    </select>
+  </label>
+  <label>Status
+    <select id="filterStatus">
+      <option value="">All</option>
+      <option value="unreviewed">Unreviewed</option>
+      <option value="reviewed">Reviewed</option>
+      <option value="CONFIRMED_DUPLICATE">Confirmed</option>
+      <option value="PROBABLE_DUPLICATE">Probable</option>
+      <option value="SIMILAR_BUT_DISTINCT">Similar</option>
+      <option value="UNRESOLVED">Unresolved</option>
+    </select>
+  </label>
+  <label>Cohort
+    <select id="filterCohort">
+      <option value="">All</option>
+      <option value="shenzhen">Shenzhen</option>
+      <option value="montgomery">Montgomery</option>
+    </select>
+  </label>
+  <label>Label combination
+    <select id="filterLabels">
+      <option value="">All</option>
+      <option value="normal-normal">Normal / Normal</option>
+      <option value="tb-tb">TB / TB</option>
+      <option value="cross">Cross-class</option>
+    </select>
+  </label>
+  <button id="btnReturnUnresolved">Return to unresolved</button>
+</section>
+
+<section id="viewer" class="card">
+  <h2>Pair Viewer</h2>
+  <div class="nav">
+    <button id="btnPrev">Previous</button>
+    <span id="pairPosition"></span>
+    <button id="btnNext">Next</button>
+    <button id="btnSkip">Skip for now</button>
+  </div>
+
+  <div class="metrics">
+    <div>Pair ID: <span id="mPairId"></span></div>
+    <div>Priority: <span id="mPriority"></span></div>
+    <div>pHash distance: <span id="mPhash"></span></div>
+    <div>NCC: <span id="mNcc"></span></div>
+    <div>SSIM: <span id="mSsim"></span></div>
+    <div>ECC: <span id="mEcc"></span></div>
+    <div>Existing status: <span id="mStatus"></span></div>
+    <div>Contact sheet: <a id="mContact" href="#" target="_blank">open</a></div>
+  </div>
+
+  <div class="images">
+    <div class="image-box">
+      <h3>Image A</h3>
+      <img id="imgA" alt="Image A">
+      <div id="metaA" class="meta"></div>
+      <a id="fullA" href="#" target="_blank">Open full resolution</a>
+    </div>
+    <div class="image-box">
+      <h3>Image B</h3>
+      <img id="imgB" alt="Image B">
+      <div id="metaB" class="meta"></div>
+      <a id="fullB" href="#" target="_blank">Open full resolution</a>
+    </div>
+    <div class="image-box">
+      <h3>Difference view</h3>
+      <img id="imgDiff" alt="Difference">
+      <p class="small">Absolute difference of 512x512 resized images.</p>
+    </div>
+  </div>
+</section>
+
+<section id="decision" class="card">
+  <h2>Human Decision</h2>
+  <p>No decision is preselected. The researcher must explicitly choose.</p>
+  <div class="decision-buttons">
+    <button data-decision="CONFIRMED_DUPLICATE">CONFIRMED_DUPLICATE</button>
+    <button data-decision="PROBABLE_DUPLICATE">PROBABLE_DUPLICATE</button>
+    <button data-decision="SIMILAR_BUT_DISTINCT">SIMILAR_BUT_DISTINCT</button>
+    <button data-decision="UNRESOLVED">UNRESOLVED</button>
+  </div>
+  <label>Label conflict
+    <select id="labelConflict">
+      <option value="none">No apparent label conflict</option>
+      <option value="potential_label_conflict">Potential label conflict</option>
+      <option value="unable_to_determine">Unable to determine</option>
+    </select>
+  </label>
+  <label>Reviewer confidence
+    <select id="confidence">
+      <option value="High">High</option>
+      <option value="Medium" selected>Medium</option>
+      <option value="Low">Low</option>
+    </select>
+  </label>
+  <label>Reviewer ID
+    <input type="text" id="reviewerId" placeholder="researcher">
+  </label>
+  <label>Notes
+    <textarea id="notes" rows="4"></textarea>
+  </label>
+  <button id="btnSave">Save decision</button>
+  <div id="saveStatus"></div>
+</section>
+
+<script src="review.js"></script>
+</body>
+</html>
