@@ -1,6 +1,6 @@
 # Separate v2 DCGAN feasibility entry point
 
-Implemented 11 November 2026. **Not executed; final researcher approval remains required.** This entry point is separate from the historical publication runner and its v1 gate. No human review decisions are created or used by v2 automated-exclusion approval.
+Implemented 11 November 2026. **The first approved two-epoch run completed on 11 November 2026.** This entry point is separate from the historical publication runner and its v1 gate. No human review decisions are created or used by v2 automated-exclusion approval.
 
 ## Gate behaviour
 
@@ -50,6 +50,21 @@ Each execution archives exact input bytes and approval, effective generator YAML
 
 Focused verification on 11 November 2026: **39 passed in 13.86s**, with 13 existing dependency deprecation warnings. This covers the v2 gate/reader/orchestration, selection/data helpers and two historical v1 gate regressions. Trainer execution and CUDA counters are stubbed; no optimizer or real training ran.
 
-Final approval has not been supplied; the real two-epoch run must not start. Actual runtime, GPU capacity, losses, image quality and checkpoint behaviour on these real sources remain unmeasured. Stubbed software tests establish orchestration and rejection behaviour only.
+The researcher authorized continuation after the explicit final-approval stop. The first real run completed; see the execution record below. Image quality and downstream utility remain unmeasured. The earlier stubbed software tests establish orchestration and rejection behaviour only.
 
 The later four-condition publication runner still needs its separate v2 integration: TB-only conventional transforms with flips disabled, matched selected-positive B/D counts, A–D reporting and separate publication authorization. Feasibility approval cannot authorize that later study. No diffusion work or changes to the v1 approval gate are included here.
+
+## First real feasibility execution
+
+- Execution commit: `032adc296fce9d5195cf7f930bf9a14edda4419e`.
+- Local artifacts: `outputs/feasibility_v2/run_01/`; exact source IDs, approval evidence and hashes are archived there. Model weights and source-level artifacts remain local.
+- Preflight passed. Exactly 52 distinct real TB training images were read (25% budget, seed 42); their IDs matched the approval, with zero validation/test overlap.
+- Two epochs completed on NVIDIA GeForce RTX 4050 Laptop GPU, four batches per epoch; no classifier training or holdout evaluation.
+- Recorded total runtime: 6.1936866 seconds (entry-function timing, excludes interpreter/import startup). Trainer runtime: 1.3219228 seconds.
+- Peak PyTorch GPU allocated/reserved memory: 227,457,024 / 295,698,432 bytes (216.92 / 282 MiB). These are allocator peaks, not whole-device process memory.
+- Epoch mean generator losses: 0.61777413, 0.48718533; discriminator losses: 0.39082992, 0.19181255. All finite; these do not establish synthetic image quality.
+- Configuration SHA-256: `6a2b34cb819c805ba3e7523ed7ef65ef74dfb6b2c5ac9532155217e7354a950e`.
+- Final generator checkpoint SHA-256: `6d24fb1c9750a2e9e5c61162d83f36001c86e2141e541caa29f39ec33041ee6d`; checkpoint epoch/config checks passed.
+- All nine protected metadata/history hashes remained unchanged after execution. Originals and previous experiment artifacts were not modified.
+
+No publication experiment was launched. This result establishes bounded execution feasibility only.
