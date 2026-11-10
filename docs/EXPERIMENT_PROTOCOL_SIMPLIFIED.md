@@ -2,6 +2,8 @@
 
 Prepared 10 November 2026. **Dataset preparation only; first training run is not approved.** This proposal supersedes the full-800-image adjudication/five-arm study for the primary analysis. The old protocol and configuration remain historical. The researcher's latest instructions explicitly require reviewing these outputs before approving training, superseding earlier run authorization.
 
+Corrected 11 November 2026 following researcher review. The 590-image dataset and proposed split are accepted in principle. Horizontal flipping is disabled in the primary condition C; the other mild transforms remain proposed for review. Final approval is still required before the two-epoch feasibility run.
+
 ## Question and scope
 
 How do selected augmentation methods affect TB-manifestation-labelled chest radiograph classification under controlled scarcity? This is an experimental comparison under defined conditions, not a claim of a universally best method. Positive, null and negative results are retained. TB recall is primary; AUPRC, F1, specificity and AUROC are supporting outcomes. No minimum improvement or clinical validation is required to report experimental findings.
@@ -39,7 +41,7 @@ All conditions use grayscale 128×128 square resizing. Classifier input repeats 
 
 Proposed added count for **both B and D is one image per selected real TB training image** (52, 105 or 210); no other real image is introduced. This controls nominal added count when comparing D with B. This is explicit TB oversampling, not an assertion that every budget is class balanced. It avoids a no-op at the full budget, where TB training images already exceed normal images. This differs from v1's deficit-filling count and requires review as part of this proposal. No synthetic/conventional transforms are silently combined. A and C have unchanged dataset counts. All conditions draw exactly the same number of classifier batches.
 
-C's candidate transforms are horizontal flip probability .5, rotation ±5°, translation up to 5%, brightness/contrast jitter .1. They are experimental choices, not clinically validated transformations. D uses the existing 128px BCE DCGAN as the simplest repaired/tested implementation; it is not claimed empirically superior to WGAN-GP. No architecture search is planned. WGAN-GP is outside the primary comparison; diffusion is deferred for scope/hardware constraints, without claiming measured infeasibility.
+C's horizontal flipping is disabled (probability 0.0). Remaining candidate transforms are rotation ±5°, translation up to 5%, brightness/contrast jitter .1, applied only to TB training images. They remain proposed experimental choices for review, not clinically validated transformations. D uses the existing 128px BCE DCGAN as the simplest repaired/tested implementation; it is not claimed empirically superior to WGAN-GP. No architecture search is planned. WGAN-GP is outside the primary comparison; diffusion is deferred for scope/hardware constraints, without claiming measured infeasibility.
 
 ## Scarcity and matched training
 

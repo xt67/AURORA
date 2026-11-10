@@ -32,7 +32,7 @@ preprocessing:
   generator_range: [-1, 1]
 conventional_augmentation:
   target_label: tuberculosis
-  horizontal_flip_probability: 0.5
+  horizontal_flip_probability: 0.0
   rotation_degrees: 5
   translation_fraction: 0.05
   brightness_jitter: 0.1
