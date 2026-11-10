@@ -1,3 +1,5 @@
+> Superseded for the primary study by [simplified proposal v2](EXPERIMENT_PROTOCOL_SIMPLIFIED.md). The exact earlier text is preserved in [protocol history](protocol_history/EXPERIMENT_PROTOCOL_v1_1.md). Do not launch this historical protocol under the new preparation-only instruction.
+
 # AURORA proposed executable protocol (v1.1)
 
 Status: implemented on artificial fixtures, **not approved for publication training**. The researcher must review this protocol and exact configuration before the first run. Parameters below are explicit defaults, not evidence that they are optimal.

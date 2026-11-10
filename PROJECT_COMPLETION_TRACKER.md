@@ -1,28 +1,24 @@
-# AURORA / MediSyn execution status
+# AURORA current execution status
 
 Updated 10 November 2026. Working branch: `aurora-refinement`.
 
-| Area | Status |
+The researcher's simplified proposal replaces full-dataset human adjudication for the primary study. The first revised training run is explicitly pending review; earlier authorization is superseded.
+
+| Item | Verified status |
 |---|---|
-| Software | GAN training/export, classifier, review UI, canonical manifests, gated fixed-update runner and analysis implemented |
-| Literature | Three supplied papers reviewed; methods and limits documented in [literature notes](docs/LITERATURE_VALIDATION.md); references added to manuscript |
-| Experimental control | A3 repeats positive training rows with exactly G1's added count; source IDs recorded; A3/G1 paired analysis checks matching counts |
-| Reporting | Complete-grid exporter recomputes results, checks frozen provenance and writes paper tables/demo JSON without private row IDs or paths |
-| Verification | Artificial fixture and regression checks documented in [test report](docs/TEST_REPORT.md); they do not validate medical images |
-| Repository | Obsolete download/baseline scripts, duplicate planning docs, stale requirements, generated logs/results and exploratory split removed from public tracking; local copies preserved |
-| Research | 206 pair decisions unresolved; canonical dataset, split, protocol and first run require actual researcher approval |
-| Pair screening | All 206 pairs visually screened by AI: 203 provisional distinct-image recommendations, 3 unresolved; local notes remain separate from human decisions |
-| Manuscript | Working draft with methods and references; results and conclusions pending experiments; no supervisor or clinical review claimed |
-| Deployment | Local package/app checks passed previously; Docker and account-based public hosting still unverified |
+| Original data | 800 images preserved, all hashes/dimensions/readability checked; 406 normal / 394 TB-labelled |
+| Automated exclusion | All 210 unique participants in the 206 flagged pairs excluded from primary selection; no confirmed-duplicate claim |
+| Retained subset | 590 images: 289 normal / 301 TB-labelled |
+| Split proposal | Seed 42; cohort/class stratification; 413 train / 89 validation / 88 test |
+| Scarcity proposal | 52 / 105 / 210 nested TB training images; 203 normal training images fixed |
+| Comparison proposal | Four conditions, three budgets, three seeds: 36 classifier fits and nine DCGAN fits |
+| Local artifacts | Separate retained/exclusion manifests, full score-preserving audit copy, split JSON and selection report |
+| Verification | 12 focused selection/data tests passed in 2.34s; independent actual-manifest accounting checks passed |
+| Training | Not started; no real-data feasibility run, new approval file or frozen approval created |
+| History | Exact v1.1 protocol/config copies retained under docs/protocol_history/; original audit and review artifacts untouched |
 
-No publication experiments or paper submission have occurred. A sole researcher can perform technical review and approve their study; published papers cannot supply case-specific decisions or clinical validation. The protocol amendment is proposed, not approved.
+Review the [verified report](docs/DATASET_SELECTION_REPORT.md) and [v2 proposal](docs/EXPERIMENT_PROTOCOL_SIMPLIFIED.md). The proposed configuration is `configs/study_simplified_proposal.yaml`. The historical runner remains unchanged; automated-exclusion approval checks, TB-only transforms and the proposed positive-count rule will be wired/tested only after approval, before feasibility and publication execution.
 
-The researcher has authorized publication experiments and chosen to retain all 800 images, completing pair review before training. File-integrity checks passed for all 800. No final manual decision CSV or canonical manifest exists yet. AI screening is complete but is not human approval: MR-066, MR-067 and MR-088 remain ambiguous after closer original-image display inspection; the other 203 recommendations also require researcher approval. No exclusions, relabelling or publication training occurred. The review UI can display hash-bound, read-only AI notes without filling decision fields.
+Selection bias, unadjudicated duplicates, absent patient identifiers, limited cohort sizes and no clinical validation must be disclosed. Montgomery validation/test each have 19 images (eight TB-labelled): no forced cross-cohort study. Diffusion is deferred for scope/hardware constraints. No images were deleted or relabelled, and no AI suggestion was converted into human approval.
 
-## Remaining scope
-
-Core software is implemented; experimental completion is pending. The default grid has 45 classifier fits (five arms × three budgets × three seeds), including nine generator fits. No full-grid runtime estimate is available. Following technical dataset review and approval, remaining work is to execute that grid, inspect and interpret measured results, finish manuscript declarations/results/discussion, and configure public hosting. A universally best method, positive gains and clinical validation are not requirements for this experimental project. Diffusion is optional and is not added to the completion scope.
-
-Historical files are retained locally under ignored `outputs/repository_archive/2026-11-10/` and in Git history. Local images, checkpoints, review decisions, `data/splits.json` and machine-specific files remain private. Cleanup does not rewrite Git history or alter the default branch.
-
-Next required research action: complete [technical review](docs/HUMAN_REVIEW.md), inspect the canonical proposal and explicitly approve the exact [protocol](docs/EXPERIMENT_PROTOCOL.md). Public deployment also needs the account-owner hosting setup described in [deployment instructions](docs/DEPLOYMENT.md). Author identity, release license and final manuscript declarations remain researcher decisions.
+Stop point: return counts, distribution, split, protocol and risks to the researcher. No further experiments are authorized in this task.

@@ -1,0 +1,36 @@
+# Proposed protocol; publication CLI requires a separate human approval file.
+data_root: data/reference/nlm_original
+reference: data/reference/nlm_original/reference_manifest.csv
+index: outputs/provenance/manual_review_index.csv
+decisions: outputs/provenance/manual_review_decisions.csv
+manifest: outputs/canonical_proposal.json
+protocol: docs/EXPERIMENT_PROTOCOL.md
+device: auto
+budget_seed: 42
+budgets: [0.25, 0.5, 1.0]
+seeds: [42, 123, 999]
+arms: [A0, A1, A2, A3, G1]
+synthetic_ratio: 1.0
+classifier:
+  pretrained: true
+  updates: 1000
+  eval_every: 100
+  batch_size: 16
+  lr: 0.0001
+  weight_decay: 0.0001
+  use_amp: true
+generator:
+  z_dim: 100
+  ngf: 64
+  ndf: 64
+  lr_g: 0.0002
+  lr_d: 0.0002
+  beta1: 0.5
+  beta2: 0.999
+  epochs: 200
+  d_steps: 1
+  batch_size: 16
+  loss_type: bce
+  image_size: 128
+  checkpoint_every: 10
+  use_amp: false

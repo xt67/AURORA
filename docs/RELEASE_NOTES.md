@@ -1,5 +1,7 @@
 # MediSyn 0.2.0 — software release candidate
 
+Simplified primary-study proposal: added reproducible automated similarity-exclusion preparation, separate retained/exclusion manifests and cohort/class-aware split proposal. Verified 590 retained / 210 excluded from 800 preserved originals. Four proposed conditions replace the previous five-arm design; exact v1.1 protocol/config history is archived. Proposed v2 settings are not executable training authorization. Source images, individual exclusions and review artifacts remain local. No training was launched.
+
 Local review assistance now supports hash-bound AI screening notes in a collapsed, read-only panel and a filter for uncertain recommendations. Notes cannot populate or save human decisions. Actual medical images and per-pair notes remain local; no publication run is implied.
 
 This release contains software and research documentation, not a completed scientific study or published paper.

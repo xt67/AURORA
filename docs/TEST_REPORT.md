@@ -1,5 +1,7 @@
 # Software verification report — 10 November 2026
 
+Simplified dataset preparation: **12 focused selection/data tests passed in 2.34s**. Tests cover union exclusion with repeated pair membership, rejection of absent/mislabelled audit identities, seeded split and nested budgets, exact-hash collision refusal, source preservation, byte-identical audit copying, changed-image refusal and overwrite protection. Independently verified the actual 800-image reference, filename-label suffixes, 206-pair union, 590/210 partition, unique original SHA-256 values and proposed split. No classifier/GAN feasibility or publication training ran in this preparation phase.
+
 ## Environment
 Windows; existing `aurora-cuda` Conda environment. Python 3.11.17, PyTorch 2.2.0+cu121, torchvision 0.17.0+cu121, NumPy 1.26.4, scikit-learn 1.4.2, Streamlit 1.32.0. CUDA is available on the local RTX 4050 laptop GPU. No environment reinstall was performed.
 

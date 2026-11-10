@@ -1,3 +1,5 @@
+> Scope update: the researcher has proposed a 590-image automated-exclusion study. Current verified selection and proposed methods are in docs/DATASET_SELECTION_REPORT.md and docs/EXPERIMENT_PROTOCOL_SIMPLIFIED.md. The v1 methods below are historical working-draft text pending approval/revision; do not submit them as the v2 protocol. No experiments have run.
+
 # AURORA: Evaluating synthetic chest radiograph augmentation under controlled scarcity of TB-manifestation-labelled training images
 
 **External-review working draft, 10 November 2026. Not ready for submission.**

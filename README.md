@@ -4,11 +4,11 @@ A research prototype for evaluating synthetic chest X-ray augmentation under lim
 
 This is an experimental comparison: it reports what selected methods do under defined conditions. Positive, negative and inconclusive findings are valid outcomes. Demonstrating a universally best method or clinical readiness is not a completion requirement.
 
-**Status: software release candidate; publication experiments remain gated by human review.** See [execution tracker](PROJECT_COMPLETION_TRACKER.md) and [test report](docs/TEST_REPORT.md) for measured software checks and remaining limitations. The demo displays no invented performance metrics.
+**Status: simplified v2 dataset and protocol prepared; training awaits researcher review.** See [execution tracker](PROJECT_COMPLETION_TRACKER.md) and [test report](docs/TEST_REPORT.md) for measured software checks and remaining limitations. The demo displays no invented performance metrics.
 
 ## Research scope
 
-The current proposal uses the original NLM Shenzhen and Montgomery collections with experimentally reduced TB-labelled training budgets. The local dataset review has 206 unresolved image-pair candidates. Final duplicate groups, exclusions and cohort-aware splits must be established before publication experiments. Use the [current protocol](docs/EXPERIMENT_PROTOCOL.md) and [literature validation notes](docs/LITERATURE_VALIDATION.md).
+The current v2 proposal retains 590 of 800 original NLM images after automated exclusion of all 210 images participating in the 206 flagged candidate pairs. These are not confirmed duplicates; no original image was deleted. See the [verified dataset report](docs/DATASET_SELECTION_REPORT.md), [simplified protocol](docs/EXPERIMENT_PROTOCOL_SIMPLIFIED.md) and [proposed configuration](configs/study_simplified_proposal.yaml). Patient independence and a duplicate-free subset are not claimed.
 
 Synthetic images are learned from real training images. They do not automatically guarantee privacy, diagnostic validity or improved classifier performance. The current implementation is for chest X-ray research; MRI and clinical deployment have not been validated.
 
@@ -34,7 +34,7 @@ python -m streamlit run app/streamlit_app.py
 
 The app works without a checkpoint and explains that generation/results are unavailable. See [deployment preparation](docs/DEPLOYMENT.md) for environment variables and the untested container candidate.
 
-## GAN training and export
+## Historical toolkit GAN training and export (not authorized for v2 yet)
 
 Only use a directory containing the approved **training partition**, with class folders such as `Normal/` and `Tuberculosis/`. Do not point this command at the full dataset. These commands do not perform data adjudication or establish leakage-free splits for you.
 
@@ -58,23 +58,19 @@ Use `configs/wgan_gp.yaml` for WGAN-GP. Both GAN paths currently use full precis
 
 The revised study runner is implemented and tested on artificial fixtures. Diffusion is an optional, unimplemented extension. Publication experiments have not started. Obsolete exploratory scripts, duplicate planning documents and generated artifacts have been removed from the public branch; local research records are preserved.
 
-## Controlled research workflow
+## Current preparation boundary
 
-1. Complete the [local human review](docs/HUMAN_REVIEW.md). No review decisions are supplied by the software.
-2. Create and inspect a hash-verified canonical proposal. Approve the dataset, frozen split and [executable protocol](docs/EXPERIMENT_PROTOCOL.md).
-3. Supply a researcher-approved local file based on `configs/approval.example.json`. The committed example intentionally refuses publication training.
-4. Run the preflight, then the exact approved experiment configuration:
+The simplified proposal compares real-only training, random real-TB oversampling, TB-only conventional augmentation and one DCGAN method. There are three nested TB budgets and three seeds: 36 proposed classifier fits and nine GAN fits. No revised publication or feasibility training has started.
 
 ```powershell
-python -m src.study.runner --config configs/study.yaml --approval outputs/approved_run.json --output outputs/publication_v1 --check-only
-python -m src.study.runner --config configs/study.yaml --approval outputs/approved_run.json --output outputs/publication_v1
+python -m src.study.selection --reference data/reference/nlm_original/reference_manifest.csv --index outputs/provenance/manual_review_index.csv --root data/reference/nlm_original --output outputs/provenance
 ```
 
-Use a new output directory. The runner records failures, provenance, fixed-update training, validation-selected thresholds and real test predictions. See the protocol for analysis and synthesis-diagnostic commands. No medical images or checkpoints are committed.
+The command verifies original hashes/dimensions, preserves all source files, writes retained/exclusion manifests and a proposed 413/89/88 split, and refuses existing output files. Use a new directory for reproduction. Review these outputs before approving the first training run. The v2 configuration is proposal-only; the historical runner has not been adapted to its automated-exclusion gate, TB-only transforms or revised count rule. Do not use fabricated human decisions to pass the old gate. [Prior protocol history](docs/protocol_history/EXPERIMENT_PROTOCOL_v1_1.md) is preserved.
 
 Further documentation: [architecture](docs/ARCHITECTURE.md), [NLM dataset card](docs/DATASET_NLM.md), [model card](docs/MODEL_CARD.md), [release notes](docs/RELEASE_NOTES.md), [software citation](CITATION.cff). Raw/reference datasets and private reviewer records stay local.
 
-After every configured experiment finishes, export the measured tables and demo report:
+For completed historical-runner experiments, the existing reporting utility exports measured tables and demo reports (v2 integration follows approval):
 
 ```powershell
 python -m src.study.report --run outputs/publication_v1 --output outputs/report_v1

@@ -1,0 +1,75 @@
+# Proposal only: NOT an executable input to the historical publication runner.
+schema_version: 2
+status: proposal_awaiting_researcher_review
+training_authorized: false
+data_root: data/reference/nlm_original
+original_reference: data/reference/nlm_original/reference_manifest.csv
+candidate_pairs: outputs/provenance/manual_review_index.csv
+retained_manifest: outputs/provenance/aurora_primary_manifest_590.csv
+exclusion_manifest: outputs/provenance/aurora_exclusion_manifest_210.csv
+split_manifest: outputs/provenance/aurora_primary_split_proposal.json
+protocol: docs/EXPERIMENT_PROTOCOL_SIMPLIFIED.md
+selection_method: automated_similarity_exclusion
+split_seed: 42
+budget_seed: 42
+budgets: [0.25, 0.5, 1.0]
+seeds: [42, 123, 999]
+conditions:
+  A: real_only
+  B: duplicate_real_tb
+  C: conventional_augmentation_tb_only
+  D: dcgan_synthetic_tb
+added_tb_count:
+  basis: selected_real_tb_training_count
+  multiplier: 1.0
+  applies_to: [B, D]
+preprocessing:
+  image_size: 128
+  grayscale: true
+  high_bit_depth: reject_without_explicit_conversion
+  classifier_channels: 3
+  classifier_normalization: imagenet
+  generator_range: [-1, 1]
+conventional_augmentation:
+  target_label: tuberculosis
+  horizontal_flip_probability: 0.5
+  rotation_degrees: 5
+  translation_fraction: 0.05
+  brightness_jitter: 0.1
+  contrast_jitter: 0.1
+classifier:
+  architecture: resnet18
+  pretrained: true
+  optimizer: adam
+  updates: 1000
+  eval_every: 100
+  batch_size: 16
+  lr: 0.0001
+  weight_decay: 0.0001
+  use_amp_on_cuda: true
+  loss: unweighted_cross_entropy
+  checkpoint_selection: minimum_validation_loss
+  threshold_selection: maximum_validation_f1_highest_threshold_tiebreak
+generator:
+  architecture: dcgan
+  loss_type: bce
+  z_dim: 100
+  ngf: 64
+  ndf: 64
+  lr_g: 0.0002
+  lr_d: 0.0002
+  beta1: 0.5
+  beta2: 0.999
+  epochs: 200
+  d_steps: 1
+  batch_size: 16
+  checkpoint_every: 10
+  use_amp: false
+  selection: last_fixed_epoch
+feasibility_check:
+  status: pending_after_approval
+  training_partition_only: true
+  budget: 0.25
+  seed: 42
+  epochs: 2
+  publication_result: false
