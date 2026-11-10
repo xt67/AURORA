@@ -12,7 +12,10 @@ The software is a locally tested release candidate. The research study is not co
 - Implemented analysis, grouped confidence intervals, paired comparisons, calibration, pixel proximity/diversity and optional FID/KID diagnostics.
 - Strengthened the existing local human-review interface without creating or approving any real decisions.
 - Prepared a manuscript working draft, architecture/protocol/data/model documentation, packaging, deployment candidate and software citation.
-- Final regression suite: 68 passed in 41.27s. Local package build/import, dependency check and actual Streamlit HTTP health check passed.
+- Final regression suite: 72 passed in 24.90s. Local package build/import, dependency check and actual Streamlit HTTP health check passed.
+
+- Completed the measured-results exporter for paper tables and demo JSON, with complete-grid/provenance checks and omission of private row IDs/local paths.
+- Updated scope throughout: comparative experimental results, including negative outcomes; no universal superiority or clinical validation requirement.
 
 ## Remaining human/external gates
 

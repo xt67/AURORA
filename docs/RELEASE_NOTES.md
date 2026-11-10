@@ -25,3 +25,7 @@ Existing uncommitted data/split artifacts are preserved locally and excluded fro
 ## Literature and public-repository update
 
 Added three supplied research references and explicit validation limits; added A3 exact-count duplication and selectable paired-analysis baseline. Removed obsolete exploratory scripts, mock API wrappers, duplicate planning documents, unimplemented diffusion requirements, tracked logs/results and the exploratory split. Local originals are preserved in an ignored archive or their original local paths. No Git history was rewritten.
+
+## Experimental reporting completion
+
+Added `src.study.report` to export a complete measured grid into manuscript tables and demo JSON. It verifies frozen hashes/configuration/manifest consistency, retains all arms, recomputes uncertainty and comparisons, omits private row IDs/paths, and refuses overwrite. Runner archives now preserve original approved bytes. The demo accepts measured reports without implying independent validation. Regression suite: 72 passed. No publication experiments were launched.

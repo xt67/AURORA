@@ -16,6 +16,8 @@ The NLM chest radiograph collections were released to support pulmonary-disease 
 
 The intended contribution is a controlled, auditable evaluation pipeline and its eventual measured findings. We do not claim a novel generator architecture, clinical readiness or publication novelty before a fuller task-specific literature review and completed experiments.
 
+This study is descriptive and comparative within its specified experimental conditions. It does not seek to establish a universally best method. Positive, negative and inconclusive outcomes will be retained; clinical validation is outside the scope of this experimental study.
+
 ## 2. Related Work
 
 Frid-Adar and colleagues evaluated GAN-based augmentation for liver-lesion classification using CT regions of interest [4]. Their study supports investigating synthetic augmentation as a task-dependent intervention; its findings cannot be transferred directly to full chest radiographs or TB-manifestation labels. Schütte and colleagues evaluated GAN-generated chest radiographs and brain CT images through downstream predictive performance, reporting sensitivity to label structure and limited sample availability [5]. This motivates treating utility, dataset composition and training-data budget as explicit experimental factors.

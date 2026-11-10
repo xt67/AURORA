@@ -20,7 +20,7 @@ def main():
     st.warning("Research prototype. Generated images are synthetic and are not validated for diagnosis or clinical use.")
     page = st.sidebar.radio("Navigation", ["Overview", "Generator", "Results", "Study workflow"])
     if page == "Overview":
-        st.markdown("AURORA investigates whether synthetic TB-manifestation-labelled training images improve a classifier under controlled data scarcity.")
+        st.markdown("AURORA compares how selected augmentation methods affect TB-manifestation classification under controlled data scarcity. It reports experimental outcomes, including negative or inconclusive findings, without claiming a universally best method.")
         st.markdown("Generators learn from real training images. Synthetic output does not by itself guarantee privacy or preserve diagnostic findings.")
         st.info("The current NLM research protocol has unresolved duplicate review. Earlier mixed-source smoke results are not final paper evidence.")
         st.markdown("[Project repository](https://github.com/xt67/medimage-synth)")
@@ -52,16 +52,17 @@ def main():
     else:
         path = Path(os.environ.get("AURORA_RESULTS", str(ROOT / "outputs/paper_results.json")))
         if not path.is_file():
-            st.info("No verified experiment results have been published. No performance improvement is claimed.")
+            st.info("No measured study results have been published. Positive, negative and inconclusive outcomes will be reported after experiments.")
             return
         try:
             report = json.loads(path.read_text())
-            if report.get("status") != "verified" or not report.get("protocol") or not report.get("experiments"):
-                raise ValueError("Results require verified status, protocol, and measured experiments")
+            if report.get("status") not in ("measured", "verified") or not report.get("protocol") or not report.get("experiments"):
+                raise ValueError("Results require measured status, protocol, and experiments")
         except (ValueError, OSError, AttributeError) as exc:
             st.error(f"Results cannot be displayed: {exc}")
             return
         st.caption(f"Protocol: {report['protocol']}")
+        st.info("These are experimental results under the stated conditions. Measured status does not mean independent clinical validation or universal superiority.")
         st.json(report)
 
 

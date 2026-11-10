@@ -6,6 +6,8 @@ Status: implemented on artificial fixtures, **not approved for publication train
 
 Does synthetic augmentation improve TB-manifestation-labelled chest radiograph classification under controlled scarcity, and how does fidelity relate to utility? Recall is primary; AUPRC, F1, specificity and AUROC are supporting outcomes. No minimum improvement is promised.
 
+The study is an experimental comparison of selected methods under defined conditions. Completion means reporting measured outcomes and limitations, including null or negative findings; it does not require superiority, a universally best method or clinical validation. With the default five arms, three budgets and three seeds, the run grid contains 45 classifier fits and nine G1 generator fits. Runtime has not been benchmarked for this full grid.
+
 Use the original NLM Shenzhen/Montgomery collection. Preserve source cohorts. The pre-adjudication candidate inventory has 800 images; final counts remain pending. Do not substitute the historical mixed-source Kaggle dataset. Do not claim patient-disjoint partitions.
 
 Human review must resolve all candidate pairs and investigate cross-label cases. `src.study.data` validates attributed decisions, creates connected components from confirmed duplicates and exact hashes, and proposes a deterministic cohort/label-aware split. Confirmed groups spanning cohorts form their own cohort-composition stratum. Groups are shuffled using the split seed, then assigned to the partition with the largest remaining target count. Targets are 70/15/15; grouped allocation is approximate. Both labels must be present in each overall partition. Report realized counts and subgroup sizes before approval. Cross-label duplicates are rejected pending explicit adjudication.
@@ -56,6 +58,8 @@ python -m src.study.runner --config configs/study.yaml --approval outputs/approv
 The gate checks approval flags, all three hashes, review-source hashes, completed decisions, reconstructed split equality and original image integrity before training. Output directories must be new. Failed runs retain a failure artifact and are not replaced with estimates. Software cannot authenticate a human signature; approval is a researcher attestation, not an automated ethics review.
 
 ## Analysis and provenance
+
+After the entire configured grid completes, run `python -m src.study.report --run outputs/publication_v1 --output outputs/report_v1`. The exporter checks archived hashes, approval-to-provenance consistency, run completeness, common configuration and manifest, then recomputes metrics and writes a Markdown table and demo-compatible JSON. All arms are retained, including negative outcomes. The report contains aggregate/per-seed/cohort statistics and paired contrasts without raw image IDs or local paths. Archive integrity checks cannot authenticate a researcher signature or independently validate experimental conduct. Inspect the exported report before release. Failed or missing runs must be resolved or reported through a separately documented protocol deviation; they are not silently dropped.
 
 Each run records exact selected real IDs, config, manifest digest, commit, device, Python/torch versions, runtime, threshold, checkpoint hash, test probabilities and subgroup metrics. Generator provenance records only its selected positive training IDs/hashes. The run root archives frozen config, protocol, approval and manifest.
 

@@ -2,6 +2,8 @@
 
 A research prototype for evaluating synthetic chest X-ray augmentation under limited TB-labelled training data. MediSyn is the companion Streamlit demo.
 
+This is an experimental comparison: it reports what selected methods do under defined conditions. Positive, negative and inconclusive findings are valid outcomes. Demonstrating a universally best method or clinical readiness is not a completion requirement.
+
 **Status: software release candidate; publication experiments remain gated by human review.** See [execution tracker](PROJECT_COMPLETION_TRACKER.md) and [test report](docs/TEST_REPORT.md) for measured software checks and remaining limitations. The demo displays no invented performance metrics.
 
 ## Research scope
@@ -71,6 +73,14 @@ python -m src.study.runner --config configs/study.yaml --approval outputs/approv
 Use a new output directory. The runner records failures, provenance, fixed-update training, validation-selected thresholds and real test predictions. See the protocol for analysis and synthesis-diagnostic commands. No medical images or checkpoints are committed.
 
 Further documentation: [architecture](docs/ARCHITECTURE.md), [NLM dataset card](docs/DATASET_NLM.md), [model card](docs/MODEL_CARD.md), [release notes](docs/RELEASE_NOTES.md), [software citation](CITATION.cff). Raw/reference datasets and private reviewer records stay local.
+
+After every configured experiment finishes, export the measured tables and demo report:
+
+```powershell
+python -m src.study.report --run outputs/publication_v1 --output outputs/report_v1
+```
+
+The exporter requires the complete configured run grid, checks frozen-file hashes and recomputes metrics. It writes `results_table.md` and `paper_results.json`, including all arms, seed variability, cohort results and A0/A3 contrasts. Source image IDs and local paths are omitted. Set `AURORA_RESULTS` to the exported JSON after inspecting it. Exporting does not independently validate the science or submit the paper.
 
 ## Release and license
 

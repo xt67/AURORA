@@ -256,12 +256,12 @@ def main():
         return
     out = Path(args.output)
     out.mkdir(parents=True, exist_ok=False)
-    write_json(out / "frozen_manifest.json", manifest)
+    (out / "frozen_manifest.json").write_bytes(Path(config["manifest"]).read_bytes())
     write_json(out / "run_provenance.json", {"config_sha256": sha256(args.config), "approval_sha256": sha256(args.approval),
                "manifest_sha256": sha256(config["manifest"]), "protocol_sha256": sha256(config["protocol"])})
-    (out / "config.yaml").write_text(Path(args.config).read_text())
-    (out / "approval.json").write_text(Path(args.approval).read_text(encoding="utf-8"), encoding="utf-8")
-    (out / "protocol.md").write_text(Path(config["protocol"]).read_text(encoding="utf-8"), encoding="utf-8")
+    (out / "config.yaml").write_bytes(Path(args.config).read_bytes())
+    (out / "approval.json").write_bytes(Path(args.approval).read_bytes())
+    (out / "protocol.md").write_bytes(Path(config["protocol"]).read_bytes())
     for fraction in config["budgets"]:
         for seed in config["seeds"]:
             for arm in config["arms"]:
