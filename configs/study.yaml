@@ -9,7 +9,7 @@ device: auto
 budget_seed: 42
 budgets: [0.25, 0.5, 1.0]
 seeds: [42, 123, 999]
-arms: [A0, A1, A2, G1]
+arms: [A0, A1, A2, A3, G1]
 synthetic_ratio: 1.0
 classifier:
   pretrained: true

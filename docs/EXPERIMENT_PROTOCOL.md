@@ -1,4 +1,4 @@
-# AURORA proposed executable protocol (v1)
+# AURORA proposed executable protocol (v1.1)
 
 Status: implemented on artificial fixtures, **not approved for publication training**. The researcher must review this protocol and exact configuration before the first run. Parameters below are explicit defaults, not evidence that they are optimal.
 
@@ -27,6 +27,7 @@ Validation/test data are real, fixed and never used to train a generator. Cohort
 | A0 | Selected real images; random sampling with replacement |
 | A1 | Same real images; inverse-frequency sampling with replacement for equal expected class proportions |
 | A2 | Same sampling as A0, plus conventional transforms |
+| A3 | Selected real images plus repeated positive training rows; exact added count matched to G1 |
 | G1 | Selected real images plus generated positive images |
 
 Conventional transforms are horizontal flip (p=.5), affine rotation ±5 degrees, translation up to 5%, and brightness/contrast jitter .1. Their clinical plausibility needs reviewer approval. No conventional transforms are silently added to G1.
@@ -40,6 +41,10 @@ G1 trains an unconditional generator only on the positive images in that exact b
 G2/diffusion is not implemented or claimed as evaluated. It is optional, requires separate feasibility work and an approved protocol amendment. Cross-cohort sensitivity training is also optional and not included in this pooled v1 runner.
 
 ## Approval and execution
+
+Version 1.1 adds A3 following the count-control rationale of Pink and Sykes (2026); see [literature basis](LITERATURE_VALIDATION.md). A3 draws positive training rows uniformly with replacement using the run seed and adds exactly G1's deficit-based count. It records duplicate source IDs and does not claim independent new observations. At zero deficit it adds nothing. Its finite class counts match G1 even when the ratio is not one; A1 instead balances sampling in expectation. Our ratio definition differs from Pink and Sykes. The protocol/configuration amendment requires fresh researcher approval.
+
+Analyze G1 against A0 and A3, retaining all results. Use the analysis command below with `--baseline A3` and the corresponding A3/G1 result paths for the count-matched contrast. The analyzer rejects unequal added counts. No test-based ratio selection is permitted.
 
 After human review and proposal inspection, the researcher creates a local approval file using `configs/approval.example.json`. Do not change the committed example to imply approval. Set identities, timezone-qualified timestamp, explicit approval flags and SHA-256 values of the exact manifest, config and protocol. PowerShell `Get-FileHash -Algorithm SHA256 <path>` produces a hash; store lowercase values.
 

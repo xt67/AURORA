@@ -20,7 +20,7 @@ def config_for(root):
                               epochs=1, d_steps=1, batch_size=4, loss_type="bce"), "synthetic_ratio": 1.}
 
 
-@pytest.mark.parametrize("arm", ["A0", "A1", "A2", "G1"])
+@pytest.mark.parametrize("arm", ["A0", "A1", "A2", "A3", "G1"])
 def test_each_arm_runs_on_artificial_fixture(study_fixture, arm):
     root, _, _, _, manifest = study_fixture
     validate_manifest(manifest, root)
@@ -30,6 +30,13 @@ def test_each_arm_runs_on_artificial_fixture(study_fixture, arm):
     assert set(result["metrics"]["cohorts"]) == {"shenzhen", "montgomery"}
     assert all(r["split"] == "train" for r in manifest["rows"] if r["id"] in result["training_ids"])
     assert (root / arm / "classifier.pth").is_file()
+    if arm == "A3":
+        from src.study.runner import augmentation_count
+        from src.study.data import budget_rows
+        selected = budget_rows(manifest["rows"], .25, 42)
+        assert result["duplicate_count"] == augmentation_count(selected, config_for(root)) > 0
+        assert set(result["duplicate_source_ids"]) <= {r["id"] for r in selected if r["label"] == 1}
+        assert result["synthetic_count"] == 0
     if arm == "G1":
         provenance = json.loads((root / arm / "generator_provenance.json").read_text())
         assert set(provenance["training_ids"]) <= set(result["training_ids"])
@@ -40,6 +47,19 @@ def test_threshold_uses_validation_predictions_only():
     assert select_threshold([0, 0, 1, 1], [.1, .3, .4, .8]) == .4
     with pytest.raises(ValueError):
         select_threshold([1, 1], [.2, .5])
+
+
+def test_count_control_noninteger_ratio_and_reproducibility():
+    from src.study.runner import augmentation_count, duplicate_positive_rows
+    rows = [{"id": str(i), "label": int(i < 2)} for i in range(7)]
+    count = augmentation_count(rows, {"synthetic_ratio": .5})
+    assert count == 2
+    assert duplicate_positive_rows(rows, count, 42) == duplicate_positive_rows(rows, count, 42)
+    assert augmentation_count(rows[:2], {"synthetic_ratio": 1}) == 0
+    assert duplicate_positive_rows([], 0, 42) == []
+    for ratio in (-1, float("nan"), float("inf")):
+        with pytest.raises(ValueError):
+            augmentation_count(rows, {"synthetic_ratio": ratio})
 
 
 def test_publication_refuses_unapproved_example(tmp_path):

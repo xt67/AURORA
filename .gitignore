@@ -65,3 +65,9 @@ opencode.json
 .env
 .env.*
 !configs/*.example.json
+
+# Machine-specific and historical exploratory files
+data/splits.json
+SETUP_CUDA_ENV.md
+configs/test_checkpoint.yaml
+scripts/run_baseline.py

@@ -6,7 +6,7 @@ A research prototype for evaluating synthetic chest X-ray augmentation under lim
 
 ## Research scope
 
-The current proposal uses the original NLM Shenzhen and Montgomery collections with experimentally reduced TB-labelled training budgets. The local dataset review has 206 unresolved image-pair candidates. Final duplicate groups, exclusions and cohort-aware splits must be established before publication experiments. Follow [the current paper roadmap](AURORA_PAPER_ROADMAP.md), not the historical mixed-source Kaggle protocol.
+The current proposal uses the original NLM Shenzhen and Montgomery collections with experimentally reduced TB-labelled training budgets. The local dataset review has 206 unresolved image-pair candidates. Final duplicate groups, exclusions and cohort-aware splits must be established before publication experiments. Use the [current protocol](docs/EXPERIMENT_PROTOCOL.md) and [literature validation notes](docs/LITERATURE_VALIDATION.md).
 
 Synthetic images are learned from real training images. They do not automatically guarantee privacy, diagnostic validity or improved classifier performance. The current implementation is for chest X-ray research; MRI and clinical deployment have not been validated.
 
@@ -49,12 +49,12 @@ Use `configs/wgan_gp.yaml` for WGAN-GP. Both GAN paths currently use full precis
 - `src/gan/`: DCGAN/WGAN-GP training, checkpoint inference and PNG export.
 - `src/classifier/`: ResNet-18 training and evaluation.
 - `src/evaluate/`: classification metrics and FID.
-- `src/study/`: reviewed manifests, publication gate, controlled A0/A1/A2/G1 experiments and reproducible analysis.
+- `src/study/`: reviewed manifests, publication gate, controlled A0/A1/A2/A3/G1 experiments and reproducible analysis.
 - `app/streamlit_app.py`: research demo.
 - `tests/`: model, training, data and app regression tests.
 - `paper/manuscript.md`: external-review working draft with verified references and implemented methods; research results pending.
 
-The revised study runner is implemented and tested on artificial fixtures. Diffusion is an optional, unimplemented extension. Publication experiments have not started. Historical status documents are retained for context, not as evidence of current readiness.
+The revised study runner is implemented and tested on artificial fixtures. Diffusion is an optional, unimplemented extension. Publication experiments have not started. Obsolete exploratory scripts, duplicate planning documents and generated artifacts have been removed from the public branch; local research records are preserved.
 
 ## Controlled research workflow
 

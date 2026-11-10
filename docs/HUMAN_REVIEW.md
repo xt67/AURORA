@@ -1,5 +1,7 @@
 # Human review and canonical dataset preparation
 
+A supervisor is not a software requirement. You may perform technical duplicate/source review as the sole researcher, using your own reviewer identifier and disclosing self-review. Published papers provide methods, not decisions for these images. Do not infer a diagnosis or relabel a genuine clinical conflict yourself without adequate evidence/expertise. Unresolved cases remain pending an explicitly documented resolution. See [literature and validation limits](LITERATURE_VALIDATION.md).
+
 No decisions have been made or approved by this software. The existing local package contains 206 candidate pairs, 64 cross-label pairs and 13 high-similarity candidates. Similarity scores are evidence to inspect, not proof of identity.
 
 Run the existing local interface from the repository root:

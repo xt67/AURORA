@@ -11,7 +11,7 @@ Windows; existing `aurora-cuda` Conda environment. Python 3.11.17, PyTorch 2.2.0
 | Core repairs plus input/logging regressions | 36 passed in 13.70s |
 | Review/manifest focused tests | 9 passed in 2.82s |
 | Study runner and analysis focused tests | 13 passed in 14.09s |
-| Final complete suite | **65 passed in 20.68s**, 13 dependency deprecation warnings |
+| Final complete suite | **68 passed in 41.27s**, 13 dependency deprecation warnings |
 | Local wheel build | `aurora-0.2.0-py3-none-any.whl` built without downloading dependencies |
 | Wheel installation/import | Installed into an isolated project folder; imported installed study runner successfully |
 | `python -m pip check` | No broken requirements found |
@@ -19,8 +19,10 @@ Windows; existing `aurora-cuda` Conda environment. Python 3.11.17, PyTorch 2.2.0
 
 An intermediate final-suite run found one CUDA memory-query compatibility defect (64 passed, 1 failed). PyTorch 2.2 requires an explicit device index for `mem_get_info`; the code now supplies it. The complete rerun passed. Deprecation warnings originate in matplotlib/pyparsing and were not suppressed.
 
+Latest pass includes A3 fixture training, deterministic duplication, non-integer/invalid ratios and A3/G1 count-matched analysis rejection. Previously recorded wheel/app checks predate this amendment; they were not rerun for unchanged app behavior.
+
 ## Coverage
-Dataset transforms and labels; immutable split preservation; high-bit-depth rejection; finite binary metric inputs; isolated logs; CPU/CUDA GAN and WGAN-GP optimization; critic group independence; checkpoint round trips; deterministic generation; valid PNG encoding; classifier synthetic-batch progression; CPU and CUDA fixed-update classification; all A0/A1/A2/G1 fixture arms; nested budgets; reviewed duplicate grouping; changed-image/hash leakage detection; missing/changed approval rejection; validation-selected thresholds; grouped bootstrap, paired identity checks and calibration; KID estimator arithmetic; nearest-neighbour matching; local review history/path safety; all demo pages, actual fixture-model generation and corrupt checkpoint handling.
+Dataset transforms and labels; immutable split preservation; high-bit-depth rejection; finite binary metric inputs; isolated logs; CPU/CUDA GAN and WGAN-GP optimization; critic group independence; checkpoint round trips; deterministic generation; valid PNG encoding; classifier synthetic-batch progression; CPU and CUDA fixed-update classification; all A0/A1/A2/A3/G1 fixture arms; nested budgets; reviewed duplicate grouping; changed-image/hash leakage detection; missing/changed approval rejection; validation-selected thresholds; grouped bootstrap, paired identity checks and calibration; KID estimator arithmetic; nearest-neighbour matching; local review history/path safety; all demo pages, actual fixture-model generation and corrupt checkpoint handling.
 
 All training tests use small artificial images and untrained/tiny fixture models. They do not use unresolved NLM images to claim experimental success. Human review decisions in tests are explicitly artificial fixtures and are never written into the actual review package.
 

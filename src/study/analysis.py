@@ -56,7 +56,7 @@ def prediction_report(predictions, threshold, bootstrap=1000, seed=42):
             "bootstrap_repetitions": bootstrap, "bootstrap_seed": seed, "group_count": len(groups)}
 
 
-def summarize(results, bootstrap=1000):
+def summarize(results, bootstrap=1000, baseline="A0"):
     if not results:
         raise ValueError("No result artifacts provided")
     if len({r["manifest_digest"] for r in results}) != 1 or len({r["publication"] for r in results}) != 1:
@@ -88,22 +88,26 @@ def summarize(results, bootstrap=1000):
         aggregate.append({"arm": arm, "budget": budget, "metrics": summary})
     paired = []
     for arm, budget in sorted(groups):
-        if arm == "A0":
+        if arm == baseline:
             continue
         deltas = defaultdict(list)
         paired_seeds = []
         for (candidate_arm, candidate_budget, seed), run in by_key.items():
-            if (candidate_arm, candidate_budget) != (arm, budget) or ("A0", budget, seed) not in by_key:
+            if (candidate_arm, candidate_budget) != (arm, budget) or (baseline, budget, seed) not in by_key:
                 continue
-            base = by_key[("A0", budget, seed)]
+            base = by_key[(baseline, budget, seed)]
             signature = lambda x: sorted((p["id"], p["label"], p["cohort"], p["group"]) for p in x["predictions"])
             if signature(base) != signature(run) or base["training_ids"] != run["training_ids"]:
                 raise ValueError("Paired runs must share real training budget and real test identities/labels")
             if base["config"]["classifier"] != run["config"]["classifier"]:
                 raise ValueError("Paired runs have inconsistent classifier settings")
+            if {baseline, arm} == {"A3", "G1"}:
+                control, generated = (base, run) if baseline == "A3" else (run, base)
+                if control["duplicate_count"] != generated["synthetic_count"]:
+                    raise ValueError("A3/G1 comparison requires matched added counts")
             paired_seeds.append(seed)
             for metric in METRICS:
-                a = next(r for r in per_run if (r["arm"], r["budget"], r["seed"]) == ("A0", budget, seed))["metrics"][metric]
+                a = next(r for r in per_run if (r["arm"], r["budget"], r["seed"]) == (baseline, budget, seed))["metrics"][metric]
                 b = next(r for r in per_run if (r["arm"], r["budget"], r["seed"]) == (arm, budget, seed))["metrics"][metric]
                 if a is not None and b is not None:
                     deltas[metric].append(b - a)
@@ -113,7 +117,7 @@ def summarize(results, bootstrap=1000):
             means = np.mean(rng.choice(values, size=(bootstrap, len(values)), replace=True), axis=1)
             comparisons[metric] = {"mean_difference": float(np.mean(values)),
                                    "seed_bootstrap_ci95": np.quantile(means, [.025, .975]).tolist() if len(values) > 1 else None}
-        paired.append({"arm": arm, "baseline": "A0", "budget": budget, "paired_seeds": sorted(paired_seeds), "metrics": comparisons})
+        paired.append({"arm": arm, "baseline": baseline, "budget": budget, "paired_seeds": sorted(paired_seeds), "metrics": comparisons})
     return {"status": "analysis_only", "publication": results[0]["publication"], "aggregate": aggregate,
             "paired": paired, "per_run": per_run,
             "limitations": "Image-group intervals do not establish patient independence. Seed bootstrap intervals with few seeds are unstable; no hypothesis-test significance is claimed. Missing runs are not imputed."}
@@ -124,11 +128,12 @@ def main():
     parser.add_argument("--results", nargs="+", required=True, help="Explicit measured result.json paths")
     parser.add_argument("--output", required=True)
     parser.add_argument("--bootstrap", type=int, default=1000)
+    parser.add_argument("--baseline", choices=["A0", "A1", "A2", "A3", "G1"], default="A0")
     args = parser.parse_args()
     if Path(args.output).exists():
         parser.error("Output exists; choose a new analysis artifact")
     results = [json.loads(Path(path).read_text()) for path in args.results]
-    write_json(args.output, summarize(results, args.bootstrap))
+    write_json(args.output, summarize(results, args.bootstrap, args.baseline))
 
 
 if __name__ == "__main__":

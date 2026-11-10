@@ -131,6 +131,24 @@ def train_fixed_updates(dataset, val_dataset, cfg, arm, seed, device, out):
     return model, threshold
 
 
+def augmentation_count(train_rows, config):
+    ratio = float(config.get("synthetic_ratio", 1.))
+    if not np.isfinite(ratio) or ratio < 0:
+        raise ValueError("Synthetic ratio must be finite and nonnegative")
+    positives = sum(r["label"] == 1 for r in train_rows)
+    negatives = sum(r["label"] == 0 for r in train_rows)
+    return int(np.ceil(max(0, negatives - positives) * ratio))
+
+
+def duplicate_positive_rows(train_rows, count, seed):
+    """Match G1's added count without claiming new independent observations."""
+    positives = [r for r in train_rows if r["label"] == 1]
+    if count and not positives:
+        raise ValueError("Duplicate control requires positive training images")
+    rng = np.random.default_rng(seed)
+    return [positives[i] for i in rng.integers(0, len(positives), size=count)] if count else []
+
+
 def add_synthetic(train_rows, root, config, seed, device, out):
     from src.gan.train_gan import train_gan
     from src.gan.inference import generate_images
@@ -145,8 +163,7 @@ def add_synthetic(train_rows, root, config, seed, device, out):
     loader = DataLoader(generator_data, batch_size=gan_config.get("batch_size", 16), shuffle=True, num_workers=0)
     generator, _ = train_gan(str(path), loader, device, str(out / "generator"))
     generator.eval()
-    negatives = sum(r["label"] == 0 for r in train_rows)
-    count = max(0, int(np.ceil((negatives - len(positives)) * config.get("synthetic_ratio", 1.))))
+    count = augmentation_count(train_rows, config)
     folder = out / "synthetic"
     folder.mkdir()
     synthetic = []
@@ -164,7 +181,7 @@ def add_synthetic(train_rows, root, config, seed, device, out):
 
 
 def run_one(config, manifest, arm, fraction, seed, out, publication=False):
-    if arm not in ("A0", "A1", "A2", "G1"):
+    if arm not in ("A0", "A1", "A2", "A3", "G1"):
         raise ValueError("Unsupported arm; diffusion is not silently substituted")
     out = Path(out)
     out.mkdir(parents=True, exist_ok=False)
@@ -180,6 +197,7 @@ def run_one(config, manifest, arm, fraction, seed, out, publication=False):
     real = ManifestDataset(selected, config["data_root"], augment=arm == "A2")
     dataset = real
     synthetic_count = 0
+    duplicate_rows = []
     try:
         memory = None
         if device.type == "cuda":
@@ -194,6 +212,9 @@ def run_one(config, manifest, arm, fraction, seed, out, publication=False):
         if arm == "G1":
             synthetic, synthetic_count = add_synthetic(selected, config["data_root"], config, seed, device, out)
             dataset = torch.utils.data.ConcatDataset([real, synthetic])
+        elif arm == "A3":
+            duplicate_rows = duplicate_positive_rows(selected, augmentation_count(selected, config), seed)
+            dataset = ManifestDataset(selected + duplicate_rows, config["data_root"])
         cfg = config["classifier"]
         val = ManifestDataset(val_rows, config["data_root"])
         model, threshold = train_fixed_updates(dataset, val, cfg, arm, seed, device, out)
@@ -206,6 +227,7 @@ def run_one(config, manifest, arm, fraction, seed, out, publication=False):
                   "threshold": threshold, "threshold_rule": "maximum validation F1; highest threshold breaks ties",
                   "metrics": evaluate_predictions(test_rows, labels, probs, threshold), "predictions": predictions,
                   "training_ids": [r["id"] for r in selected], "synthetic_count": synthetic_count,
+                  "duplicate_count": len(duplicate_rows), "duplicate_source_ids": [r["id"] for r in duplicate_rows],
                   "updates": cfg["updates"], "batch_size": cfg["batch_size"], "config": config,
                   "manifest_digest": __import__("hashlib").sha256(json.dumps(manifest, sort_keys=True).encode()).hexdigest(),
                   "checkpoint_sha256": sha256(out / "classifier.pth"), "commit": commit,

@@ -39,6 +39,20 @@ def test_nearest_neighbours_find_identical_samples():
     assert distances == pytest.approx([0., .1])
 
 
+def test_duplicate_control_comparison_enforces_count_match():
+    control = dict(arm="A3", budget=.25, seed=42, publication=False, status="measured", manifest_digest="fixture",
+                   predictions=predictions(), threshold=.5, training_ids=["train"],
+                   config={"classifier": {"updates": 2}}, duplicate_count=3)
+    generated = deepcopy(control)
+    generated.update(arm="G1", synthetic_count=3, duplicate_count=0)
+    result = summarize([control, generated], bootstrap=10, baseline="A3")
+    assert result["paired"][0]["baseline"] == "A3"
+    assert result["paired"][0]["metrics"]["recall"]["mean_difference"] == 0
+    generated["synthetic_count"] = 4
+    with pytest.raises(ValueError, match="matched added counts"):
+        summarize([control, generated], bootstrap=10, baseline="A3")
+
+
 def test_kid_matches_direct_unbiased_estimator():
     a, b = np.array([[0.], [1.], [2.]]), np.array([[3.], [4.]])
     expected = sum((float(x @ y) + 1) ** 3 for i, x in enumerate(a) for j, y in enumerate(a) if i != j) / 6

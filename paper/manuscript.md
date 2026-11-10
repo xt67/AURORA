@@ -2,7 +2,7 @@
 
 **External-review working draft, 10 November 2026. Not ready for submission.**
 
-Authors, affiliations, supervisor, corresponding author and target venue: to be supplied by the researchers. There are no completed publication experiments under this protocol.
+Author identity, actual affiliation, corresponding author and target venue: to be supplied by the sole researcher. No supervisor or clinical reviewer is claimed. There are no completed publication experiments under this protocol.
 
 ## Abstract
 
@@ -23,6 +23,8 @@ Frid-Adar and colleagues evaluated GAN-based augmentation for liver-lesion class
 WGAN-GP replaces weight clipping with a critic-gradient penalty and provides an alternative adversarial training formulation [6]. MediSyn retains it as an available candidate, without assuming that all implemented architectures belong in the final study. FID compares distributions in a pretrained feature space [7], while KID uses a kernel-based discrepancy estimator [8]. These metrics address distributional similarity, not clinical correctness. The study therefore separates feature-based fidelity, pixel-based proximity/diversity screens and real-test classification outcomes. A deeper comparison with TB-specific synthesis and classification studies remains necessary before submission.
 
 ## 3. Materials and Methods
+
+The supplied systematic review [9] motivates explicit separation of image quality from downstream utility and transparent reporting of study limitations. Morís et al. [10] provide a TB-specific diffusion/CUT comparison with real-image testing; their models, hardware and protocol differ from ours. Pink and Sykes [11] directly investigate count-matched duplication and fixed-update classifiers, finding that higher generative fidelity did not establish superior utility in their setting. That question and control are prior work. AURORA's proposed emphasis is original NLM cohorts, reviewed duplicate groups and nested scarcity budgets; novelty is not established merely by this combination. See docs/LITERATURE_VALIDATION.md for evidence boundaries.
 
 ### 3.1 Candidate data and review status
 
@@ -53,6 +55,8 @@ All conditions use ResNet-18, Adam, unweighted cross entropy and identical batch
 Diffusion is optional and unimplemented in this release. Cross-cohort sensitivity training is not part of the pooled v1 runner. Neither is described as completed or infeasible based on unperformed experiments.
 
 ### 3.5 Evaluation and analysis implementation
+
+Protocol v1.1 adds A3, an exact added-count duplicate-real control motivated by [11]. It repeats positive training rows uniformly with replacement using the run seed, adding the same deficit-based count as G1. It records every repeated source ID. Both arms share nominal size, class counts and classifier updates; A3 adds no independent observations. The deficit multiplier here differs from [11]'s synthetic-to-real ratio. G1-minus-A3 and G1-minus-A0 contrasts will both be reported; no outcome or superiority is presumed. Analysis supports selecting A3 as the reference and checks equal added counts.
 
 TB recall is primary. Supporting metrics are AUPRC, F1, specificity and AUROC; the code retains per-image probabilities and reports Shenzhen and Montgomery subsets separately. Undefined ranking metrics for single-class subsets are represented as missing rather than invented values. Calibration reporting includes Brier score and a ten-bin expected calibration error.
 
@@ -95,6 +99,12 @@ The software provides an executable controlled-study framework. A conclusion abo
 [7] Heusel M, Ramsauer H, Unterthiner T, Nessler B, Hochreiter S. GANs Trained by a Two Time-Scale Update Rule Converge to a Local Nash Equilibrium. NeurIPS. 2017. [arXiv:1706.08500](https://arxiv.org/abs/1706.08500).
 
 [8] Bińkowski M, Sutherland DJ, Arbel M, Gretton A. Demystifying MMD GANs. ICLR. 2018. [arXiv:1801.01401](https://arxiv.org/abs/1801.01401).
+
+[9] Folguera-Profitós J et al. Quality Assessment and Model Training Impact of Synthetic Images in Medical Diagnostic Imaging: Systematic Review. JMIR AI. 2026;5:e81472. [doi:10.2196/81472](https://doi.org/10.2196/81472).
+
+[10] Morís DI, de Moura J, Novo J, Ortega M. Adapted generative latent diffusion models for accurate pathological analysis in chest X-ray images. Med Biol Eng Comput. 2024;62:2189–2212. [doi:10.1007/s11517-024-03056-5](https://doi.org/10.1007/s11517-024-03056-5).
+
+[11] Pink C, Sykes E. Disentangling dataset size from synthetic diversity in tuberculosis chest X-ray classification. Proceedings of the 39th Canadian Conference on Artificial Intelligence. PMLR. 2026;318:954–961. [Proceedings](https://proceedings.mlr.press/v318/pink26a.html). The supplied PDF's DOI placeholder is not a valid DOI.
 
 ## 9. Reproducibility Appendix
 

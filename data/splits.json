@@ -1,8 +1,0 @@
-{
-  "train": 2937,
-  "val": 629,
-  "test": 631,
-  "seed": 42,
-  "stratified": true,
-  "deduplicated": true
-}
