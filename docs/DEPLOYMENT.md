@@ -1,0 +1,46 @@
+# MediSyn deployment preparation
+
+Status: local page tests, actual PNG generation, a bounded HTTP health check, wheel build/install and dependency checks have passed. No public deployment or container build has been tested. See TEST_REPORT.md for final regression counts.
+
+## Local launch
+
+From the repository root in the existing `aurora-cuda` environment:
+
+```powershell
+python -m streamlit run app/streamlit_app.py
+```
+
+For a fresh source checkout use Python 3.11, `python -m pip install -r requirements.txt`, then `python -m pip install -e . --no-deps`. The tested development environment is Python 3.11.17 with torch 2.2.0+cu121 and torchvision 0.17.0+cu121. A clean Linux/container environment has not been exercised. Existing CUDA environments do not need to be reinstalled merely to run the app.
+
+Run `python scripts/check_local_app.py` for a bounded, loopback-only HTTP smoke check. It stops its temporary server automatically and stores logs under `outputs/verification/`.
+
+Set `AURORA_CHECKPOINT` to a checkpoint produced by the repaired trainer. The default is `outputs/gan/models/generator_latest.pth`. Legacy state-dict-only files lack architecture metadata and are rejected explicitly. A smoke-test checkpoint must never be presented as a trained medical model.
+
+Set `AURORA_RESULTS` to a reviewed JSON result artifact; the default is `outputs/paper_results.json`. The app expects `status: "verified"`, a `protocol` identifier, and a nonempty `experiments` collection. This field is a publisher assertion, not automatic scientific verification. Publish per-seed measured metrics, provenance and limitations together. In the absence of an artifact the app displays an honest empty state.
+
+## Container candidate
+
+```powershell
+docker build -t aurora-demo .
+docker run --rm -p 8501:8501 aurora-demo
+```
+
+This starts an empty research demo. Mount a reviewed model directory read-only and set `AURORA_CHECKPOINT` to the container path when a release model is available. Raw datasets, private review artifacts and local checkpoints are excluded from the image.
+
+Before public release: validate the image on the selected host, verify access to the health endpoint `/_stcore/health`, test generation with the release checkpoint, check memory/resource use under concurrent sessions, and establish checkpoint/data redistribution rights. A hosting account and release model are still needed. The container is a deployment candidate, not a claim that the project is finished.
+
+## Account-based hosting option
+
+[Streamlit Community Cloud deployment](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app) connects a GitHub repository and application entry point. A candidate deployment uses `xt67/medimage-synth`, branch `aurora-refinement`, entry point `app/streamlit_app.py`, and Python 3.11. The app can launch in its honest empty state without datasets or a model. Use the free hosting option only; do not start paid services. Resource suitability for a reviewed generator must be tested before exposing generation publicly.
+
+Exact remaining action: the account owner must sign in, connect GitHub, select the branch/entry point and launch a deployment. No account credentials were supplied, and no public URL has been created. Do not attach private datasets or contact sheets. A release checkpoint and measured-results artifact require separate review before being installed on the host.
+
+## Troubleshooting
+
+- `No module named pytest/torch/streamlit`: activate `aurora-cuda` or the documented virtual environment; the system Python is a different installation.
+- CUDA unavailable: use CPU/auto for software demonstrations. Changing a publication device/config requires updating the approved configuration hash.
+- CUDA OOM: close competing GPU programs; reduce batch size only in a revised configuration. Failed runs are recorded. Do not silently change settings midway through a comparison.
+- Missing/legacy/corrupt checkpoint: use a trusted metadata checkpoint produced by the repaired trainer; the app explains unavailable generation rather than substituting random samples.
+- Publication gate refuses to run: resolve the reported review/approval/hash issue. Do not turn off the gate or treat fixture tests as human sign-off.
+- Port in use: use another local Streamlit port. The health script chooses an available ephemeral port and disables watchers.
+- Docker unavailable: local Python execution remains supported; container validation is an explicitly outstanding release check.

@@ -1,27 +1,13 @@
 from setuptools import setup, find_packages
+from pathlib import Path
 
 setup(
     name="aurora",
-    version="1.0.0",
-    description="AURORA - Augmenting Underrepresented Rare-disease Observations using Realistic Artificial imaging (MediSyn toolkit)",
+    version="0.2.0",
+    description="AURORA / MediSyn: reproducible TB-manifestation image augmentation research",
     author="Rayan",
     packages=find_packages(),
-    install_requires=[
-        "torch>=2.2.0",
-        "torchvision>=0.17.0",
-        "Pillow>=10.2.0",
-        "numpy>=1.26.4",
-        "scikit-learn>=1.4.1",
-        "matplotlib>=3.8.3",
-        "seaborn>=0.13.2",
-        "plotly>=5.19.0",
-        "streamlit>=1.32.0",
-        "pytorch-fid>=0.3.0",
-        "PyYAML>=6.0.1",
-        "tensorboard>=2.16.2",
-        "tqdm>=4.66.2",
-        "pytest>=8.1.1",
-        "gdown>=5.1.0",
-    ],
-    python_requires=">=3.10",
+    install_requires=[line.strip() for line in Path(__file__).with_name("requirements.txt").read_text().splitlines()
+                      if line.strip() and not line.lstrip().startswith("#")],
+    python_requires=">=3.10,<3.13",
 )

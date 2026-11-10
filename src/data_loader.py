@@ -15,13 +15,13 @@ logger = logging.getLogger(__name__)
 
 class MedicalImageDataset(Dataset):
     """Dataset class for medical images (X-rays, MRI).
-    
+
     Args:
         root_dir: Root directory containing class folders.
         transform: Transform to apply to images.
         target_classes: List of class names to load. None for all.
     """
-    
+
     def __init__(
         self,
         root_dir: str,
@@ -32,15 +32,15 @@ class MedicalImageDataset(Dataset):
         self.transform = transform
         self.images = []
         self.labels = []
-        
+
         # Deterministic: sort class directories by name
         self.classes = sorted([d for d in self.root_dir.iterdir() if d.is_dir()], key=lambda x: x.name)
         self.class_to_idx = {c.name: i for i, c in enumerate(self.classes)}
-        
+
         if target_classes:
             self.classes = [c for c in self.classes if c.name in target_classes]
-        
-        
+
+
         skipped_files = []
         for class_dir in self.classes:
             # Deterministic: sort image paths by name
@@ -54,27 +54,27 @@ class MedicalImageDataset(Dataset):
                         self.labels.append(self.class_to_idx[class_dir.name])
                     except Exception as e:
                         skipped_files.append((str(img_path), str(e)))
-        
+
         if skipped_files:
             logger.warning(f"Skipped {len(skipped_files)} corrupted files")
             log_path = self.root_dir.parent / "skipped_files.log"
             with open(log_path, "w") as f:
                 f.writelines([f"{p[0]}: {p[1]}\n" for p in skipped_files])
-        
+
         if len(self) == 0:
             raise RuntimeError(f"No images found in {root_dir}. Check dataset path and structure.")
-    
+
     def __len__(self) -> int:
         return len(self.images)
-    
+
     def __getitem__(self, idx: int) -> Tuple[torch.Tensor, int]:
         img_path = self.images[idx]
         with Image.open(img_path) as source:
             image = to_grayscale_8bit(source)
-        
+
         if self.transform:
             image = self.transform(image)
-        
+
         return image, self.labels[idx]
 
 
@@ -86,14 +86,14 @@ def get_transforms(
     for_classifier: bool = False
 ) -> transforms.Compose:
     """Create image transforms.
-    
+
     Args:
         image_size: Target image size.
         is_training: Whether for training (with augmentation).
         normalize_range: Range for normalization (used for GAN: [-1, 1]).
         augmentation_mode: "none" | "conventional" | "synthetic" - controls stochastic augmentations.
         for_classifier: If True, use ImageNet normalization for pretrained ResNet.
-    
+
     Returns:
         Composed transforms.
     """
@@ -101,7 +101,7 @@ def get_transforms(
         transforms.Resize((image_size, image_size)),
         transforms.CenterCrop(image_size),
     ]
-    
+
     # Only apply stochastic augmentations during training AND when mode permits
     if augmentation_mode not in ("none", "conventional", "synthetic"):
         raise ValueError("Unknown augmentation_mode")
@@ -111,9 +111,9 @@ def get_transforms(
             transforms.RandomAffine(degrees=5, translate=(0.05, 0.05)),
             transforms.ColorJitter(brightness=0.1, contrast=0.1),
         ])
-    
+
     transform_list.append(transforms.ToTensor())
-    
+
     if for_classifier:
         # Convert grayscale to 3-channel for pretrained ResNet
         transform_list.append(repeat_grayscale_channels)
@@ -126,7 +126,7 @@ def get_transforms(
         transform_list.append(
             transforms.Normalize(mean=[0.5], std=[0.5], inplace=True)
         )
-    
+
     return transforms.Compose(transform_list)
 
 
@@ -144,7 +144,7 @@ def create_dataloaders(
     manifest_path: Optional[str] = None,
 ) -> Tuple[DataLoader, DataLoader, DataLoader]:
     """Create train/val/test dataloaders.
-    
+
     Args:
         data_dir: Directory containing class folders.
         batch_size: Batch size for dataloaders.
@@ -156,7 +156,7 @@ def create_dataloaders(
         target_classes: Classes to include.
         augmentation_mode: "none" | "conventional" - controls stochastic augmentations on train set.
         for_classifier: If True, use ImageNet normalization (3-channel) for pretrained ResNet.
-    
+
     Returns:
         Tuple of (train_loader, val_loader, test_loader).
     """
@@ -205,7 +205,7 @@ def create_dataloaders(
     train_dataset = torch.utils.data.Subset(train_full, train_idx)
     val_dataset = torch.utils.data.Subset(val_full, val_idx)
     test_dataset = torch.utils.data.Subset(test_full, test_idx)
-    
+
     train_loader = DataLoader(
         train_dataset,
         batch_size=batch_size,
@@ -215,7 +215,7 @@ def create_dataloaders(
         drop_last=False,
         generator=torch.Generator().manual_seed(seed)
     )
-    
+
     val_loader = DataLoader(
         val_dataset,
         batch_size=batch_size,
@@ -224,7 +224,7 @@ def create_dataloaders(
         pin_memory=True,
         drop_last=False
     )
-    
+
     test_loader = DataLoader(
         test_dataset,
         batch_size=batch_size,
@@ -233,7 +233,7 @@ def create_dataloaders(
         pin_memory=True,
         drop_last=False
     )
-    
+
     # Persist split manifest with actual indices and filenames for reproducibility
     split_manifest = {
         "train": {"count": train_len, "indices": train_idx},
@@ -253,7 +253,7 @@ def create_dataloaders(
     if manifest_path is not None:
         with open(manifest_path, "x") as f:
             json.dump(split_manifest, f, indent=2)
-    
+
     # Verify disjoint splits
     train_set = set(train_idx)
     val_set = set(val_idx)
@@ -261,16 +261,16 @@ def create_dataloaders(
     assert len(train_set & val_set) == 0, "Train/val overlap!"
     assert len(train_set & test_set) == 0, "Train/test overlap!"
     assert len(val_set & test_set) == 0, "Val/test overlap!"
-    
+
     class_counts = {}
     for c in train_full.classes:
         i = train_full.class_to_idx[c.name]
         class_counts[c.name] = sum(1 for label in train_full.labels if label == i)
     logger.info(f"Dataset class distribution: {class_counts}")
-    
+
     if any(c < 50 for c in class_counts.values()):
         logger.warning(f"Some classes have fewer than 50 samples. Consider oversampling.")
-    
+
     return train_loader, val_loader, test_loader
 
 
@@ -288,10 +288,10 @@ def repeat_grayscale_channels(image: torch.Tensor) -> torch.Tensor:
 
 def grayscale_to_rgb(image: torch.Tensor) -> torch.Tensor:
     """Convert grayscale image to 3-channel RGB.
-    
+
     Args:
         image: Grayscale tensor of shape (B, 1, H, W).
-    
+
     Returns:
         RGB tensor of shape (B, 3, H, W).
     """

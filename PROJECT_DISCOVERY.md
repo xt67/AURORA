@@ -1,3 +1,5 @@
+> Historical document: dataset assumptions and completion claims below may be superseded. See `docs/COMPLETION_STATUS.md` and `AURORA_PAPER_ROADMAP.md` for current status.
+
 # Project Discovery Report
 
 **Repository:** `xt67/medimage-synth` (local clone)  

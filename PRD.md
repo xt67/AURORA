@@ -1,3 +1,5 @@
+> Historical document: dataset assumptions and completion claims below may be superseded. See `docs/COMPLETION_STATUS.md` and `AURORA_PAPER_ROADMAP.md` for current status.
+
 # AURORA - Augmenting Underrepresented Rare-disease Observations using Realistic Artificial imaging
 
 ## Overview

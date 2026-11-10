@@ -1,3 +1,5 @@
+> Historical document: dataset assumptions and completion claims below may be superseded. See `docs/COMPLETION_STATUS.md` and `AURORA_PAPER_ROADMAP.md` for current status.
+
 # AURORA / MediSyn — Complete Project Status, Findings, and Research Paper Document
 
 **Companion tool name:** MediSyn

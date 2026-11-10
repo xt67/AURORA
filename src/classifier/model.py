@@ -57,7 +57,7 @@ def get_class_weights(dataset, num_classes: int = 2) -> torch.Tensor:
     from collections import Counter
 
     labels = []
-    
+
     # Subset wrapping a dataset with labels
     if hasattr(dataset, "indices"):
         base_ds = dataset.dataset

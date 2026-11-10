@@ -34,13 +34,13 @@ def test_classifier_forward_3ch():
 def test_class_weights_subset():
     """Test get_class_weights works with Subset."""
     from torch.utils.data import Subset, TensorDataset
-    
+
     # Create a simple dataset
     X = torch.randn(20, 1, 128, 128)
     y = torch.tensor([0]*15 + [1]*5)  # imbalanced
     ds = TensorDataset(X, y)
     subset = Subset(ds, list(range(20)))
-    
+
     weights = get_class_weights(subset, num_classes=2)
     assert weights.shape == (2,)
     # Class 0 has 15, class 1 has 5 -> weights should be inverse
@@ -60,14 +60,14 @@ def test_different_seeds_produce_different_initializations():
     model2 = MedicalImageClassifier(num_classes=2, pretrained=False)
     set_seed(123)
     model3 = MedicalImageClassifier(num_classes=2, pretrained=False)
-    
+
     # Check that weights differ
     for p1, p2 in zip(model1.parameters(), model2.parameters()):
         if not torch.allclose(p1, p2):
             break
     else:
         pytest.fail("Models with different seeds should have different weights")
-    
+
     for p1, p3 in zip(model1.parameters(), model3.parameters()):
         if not torch.allclose(p1, p3):
             break
@@ -83,7 +83,7 @@ def test_amp_training_loop():
         import shutil
         shutil.rmtree(tmpdir, ignore_errors=True)
     tmpdir.mkdir(parents=True, exist_ok=True)
-    
+
     try:
         # Create minimal config
         config = {
@@ -97,30 +97,30 @@ def test_amp_training_loop():
             "use_amp": True,
             "data_dir": str(tmpdir),
         }
-        
+
         import yaml
         config_path = tmpdir / "test_config.yaml"
         with open(config_path, "w") as f:
             yaml.dump(config, f)
-        
+
         # Create dummy data
         for cls in ["Normal", "TB"]:
             (tmpdir / cls).mkdir()
             for i in range(10):
                 arr = (np.random.rand(128, 128) * 255).astype(np.uint8)
                 Image.fromarray(arr, "L").save(tmpdir / cls / f"{i:03d}.png")
-        
+
         import torch
-        
+
         tr, vl, te = create_dataloaders(str(tmpdir), batch_size=4, seed=42, num_workers=0, for_classifier=True)
-        
+
         # This should run without error on CPU with AMP (which will be disabled)
         model = train_classifier(
             str(config_path), tr, vl, torch.device("cpu"),
             output_dir=str(tmpdir / "out"),
             seed=42,
         )
-        
+
         # Check best checkpoint was loaded
         assert model is not None
         metrics = evaluate_classifier(model, te, torch.device("cpu"))
