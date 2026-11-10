@@ -1,0 +1,11 @@
+{
+  "canonical_dataset_approved": false,
+  "split_frozen": false,
+  "protocol_approved": false,
+  "publication_run_approved": false,
+  "approved_by": "",
+  "approved_at": "",
+  "manifest_sha256": "",
+  "config_sha256": "",
+  "protocol_sha256": ""
+}

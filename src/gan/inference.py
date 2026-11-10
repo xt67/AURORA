@@ -11,7 +11,7 @@ from .generator import Generator
 def load_generator(path, device="cpu"):
     device = torch.device(device)
     checkpoint = torch.load(path, map_location="cpu", weights_only=True)
-    if "netG_state" not in checkpoint or "config" not in checkpoint:
+    if not isinstance(checkpoint, dict) or "netG_state" not in checkpoint or not isinstance(checkpoint.get("config"), dict):
         raise ValueError("Checkpoint requires netG_state and config; legacy weights lack architecture metadata")
     config = checkpoint["config"]
     model = Generator(config["z_dim"], config.get("ngf", 64), 1).to(device)
@@ -25,6 +25,7 @@ def generate_images(model, count, z_dim, seed=42):
     if not 1 <= count <= 256:
         raise ValueError("count must be between 1 and 256")
     device = next(model.parameters()).device
+    model.eval()
     rng = torch.Generator(device=device).manual_seed(seed)
     return model(torch.randn(count, z_dim, 1, 1, generator=rng, device=device))
 

@@ -34,6 +34,13 @@ def test_metrics_reject_invalid_inputs(truth, pred, prob):
         compute_metrics(truth, pred, prob)
 
 
+def test_high_bit_depth_images_are_not_silently_clipped():
+    from src.data_loader import to_grayscale_8bit
+    image = Image.fromarray(np.array([[0, 1024, 4095]], dtype=np.uint16))
+    with pytest.raises(ValueError, match="intensity conversion"):
+        to_grayscale_8bit(image)
+
+
 @pytest.mark.parametrize("loss_type", ["bce", "wgan-gp"])
 @pytest.mark.parametrize("device", ["cpu", pytest.param("cuda", marks=pytest.mark.skipif(not torch.cuda.is_available(), reason="CUDA unavailable"))])
 def test_training_checkpoint_inference_png(tmp_path, loss_type, device):
@@ -130,7 +137,7 @@ def test_classifier_consumes_all_synthetic_batches(tmp_path, monkeypatch):
     assert seen == [1., 2., 1.]
 
 
-@pytest.mark.parametrize("page", ["Overview", "Generator", "Results"])
+@pytest.mark.parametrize("page", ["Overview", "Generator", "Results", "Study workflow"])
 def test_demo_empty_state(page, monkeypatch, tmp_path):
     from streamlit.testing.v1 import AppTest
     monkeypatch.setenv("AURORA_CHECKPOINT", str(tmp_path / "missing.pth"))
@@ -139,3 +146,28 @@ def test_demo_empty_state(page, monkeypatch, tmp_path):
     app.sidebar.radio[0].set_value(page).run()
     assert not app.exception
     assert not app.success
+
+
+def test_demo_generates_downloadable_png(monkeypatch, tmp_path):
+    from streamlit.testing.v1 import AppTest
+    from src.gan.generator import Generator
+    checkpoint = tmp_path / "fixture.pth"
+    torch.save({"netG_state": Generator(z_dim=8, ngf=2).state_dict(), "config": {"z_dim": 8, "ngf": 2}}, checkpoint)
+    monkeypatch.setenv("AURORA_CHECKPOINT", str(checkpoint))
+    app = AppTest.from_file("app/streamlit_app.py").run()
+    app.sidebar.radio[0].set_value("Generator").run()
+    app.button[0].click().run()
+    assert not app.exception
+    with Image.open(BytesIO(app.session_state["png"])) as image:
+        assert image.format == "PNG"
+
+
+def test_demo_handles_corrupt_checkpoint(monkeypatch, tmp_path):
+    from streamlit.testing.v1 import AppTest
+    checkpoint = tmp_path / "broken.pth"
+    checkpoint.write_bytes(b"")
+    monkeypatch.setenv("AURORA_CHECKPOINT", str(checkpoint))
+    app = AppTest.from_file("app/streamlit_app.py").run()
+    app.sidebar.radio[0].set_value("Generator").run()
+    assert not app.exception
+    assert app.error

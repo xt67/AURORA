@@ -69,7 +69,8 @@ class MedicalImageDataset(Dataset):
     
     def __getitem__(self, idx: int) -> Tuple[torch.Tensor, int]:
         img_path = self.images[idx]
-        image = Image.open(img_path).convert("L")
+        with Image.open(img_path) as source:
+            image = to_grayscale_8bit(source)
         
         if self.transform:
             image = self.transform(image)
@@ -271,6 +272,13 @@ def create_dataloaders(
         logger.warning(f"Some classes have fewer than 50 samples. Consider oversampling.")
     
     return train_loader, val_loader, test_loader
+
+
+def to_grayscale_8bit(image: Image.Image) -> Image.Image:
+    """Reject implicit clipping of high-bit-depth medical pixel intensities."""
+    if image.mode in ("I", "F") or image.mode.startswith("I;16"):
+        raise ValueError("High-bit-depth input requires an explicitly approved intensity conversion")
+    return image.convert("L")
 
 
 def repeat_grayscale_channels(image: torch.Tensor) -> torch.Tensor:
