@@ -21,7 +21,8 @@ from src.gan.inference import generate_images
 from src.evaluate.generative import nearest_neighbours
 from .data import budget_rows, sha256
 from .publication_gate import preflight
-from .runner import train_fixed_updates, predict, evaluate_predictions, duplicate_positive_rows, write_json
+from .runner import make_train_loader, select_threshold, predict, evaluate_predictions, duplicate_positive_rows, write_json
+from src.utils.seed import set_seed
 from .v2_gate import digest, object_digest
 
 
@@ -151,6 +152,42 @@ def fit_generator(plan, selected, seed, device, out):
     return ClassifierDataset(fake_images, [1] * len(fake_images))
 
 
+def train_classifier(dataset, validation, cfg, arm, seed, device, out):
+    """Fixed successful updates; low AMP scale prevents initial FP16 overflow."""
+    set_seed(seed)
+    model = MedicalImageClassifier(pretrained=cfg['pretrained']).to(device)
+    optimizer = torch.optim.Adam(model.parameters(), lr=cfg['lr'], weight_decay=cfg['weight_decay'])
+    amp = bool(cfg['use_amp'] and device.type == 'cuda')
+    scaler = torch.cuda.amp.GradScaler(enabled=amp, init_scale=cfg['amp_initial_scale'])
+    train = make_train_loader(dataset, arm, cfg['updates'], cfg['batch_size'], seed)
+    val = DataLoader(validation, batch_size=cfg['batch_size'], num_workers=0)
+    history, best_loss = [], float('inf')
+    for step, (images, labels) in enumerate(train, 1):
+        model.train()
+        optimizer.zero_grad(set_to_none=True)
+        with torch.cuda.amp.autocast(enabled=amp):
+            loss = torch.nn.functional.cross_entropy(model(images.to(device)), labels.to(device))
+        if not torch.isfinite(loss):
+            raise FloatingPointError(f'Non-finite classifier loss at update {step}')
+        scaler.scale(loss).backward()
+        scaler.unscale_(optimizer)
+        if any(p.grad is not None and not torch.isfinite(p.grad).all() for p in model.parameters()):
+            raise FloatingPointError(f'Non-finite classifier gradient at update {step}; no skipped optimizer updates allowed')
+        scaler.step(optimizer)
+        scaler.update()
+        if step % cfg['eval_every'] == 0 or step == cfg['updates']:
+            _, _, val_loss = predict(model, val, device)
+            history.append({'step': step, 'training_loss': loss.item(), 'validation_loss': val_loss, 'amp_scale': scaler.get_scale()})
+            if val_loss < best_loss:
+                best_loss = val_loss
+                torch.save({'state_dict': model.state_dict(), 'step': step, 'config': cfg}, out / 'classifier.pth')
+            write_json(out / 'training_history.json', history)
+            print(f'CLASSIFIER {out.name}: {step}/{cfg["updates"]} updates', flush=True)
+    model.load_state_dict(torch.load(out / 'classifier.pth', map_location=device, weights_only=True)['state_dict'])
+    labels, probabilities, _ = predict(model, val, device)
+    return model, select_threshold(labels, probabilities)
+
+
 def fit_one(plan, arm, fraction, seed, out):
     out.mkdir(exist_ok=False)
     start = time.perf_counter()
@@ -175,8 +212,9 @@ def fit_one(plan, arm, fraction, seed, out):
             raise ValueError('Unknown condition')
         val_rows = [r for r in plan.manifest['rows'] if r['split'] == 'val']
         val, val_read_ids = load_dataset(plan.root, val_rows, 'val')
-        cfg = {**plan.config['classifier'], 'use_amp': plan.config['classifier']['use_amp_on_cuda']}
-        model, threshold = train_fixed_updates(dataset, val, cfg, arm, seed, device, out)
+        cfg = {**plan.config['classifier'], 'use_amp': plan.config['classifier']['use_amp_on_cuda'],
+               'amp_initial_scale': plan.config['publication_settings']['classifier_amp_initial_scale']}
+        model, threshold = train_classifier(dataset, val, cfg, arm, seed, device, out)
         labels, probabilities, val_loss = predict(model, DataLoader(val, batch_size=16), device)
         torch.cuda.synchronize()
         record = {'status': 'fitted_test_not_evaluated', 'arm': arm, 'budget': fraction, 'seed': seed,

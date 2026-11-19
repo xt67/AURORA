@@ -1,0 +1,8 @@
+schema_version: 2
+scope: aurora_v2_publication
+proposal: configs/study_simplified_proposal.yaml
+protocol: docs/PUBLICATION_V2_1.md
+device: cuda
+classifier_amp_initial_scale: 1.0
+diagnostics: training_pixel_neighbours_and_diversity
+bootstrap_repetitions: 1000

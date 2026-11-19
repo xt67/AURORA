@@ -47,6 +47,8 @@ def plan(config_path):
         raise ValueError('Explicit v2 CUDA publication config required')
     if cfg.get('diagnostics') != 'training_pixel_neighbours_and_diversity' or cfg.get('bootstrap_repetitions') != 1000:
         raise ValueError('Unexpected diagnostic/analysis settings')
+    if cfg.get('classifier_amp_initial_scale') != 1.0:
+        raise ValueError('Documented v2.1 AMP initial loss scale 1.0 required')
     # Reuse the full provenance reconstruction, not any feasibility approval.
     base = v2_gate._plan(cfg['proposal'], 'cuda')
     design = yaml.safe_load(base.artifacts['config'])
@@ -76,6 +78,7 @@ def plan(config_path):
     if not weight_hash.startswith('f37072fd'):
         raise ValueError('ImageNet ResNet18 checkpoint hash mismatch')
     artifacts = {'publication_config': raw, 'publication_protocol': Path(cfg['protocol']).read_bytes(),
+                 'publication_design': Path('docs/PUBLICATION_V2.md').read_bytes(),
                  **{'proposal_' + k: v for k, v in base.artifacts.items()}}
     bindings = {'hashes': {k: digest(v) for k, v in artifacts.items()},
                 'training_ids': {b: [r['id'] for r in rows] for b, rows in selections.items()},

@@ -20,7 +20,7 @@ def publication_fixture(approved_fixture, tmp_path, monkeypatch):
     monkeypatch.setattr(gate, 'implementation', lambda: {'commit': 'c' * 40, 'sha256': 'd' * 64})
     real_hash = gate.sha256
     monkeypatch.setattr(gate, 'sha256', lambda p: 'f37072fd' + '0' * 56 if Path(p).name == 'resnet18-f37072fd.pth' else real_hash(p))
-    cfg = yaml.safe_load(Path('configs/study_publication_v2.yaml').read_text())
+    cfg = yaml.safe_load(Path('configs/study_publication_v2_1.yaml').read_text())
     cfg['proposal'] = str(proposal)
     path = tmp_path / 'publication.yaml'
     path.write_text(yaml.safe_dump(cfg))
@@ -129,3 +129,21 @@ def test_check_only_does_not_train_or_read_images(publication_fixture, tmp_path,
     monkeypatch.setattr(runner.ImageReader, 'read', lambda *args: pytest.fail('No images'))
     runner.run(cfg, auth, tmp_path / 'not_created', check_only=True)
     assert not (tmp_path / 'not_created').exists()
+
+
+def test_classifier_records_exact_updates_and_scale(tmp_path, monkeypatch):
+    class TinyModel(torch.nn.Module):
+        def __init__(self, pretrained=True):
+            super().__init__()
+            self.fc = torch.nn.Linear(3, 2)
+        def forward(self, x):
+            return self.fc(x.mean(dim=(2, 3)))
+    monkeypatch.setattr(runner, 'MedicalImageClassifier', TinyModel)
+    ds = runner.ClassifierDataset([Image.new('L', (8, 8), 40), Image.new('L', (8, 8), 200)], [0, 1])
+    cfg = dict(pretrained=False, lr=.0001, weight_decay=.0001, use_amp=True, amp_initial_scale=1., updates=3, eval_every=1, batch_size=2)
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    _, threshold = runner.train_classifier(ds, ds, cfg, 'A', 42, device, tmp_path)
+    history = json.loads((tmp_path / 'training_history.json').read_text())
+    assert [r['step'] for r in history] == [1, 2, 3]
+    assert all(r['amp_scale'] == 1 for r in history)
+    assert 0 <= threshold <= 1
