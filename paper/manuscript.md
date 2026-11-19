@@ -1,117 +1,125 @@
-> Scope update: the researcher has proposed a 590-image automated-exclusion study. Current verified selection and proposed methods are in docs/DATASET_SELECTION_REPORT.md and docs/EXPERIMENT_PROTOCOL_SIMPLIFIED.md. The v1 methods below are historical working-draft text pending approval/revision; do not submit them as the v2 protocol. No experiments have run.
+# AURORA: An Auditable Protocol and DCGAN Execution Feasibility Study for Synthetic Chest Radiograph Augmentation
 
-# AURORA: Evaluating synthetic chest radiograph augmentation under controlled scarcity of TB-manifestation-labelled training images
+**Rayan Rahman**
 
-**External-review working draft, 10 November 2026. Not ready for submission.**
+Marathwada Mitra Mandal Institute of Technology
 
-Author identity, actual affiliation, corresponding author and target venue: to be supplied by the sole researcher. No supervisor or clinical reviewer is claimed. There are no completed publication experiments under this protocol.
+**Working draft — 19 November 2026. Protocol and feasibility report; not a completed augmentation-effectiveness study.**
 
 ## Abstract
 
-**Background:** Synthetic images may expand training datasets, but fidelity and downstream value are separate questions. **Objective:** AURORA will evaluate whether augmentation improves TB recall when real positive training images are limited. **Methods:** MediSyn implements manifest-driven cohort/duplicate-aware partitioning, nested training budgets, matched classifier-update comparisons and validation-based threshold selection. **Results:** Pending human dataset adjudication and approved experiments. **Conclusion:** No conclusion about augmentation effectiveness is currently supported.
+Synthetic image augmentation requires separating generator execution, image fidelity and downstream predictive utility. We present AURORA, an auditable research pipeline and prospective four-condition protocol for TB-manifestation-labelled chest radiographs. From an inventory of 800 Shenzhen and Montgomery images, automated exclusion of all 210 images involved in 206 flagged similarity pairs retained 590 images: 289 normal and 301 TB-labelled. A cohort- and label-stratified split allocated 413/89/88 images to training/validation/testing. A separate hash-bound approval gate restricted a two-epoch DCGAN feasibility run to 52 real TB training images at the 25% budget, seed 42. The run completed on an NVIDIA RTX 4050 Laptop GPU with 1.32 seconds recorded trainer runtime and 216.92 MiB peak PyTorch allocation. Both epochs had finite losses; the final checkpoint passed epoch/configuration checks. No validation or test image was read by the generator. These findings establish bounded execution feasibility only. Real-only, duplicated-real, conventional-augmentation and synthetic-augmentation comparisons remain unexecuted. Automated selection bias, missing patient identifiers and absent clinical validation constrain interpretation.
 
 ## 1. Introduction
 
-A reproducible study of synthetic augmentation must distinguish an increase in training-image count from an increase in useful information. GANs learn a distribution through adversarial optimization [1]; DCGAN provides a convolutional image-generation baseline [2]. These mechanisms motivate augmentation experiments, but they do not establish that generated radiographs preserve disease-related features.
+Synthetic radiographs offer a testable approach to augmenting limited labelled training sets. Adding images, improving visual realism and improving performance on real evaluation images are different outcomes. An informative experiment must distinguish nominal oversampling from any benefit introduced by a learned generator.
 
-The NLM chest radiograph collections were released to support pulmonary-disease research, including images with manifestations of TB [3]. AURORA studies classification of these image labels rather than microbiologically confirmed infection. The proposed experiment reduces positive training-image availability while keeping evaluation images fixed. Its primary question is whether synthetic augmentation improves TB recall relative to real-only training and simpler augmentation controls, and how that utility relates to synthesis diagnostics.
+The Shenzhen and Montgomery collections support research on pulmonary-disease manifestations [1]. Here, TB-labelled denotes the source image label rather than independently confirmed infection. Scarcity is imposed experimentally by limiting positive training images while keeping normal training images fixed; it does not represent population disease prevalence.
 
-The intended contribution is a controlled, auditable evaluation pipeline and its eventual measured findings. We do not claim a novel generator architecture, clinical readiness or publication novelty before a fuller task-specific literature review and completed experiments.
+AURORA contributes documented dataset selection, provenance-bound execution and a prospective count-matched protocol. Its present measured contribution is a bounded feasibility run, not a new generator architecture or evidence of augmentation superiority. Positive, negative and null outcomes are equally reportable.
 
-This study is descriptive and comparative within its specified experimental conditions. It does not seek to establish a universally best method. Positive, negative and inconclusive outcomes will be retained; clinical validation is outside the scope of this experimental study.
+## 2. Related work
 
-## 2. Related Work
+DCGAN provides a convolutional adversarial image-learning baseline [2]. Its architectural design does not itself establish preservation of radiographic disease features. Morís et al. investigated adapted latent diffusion for chest-radiograph pathological analysis [3]; their models and experimental conditions differ from this feasibility study.
 
-Frid-Adar and colleagues evaluated GAN-based augmentation for liver-lesion classification using CT regions of interest [4]. Their study supports investigating synthetic augmentation as a task-dependent intervention; its findings cannot be transferred directly to full chest radiographs or TB-manifestation labels. Schütte and colleagues evaluated GAN-generated chest radiographs and brain CT images through downstream predictive performance, reporting sensitivity to label structure and limited sample availability [5]. This motivates treating utility, dataset composition and training-data budget as explicit experimental factors.
+Pink and Sykes compared synthetic augmentation with count-matched real duplication under fixed classifier optimization budgets [4]. In their experiments, superior generative metrics did not imply superiority over duplicated-real controls. This motivates AURORA's duplication comparator and separation of fidelity from utility. Such controls are prior work, not an original AURORA invention.
 
-WGAN-GP replaces weight clipping with a critic-gradient penalty and provides an alternative adversarial training formulation [6]. MediSyn retains it as an available candidate, without assuming that all implemented architectures belong in the final study. FID compares distributions in a pretrained feature space [7], while KID uses a kernel-based discrepancy estimator [8]. These metrics address distributional similarity, not clinical correctness. The study therefore separates feature-based fidelity, pixel-based proximity/diversity screens and real-test classification outcomes. A deeper comparison with TB-specific synthesis and classification studies remains necessary before submission.
+Folguera-Profitós et al. reviewed synthetic medical-image quality and downstream training impact, identifying heterogeneous evaluation and limitations in reproducibility and bias assessment [5]. Their synthesis motivates explicit evidence boundaries; it does not validate AURORA outputs. This is a targeted literature discussion, not a systematic review.
 
-## 3. Materials and Methods
+## 3. Materials and implemented methods
 
-The supplied systematic review [9] motivates explicit separation of image quality from downstream utility and transparent reporting of study limitations. Morís et al. [10] provide a TB-specific diffusion/CUT comparison with real-image testing; their models, hardware and protocol differ from ours. Pink and Sykes [11] directly investigate count-matched duplication and fixed-update classifiers, finding that higher generative fidelity did not establish superior utility in their setting. That question and control are prior work. AURORA's proposed emphasis is original NLM cohorts, reviewed duplicate groups and nested scarcity budgets; novelty is not established merely by this combination. See docs/LITERATURE_VALIDATION.md for evidence boundaries.
+### 3.1 Dataset selection
 
-### 3.1 Candidate data and review status
+The original local NLM inventory contains 800 images, comprising 406 normal and 394 TB-labelled images. A pre-existing audit contains 206 flagged candidate pairs involving 210 unique images. The primary selection excludes their complete union regardless of label or similarity score. This is automated similarity-based exclusion, not confirmed duplicate removal or human adjudication. No originals were deleted or relabelled.
 
-The candidate inventory comprises Shenzhen (326 normal, 336 TB-manifestation-labelled) and Montgomery (80 normal, 58 TB-manifestation-labelled) images, consistent with the dataset publication [3]. The approximately balanced pooled inventory is not the earlier mixed-source 5:1 dataset. Final sample counts and exclusions depend on adjudication. No patient identifiers have been established in the project, and patient-level independence is not claimed.
+**Table 1. Image-level selection and split counts.**
 
-Local provenance work identified 206 perceptually similar candidate pairs, including 64 cross-label pairs and 13 high-similarity candidates. These are unresolved audit observations, not confirmed duplicates. No qualified reviewer has signed them off. MediSyn records attributed human decisions, timestamps, notes and separate label-conflict status. Probable/unresolved decisions and cross-label duplicate conflicts block canonical finalization. The software does not make diagnosis, exclusion or relabelling decisions.
+| Cohort and label | Original | Excluded | Retained | Train | Validation | Test |
+|---|---:|---:|---:|---:|---:|---:|
+| Shenzhen normal | 326 | 112 | 214 | 150 | 32 | 32 |
+| Shenzhen TB-labelled | 336 | 87 | 249 | 174 | 38 | 37 |
+| Montgomery normal | 80 | 5 | 75 | 53 | 11 | 11 |
+| Montgomery TB-labelled | 58 | 6 | 52 | 36 | 8 | 8 |
+| Total | 800 | 210 | 590 | 413 | 89 | 88 |
 
-### 3.2 Implemented manifest and split procedure
+Exclusion affected 26.25% of the inventory: 30.06% of Shenzhen versus 7.97% of Montgomery, and 28.82% of normal versus 23.60% of TB-labelled images. These differences make selection bias a material limitation. Unique exact hashes among retained images do not establish absence of transformed duplicates or repeated patients. Reproduction is conditional on the frozen candidate audit; the initial similarity-screening algorithm, thresholds and operating characteristics must be documented fully before an effectiveness submission.
 
-A reviewed proposal records source-file hashes, relative image paths, cohort, binary label, connected duplicate group and partition. Exact hashes and confirmed duplicate relationships are grouped; cross-label groups are rejected. Groups are stratified by label and cohort composition, shuffled with a fixed seed, and allocated to the partition with the largest remaining target count under a 70/15/15 target. This group-aware procedure can produce approximate proportions. Realized counts and subgroup sizes must be approved and reported.
+### 3.2 Split, preprocessing and budgets
 
-The training gate reconstructs the proposal from reviewed sources, verifies image hashes and checks that approval binds the exact manifest, configuration and protocol. The default training CLI has no bypass for an unresolved publication dataset. Software tests use separate artificial images.
+Within each cohort/label stratum, filenames are sorted and shuffled using one Python random generator seeded 42, processing strata in sorted order. Counts use floor-rounded 70/15/15 targets; remaining images follow descending fractional remainders, breaking ties train/validation/test. The resulting training set contains 203 normal and 210 TB-labelled images; validation contains 43/46 and testing 43/45. No patient identifiers are available, so patient-level independence cannot be claimed.
 
-### 3.3 Preprocessing and nested budgets
+Inputs are converted to grayscale and resized to 128 by 128. Generator tensors are normalized to [-1,1]. High-bit-depth inputs are rejected without an explicit conversion. Planned classifier preprocessing repeats grayscale into three channels with ImageNet normalization. Square resizing and low resolution may remove relevant detail.
 
-PIL grayscale conversion and square resizing produce 128 × 128 inputs. High-bit-depth inputs are rejected pending an explicit intensity-conversion method. GAN tensors are normalized to [-1,1]; classifier tensors repeat grayscale to three channels and use ImageNet normalization. Square resizing and low resolution are acknowledged limitations.
+One seeded ordering of TB training images defines nested prefixes of 52, 105 and 210 images at 25%, 50% and 100% budgets. All 203 normal training images remain fixed. Only the 52-image prefix, seed 42, was used in the completed feasibility run.
 
-The implemented budget function retains all normal training images and takes nested prefixes of one seeded permutation of positive training images. Budgets are 25%, 50% and 100% of the frozen positive training count, rounded down with a minimum of one. The budget seed is fixed across training seeds. Budgets count images rather than independent patients or duplicate groups.
+### 3.3 Approval and data access
 
-### 3.4 Candidate synthesis and classification methods
+A separate v2 approval gate binds seven artifacts: configuration, protocol, original reference, candidate audit, retained manifest, exclusion manifest and split JSON. It additionally checks exact ordered source IDs, selection and effective-configuration digests, implementation commit and implementation-file digest. The gate reconstructs exclusion and allocation rather than trusting counts alone. The historical v1 human-review gate is unchanged.
 
-MediSyn implements a 128px convolutional GAN and a WGAN-GP critic without batch normalization or a sigmoid output. G1 trains the configured generator solely on real positive images in the corresponding training budget. The final fixed epoch is used, with no test-based selection. The default synthetic count fills the positive-image deficit relative to normal training images; actual counts and zero-deficit cases are recorded. These are proposed settings awaiting researcher approval, not empirically selected best settings.
+The image reader rejects nonselected IDs before image reads, verifies hashes and decodes the same verified byte buffers. The trainer receives only 52 preloaded tensors, without dataset paths or a holdout loader. This is an application-level access boundary around trusted code, not an operating-system sandbox or proof of patient independence.
 
-A0 uses real-only random sampling with replacement. A1 uses inverse-class-frequency sampling with replacement, yielding equal expected class proportions. A2 adds conventional transforms to A0: horizontal flips, small affine rotation/translation, and brightness/contrast jitter. G1 adds generated positive images without silently adding A2 transforms. A reviewer must approve the biological plausibility of these transforms.
+### 3.4 Bounded DCGAN configuration
 
-All conditions use ResNet-18, Adam, unweighted cross entropy and identical batch size, optimizer hyperparameters, validation cadence and total optimizer-update budget. The study runner does not early-stop. Validation loss selects the classifier checkpoint; validation F1 selects the decision threshold, with ties resolved by the highest threshold. Test and cohort subsets receive that fixed threshold. This threshold rule is not a validated clinical operating point. Default settings and all approval requirements are specified in docs/EXPERIMENT_PROTOCOL.md and configs/study.yaml.
+The feasibility run uses latent dimension 100, generator/discriminator widths 64, binary cross-entropy objectives, Adam learning rates 0.0002 and betas 0.5/0.999. Batch size is 16, with one discriminator step per generator step and full-precision training. Real discriminator targets are smoothed to 0.9; fake targets are zero and generator targets are one. Gradient norms are clipped at 1.0.
 
-Diffusion is optional and unimplemented in this release. Cross-cohort sensitivity training is not part of the pooled v1 runner. Neither is described as completed or infeasible based on unperformed experiments.
+Two epochs each contain batches of 16/16/16/4, giving eight generator and eight discriminator updates. Reported epoch losses are unweighted arithmetic means of batch losses, including the smaller final batch. The final epoch is retained without validation-based generator selection. The entry point enforces two epochs rather than inheriting the proposed publication setting of 200 epochs.
 
-### 3.5 Evaluation and analysis implementation
+## 4. Measured feasibility results
 
-Protocol v1.1 adds A3, an exact added-count duplicate-real control motivated by [11]. It repeats positive training rows uniformly with replacement using the run seed, adding the same deficit-based count as G1. It records every repeated source ID. Both arms share nominal size, class counts and classifier updates; A3 adds no independent observations. The deficit multiplier here differs from [11]'s synthetic-to-real ratio. G1-minus-A3 and G1-minus-A0 contrasts will both be reported; no outcome or superiority is presumed. Analysis supports selecting A3 as the reference and checks equal added counts.
+One run completed at implementation commit `032adc296fce9d5195cf7f930bf9a14edda4419e`. Recorded read IDs matched the 52 approved sources with zero validation/test overlap. The final checkpoint passed epoch/configuration verification. No classifier was fitted and no holdout evaluation occurred.
 
-TB recall is primary. Supporting metrics are AUPRC, F1, specificity and AUROC; the code retains per-image probabilities and reports Shenzhen and Montgomery subsets separately. Undefined ranking metrics for single-class subsets are represented as missing rather than invented values. Calibration reporting includes Brier score and a ten-bin expected calibration error.
+**Table 2. Single-run measurements, not publication-grid performance.**
 
-Analysis recomputes metrics from saved probabilities, summarizes seed means and sample standard deviations, and verifies paired real training/test identities before calculating arm-minus-A0 differences. Confidence intervals use a percentile bootstrap of duplicate groups within cohort-composition/label strata. Paired seed differences have a separate descriptive seed bootstrap. Small-seed uncertainty is explicitly limited, and the software makes no automatic statistical-significance claim.
+| Measurement | Observed value |
+|---|---:|
+| Trainer runtime | 1.3219228 s |
+| Entry-function total runtime | 6.1936866 s |
+| Peak PyTorch allocated GPU memory | 227,457,024 bytes (216.92 MiB) |
+| Peak PyTorch reserved GPU memory | 295,698,432 bytes (282 MiB) |
+| Generator mean loss, epochs 1 / 2 | 0.61777413 / 0.48718533 |
+| Discriminator mean loss, epochs 1 / 2 | 0.39082992 / 0.19181255 |
 
-Optional Inception diagnostics calculate FID and polynomial-kernel KID; KID subset variability is not a confidence interval. Pixel diagnostics use resized grayscale RMSE for nearest training neighbours and diversity. These proximity screens neither establish privacy nor replace pathological review. Reference sets and sample counts must be declared; validation-based fidelity tuning must not consume the test set.
+The device was an NVIDIA GeForce RTX 4050 Laptop GPU. Total timing excludes interpreter/import startup; trainer timing includes its checkpoint/sample output. Memory values describe the PyTorch allocator, not whole-device process memory. One run provides no timing uncertainty estimate and cannot establish publication-grid runtime.
 
-## 4. Results
+![Observed epoch losses. Connecting lines guide the eye and do not establish convergence or image quality.](../docs/images/feasibility-losses.png)
 
-**Publication results are unavailable.** Insert only measured, versioned artifacts after approval: final cohort/label/split counts; per-seed baseline and augmentation metrics; confidence intervals; cohort findings; generator fidelity/diversity/proximity summaries; failures and runtime. Software regression tests demonstrate execution behavior on artificial inputs, not medical quality or classifier improvement. Historical confounded smoke metrics are excluded from primary evidence.
+Prior focused verification recorded 39 passing software tests in 13.86 seconds, covering missing approval, changed hashes, incorrect sources and holdout rejection, plus historical-gate regressions. Trainer and GPU counters were stubbed in those tests; the real run above supplies separate execution evidence. Nine protected metadata/history hashes remained unchanged. No FID, KID, clinical quality assessment, memorization assessment or classifier metric was measured in this feasibility run.
 
-## 5. Discussion
+## 5. Prospective comparison: not executed
 
-Interpretation awaits results. The final discussion should assess whether any benefit exceeds random oversampling and conventional augmentation, which budgets show benefit or harm, whether conclusions change by cohort, and whether fidelity tracks downstream utility. Mixed or negative findings must be retained. No advantage is claimed in this draft.
+The proposed study compares A (real only), B (A plus repeated real TB images), C (A with conventional augmentation only on TB training images) and D (A plus DCGAN synthetic TB images). B and D each add one image per selected TB training image: 52/105/210 additions. Their total training-set sizes are 307/413/623; A/C totals are 255/308/413. Count matching does not imply semantic equivalence or independent samples.
 
-## 6. Limitations and Responsible Use
+Condition C disables horizontal flips; candidate transforms include rotation up to 5 degrees, translation up to 5%, and brightness/contrast jitter 0.1. These choices are not clinically validated. D would train solely on the corresponding positive training budget for a fixed 200 epochs. WGAN-GP and diffusion are outside the primary comparison.
 
-The dataset is small and drawn from two cohorts. Absence of established patient identifiers prevents a patient-disjointness claim. Candidate duplication and label conflicts require human resolution. Source, acquisition and cohort effects may confound apparent disease classification. Low-resolution grayscale preprocessing may discard relevant detail. Feature-space similarity and saliency/visual plausibility do not prove diagnosis-relevant fidelity. Models may memorize training content. No formal privacy guarantee, clinical validation, prospective evaluation or diagnostic-use authorization is established.
+The proposed classifier is ImageNet-pretrained ResNet-18, Adam, learning rate 0.0001, weight decay 0.0001, batch size 16 and unweighted cross-entropy. Every condition would receive 1,000 updates, with validation every 100 updates and no early stopping. Minimum validation loss would choose the checkpoint; maximum validation F1 with a highest-threshold tie-break would choose the threshold, frozen for real-test evaluation. This is not a clinical operating point.
 
-Original images, contact sheets, private review records and checkpoints are excluded from this code release. Dataset/checkpoint redistribution terms require explicit review; public availability is not treated as a blanket redistribution license. Local institutional requirements, ethics statements and any disclosure requirements must be completed by the researchers.
+Three budgets and seeds 42/123/999 imply 36 classifier fits and nine GAN fits. TB recall is primary; AUPRC, F1, specificity and AUROC are supporting outcomes. Planned reporting includes every seed, mean/sample standard deviation, paired D-minus-A and D-minus-B contrasts, failures and uncertainty. Image-based intervals must not be described as patient-level intervals. The separate v2 publication runner still requires integration and authorization; no outcome table is populated before those experiments run.
 
-## 7. Conclusion and Future Work
+## 6. Discussion and limitations
 
-The software provides an executable controlled-study framework. A conclusion about augmentation effectiveness remains pending. Future extensions may include a separately validated diffusion comparator, independent cohorts, higher-resolution preprocessing and formal privacy evaluation. None is claimed as achieved.
+The run establishes that the approved access and checkpoint workflow executes at the smallest budget on the available GPU. It does not answer whether generated images improve TB classification. The proposed controls would help distinguish nominal oversampling from generator-specific utility, but conclusions would remain conditional on the tested setting.
 
-## 8. References
+Automated exclusion can remove valid images while leaving unidentified duplicates. Differential exclusion rates may bias the selected distribution. Missing patient identifiers prevent assurance of patient-disjoint evaluation, and source labels have not been independently revalidated. Low resolution and acquisition differences further constrain interpretation.
 
-[1] Goodfellow IJ et al. Generative Adversarial Networks. 2014. [arXiv:1406.2661](https://arxiv.org/abs/1406.2661).
+Montgomery validation/test each contain 19 images, including eight TB-labelled images; a single TB error changes subgroup recall by 12.5 percentage points. Cohort results would therefore be descriptive and uncertain. Two epochs provide no evidence about later stability, collapse, privacy, anatomical plausibility or diagnostic fidelity. The present report supports software feasibility, not clinical deployment.
 
-[2] Radford A, Metz L, Chintala S. Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks. 2015. [arXiv:1511.06434](https://arxiv.org/abs/1511.06434).
+## 7. Conclusion
 
-[3] Jaeger S, Candemir S, Antani S, Wang YX, Lu PX, Thoma G. Two public chest X-ray datasets for computer-aided screening of pulmonary diseases. Quant Imaging Med Surg. 2014;4(6):475–477. [doi:10.3978/j.issn.2223-4292.2014.11.20](https://doi.org/10.3978/j.issn.2223-4292.2014.11.20). [Author-hosted full text](https://www.lhncbc.nlm.nih.gov/LHC-publications/PDF/pub9356.pdf).
+AURORA provides an auditable 590-image subset, a prospective count-matched augmentation protocol and a completed two-epoch DCGAN execution check on 52 real TB training images. The measured result establishes bounded execution feasibility. Augmentation utility and image quality remain open experimental questions.
 
-[4] Frid-Adar M, Diamant I, Klang E, Amitai M, Goldberger J, Greenspan H. GAN-based synthetic medical image augmentation for increased CNN performance in liver lesion classification. Neurocomputing. 2018;321:321–331. [doi:10.1016/j.neucom.2018.09.013](https://doi.org/10.1016/j.neucom.2018.09.013). [Author preprint](https://arxiv.org/abs/1803.01229).
+## Declarations and reproducibility
 
-[5] Schütte AD, Hetzel J, Gatidis S, Hepp T, Dietz B, Bauer S, Schwab P. Overcoming barriers to data sharing with medical image generation: a comprehensive evaluation. npj Digit Med. 2021;4:141. [doi:10.1038/s41746-021-00507-3](https://doi.org/10.1038/s41746-021-00507-3). [Author preprint](https://arxiv.org/abs/2012.03769).
+Code: https://github.com/xt67/AURORA, Apache License 2.0. Third-party data/model rights remain separate. Configuration SHA-256: `6a2b34cb819c805ba3e7523ed7ef65ef74dfb6b2c5ac9532155217e7354a950e`. Checkpoint SHA-256: `6d24fb1c9750a2e9e5c61162d83f36001c86e2141e541caa29f39ec33041ee6d`. Exact source identities and private approval records remain local.
 
-[6] Gulrajani I, Ahmed F, Arjovsky M, Dumoulin V, Courville A. Improved Training of Wasserstein GANs. 2017. [arXiv:1704.00028](https://arxiv.org/abs/1704.00028).
+Rayan Rahman is the sole named author. Corresponding-author email, department, contributions, funding, competing interests and applicable data-use/ethics determinations require author confirmation. No supervisor, clinician, ethics approval or exemption is invented.
 
-[7] Heusel M, Ramsauer H, Unterthiner T, Nessler B, Hochreiter S. GANs Trained by a Two Time-Scale Update Rule Converge to a Local Nash Equilibrium. NeurIPS. 2017. [arXiv:1706.08500](https://arxiv.org/abs/1706.08500).
+AI assistance: this draft was written with Codex assistance from project evidence. Paper Orchestra's repository workflow was inspected and its local input package prepared [6]. Its external-model generation is pending successful setup/execution and must not be claimed as completed. All text, references and eventual generated revisions require author review.
 
-[8] Bińkowski M, Sutherland DJ, Arbel M, Gretton A. Demystifying MMD GANs. ICLR. 2018. [arXiv:1801.01401](https://arxiv.org/abs/1801.01401).
+## References
 
-[9] Folguera-Profitós J et al. Quality Assessment and Model Training Impact of Synthetic Images in Medical Diagnostic Imaging: Systematic Review. JMIR AI. 2026;5:e81472. [doi:10.2196/81472](https://doi.org/10.2196/81472).
-
-[10] Morís DI, de Moura J, Novo J, Ortega M. Adapted generative latent diffusion models for accurate pathological analysis in chest X-ray images. Med Biol Eng Comput. 2024;62:2189–2212. [doi:10.1007/s11517-024-03056-5](https://doi.org/10.1007/s11517-024-03056-5).
-
-[11] Pink C, Sykes E. Disentangling dataset size from synthetic diversity in tuberculosis chest X-ray classification. Proceedings of the 39th Canadian Conference on Artificial Intelligence. PMLR. 2026;318:954–961. [Proceedings](https://proceedings.mlr.press/v318/pink26a.html). The supplied PDF's DOI placeholder is not a valid DOI.
-
-## 9. Reproducibility Appendix
-
-The repository includes configuration, review schema, immutable manifest checks, run provenance, metric recomputation and regression tests. The run root archives its approved protocol/configuration/manifest and approval attestation; each run records the commit, selected image IDs, checkpoint hash, seed, device, software version and runtime. The published paper must identify an exact commit and artifact release rather than a moving branch.
-
-Before external submission, complete author contributions, affiliations, funding, competing interests, data-use/ethics statements, code license, model-release terms, task-specific literature coverage, final protocol deviations and all missing results. This working draft does not imply journal acceptance or endorsement.
+1. Jaeger S, Candemir S, Antani S, Wáng YXJ, Lu PX, Thoma G. Two public chest X-ray datasets for computer-aided screening of pulmonary diseases. *Quantitative Imaging in Medicine and Surgery*. 2014;4(6):475–477. https://doi.org/10.3978/j.issn.2223-4292.2014.11.20
+2. Radford A, Metz L, Chintala S. Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks. 2015/2016. https://arxiv.org/abs/1511.06434
+3. Morís DI, de Moura J, Novo J, Ortega M. Adapted generative latent diffusion models for accurate pathological analysis in chest X-ray images. *Medical & Biological Engineering & Computing*. 2024;62:2189–2212. https://doi.org/10.1007/s11517-024-03056-5
+4. Pink C, Sykes E. Disentangling dataset size from synthetic diversity in tuberculosis chest X-ray classification. *PMLR*. 2026;318:954–961. https://proceedings.mlr.press/v318/pink26a.html
+5. Folguera-Profitós J, et al. Quality Assessment and Model Training Impact of Synthetic Images in Medical Diagnostic Imaging: Systematic Review. *JMIR AI*. 2026;5:e81472. https://doi.org/10.2196/81472
+6. Google Research. PaperOrchestra software repository, inspected revision `d9bae997e793a015ed38bb1605be9eb58c00284f`. https://github.com/google-research/paper-orchestra
