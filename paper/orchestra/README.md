@@ -9,6 +9,8 @@ An isolated Python environment is under `outputs/tools/paper-orchestra-env`.
 
 ## Current deliverables and truthful status
 
+**Execution update, 19 November 2026:** the upstream outline and section-writing prompts have now run successfully with Gemini Flash through a standard-library REST adapter. A reviewed companion draft is available in [generated/manuscript.pdf](generated/manuscript.pdf), with HTML, LaTeX and review notes alongside it. Curated references replaced the automated literature-search stage; the upstream automated refinement and end-to-end LaTeX pipeline have not run. The PDF was rendered through Pandoc/HTML and headless Chrome, and its page images were inspected. This updates the earlier setup-only status below without claiming a completed unmodified Paper Orchestra pipeline.
+
 - `paper/manuscript.md`: active Codex-assisted v2 protocol/feasibility draft, with confirmed author/college.
 - `paper/manuscript.html`: self-contained reading copy.
 - `paper/manuscript.tex`: Pandoc-generated editable LaTeX, not yet compiled.
