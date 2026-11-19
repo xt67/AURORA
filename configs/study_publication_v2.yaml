@@ -1,0 +1,7 @@
+schema_version: 2
+scope: aurora_v2_publication
+proposal: configs/study_simplified_proposal.yaml
+protocol: docs/PUBLICATION_V2.md
+device: cuda
+diagnostics: training_pixel_neighbours_and_diversity
+bootstrap_repetitions: 1000
