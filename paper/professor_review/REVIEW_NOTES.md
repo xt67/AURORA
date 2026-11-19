@@ -16,7 +16,7 @@ Focused verification: **43 tests passed in 24.42 seconds**, with 13 existing dep
 
 Seven protected data/audit/report files still match their earlier byte hashes. Two historical protocol files have Windows line endings after checkout: their LF-normalized hashes match the old audit and their content matches commit 586b181. Neither historical file was edited in this review. Do not describe their current byte hashes as identical to the old LF hashes.
 
-The supplied PDF at `C:/Users/onlys/OneDrive/Documents/manuscript.pdf` matched the earlier generated repository PDF and was left untouched. The current professor-facing version is a separate artifact. Earlier manuscripts remain identifiable as historical drafts.
+The supplied PDF at `C:/Users/onlys/OneDrive/Documents/manuscript.pdf` matched the earlier generated repository PDF and was left untouched. The current professor-facing version is a separate artifact. Superseded manuscripts are preserved in Git history and a local ignored archive; only this current paper package remains in the public tree.
 
 ## Before a journal/conference submission
 

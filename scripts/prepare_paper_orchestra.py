@@ -31,7 +31,7 @@ def main():
     evidence['discriminator_epoch_losses'] = np.load(run / 'gan/d_losses.npy').tolist()
     evidence['holdout_image_reads'] = 0
     evidence['publication_experiments_completed'] = False
-    manuscript = (ROOT / 'paper/manuscript.md').read_text(encoding='utf-8-sig')
+    manuscript = (ROOT / 'paper/professor_review/manuscript.md').read_text(encoding='utf-8-sig')
     (out / 'idea_sparse.md').write_text(
         '# Writing brief\nWrite a protocol and execution-feasibility paper, not an effectiveness paper. '
         'Author: Rayan Rahman; Marathwada Mitra Mandal Institute of Technology. '

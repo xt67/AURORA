@@ -31,7 +31,11 @@ Before public release: validate the image on the selected host, verify access to
 
 ## Account-based hosting option
 
-[Streamlit Community Cloud deployment](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app) connects a GitHub repository and application entry point. A candidate deployment uses `xt67/medimage-synth`, branch `aurora-refinement`, entry point `app/streamlit_app.py`, and Python 3.11. The app can launch in its honest empty state without datasets or a model. Use the free hosting option only; do not start paid services. Resource suitability for a reviewed generator must be tested before exposing generation publicly.
+For the first deployment, sign into https://share.streamlit.io with the repository owner's GitHub account and choose **Create app**. Use repository **xt67/AURORA**, branch **master**, main file **app/streamlit_app.py**, and **Python 3.11** under Advanced settings. No API secrets are required for the empty research demo. Do not upload the Paper Orchestra key or private data. After deployment, copy the assigned public `streamlit.app` URL and verify the app before adding it to GitHub's About website field.
+
+`app/requirements.txt` provides the inference-only CPU dependencies and takes precedence over the root training requirements on Community Cloud. It matches the existing model-library versions; a clean cloud build remains to be verified. The local CUDA training environment is unchanged.
+
+[Streamlit Community Cloud deployment](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app) connects a GitHub repository and application entry point. A candidate deployment uses `xt67/AURORA`, branch `master`, entry point `app/streamlit_app.py`, and Python 3.11. The app can launch in its honest empty state without datasets or a model. Use the free hosting option only; do not start paid services. Resource suitability for a reviewed generator must be tested before exposing generation publicly.
 
 Exact remaining action: the account owner must sign in, connect GitHub, select the branch/entry point and launch a deployment. No account credentials were supplied, and no public URL has been created. Do not attach private datasets or contact sheets. A release checkpoint and measured-results artifact require separate review before being installed on the host.
 

@@ -1,0 +1,8 @@
+# Streamlit Community Cloud: select Python 3.11 in Advanced settings.
+# Inference-only CPU dependencies; research/training requirements remain at root.
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.2.0+cpu
+torchvision==0.17.0+cpu
+numpy==1.26.4
+Pillow==10.2.0
+streamlit==1.32.0
