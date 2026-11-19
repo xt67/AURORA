@@ -9,7 +9,7 @@ Controlled research on synthetic augmentation of TB-manifestation-labelled chest
 DCGAN and WGAN-GP share the existing 128px grayscale generator with a noise-vector input. WGAN-GP uses an unbounded critic without batch normalization. Generator training runs in full precision. ResNet-18 consumes replicated grayscale RGB tensors with ImageNet normalization. The study runner uses AMP only for CUDA classifier training.
 
 ## Data and selection
-Candidate primary data are the original NLM cohorts, pending human review. The generator is restricted to the selected positive real training subset. The configured final generator epoch is retained; it is not called a best-quality checkpoint. Classifier checkpoints use validation loss; operating thresholds use validation F1. Test data are excluded from training and selection.
+The selected primary subset contains 590 NLM images after automated similarity-based exclusion. A two-epoch feasibility run used 52 TB-labelled training images; no publication-trained model is released. The generator is restricted to the selected positive real training subset. The configured final generator epoch is retained; it is not called a best-quality checkpoint. Classifier checkpoints use validation loss; operating thresholds use validation F1. Test data are excluded from training and selection.
 
 ## Evidence and limitations
 Software fixtures test CPU/CUDA execution, checkpoints, image export and metrics. They are not evidence of medical fidelity, privacy or downstream improvement. Small-data memorization, cohort confounding, low resolution and lack of patient identifiers remain limitations. FID/KID and pixel-neighbour screens do not prove clinical validity or privacy.

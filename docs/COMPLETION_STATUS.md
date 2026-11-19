@@ -1,15 +1,7 @@
-# AURORA / MediSyn completion status
+# AURORA completion status
 
-The core toolkit is implemented and previously tested. The current task is the simplified v2 dataset/protocol preparation, now complete; the experimental study itself has not run.
+Updated 19 November 2026. The toolkit, selected dataset and bounded DCGAN execution test are complete. The comparative augmentation study is not complete.
 
-- Verified 800 source images and preserved them all.
-- Excluded 210 unique flagged participants from the primary subset without declaring them duplicates.
-- Created separate retained/exclusion manifests for 590 / 210 images and preserved all 206 scored pairs.
-- Proposed the deterministic 413/89/88 split and 52/105/210 positive training budgets.
-- Specified four conditions, three seeds, matched classifier updates, one DCGAN and no required diffusion/cross-cohort experiment.
-- Preserved v1.1 protocol/config history and documented automated selection bias and study limits.
-- Passed 12 focused data-selection tests in 2.34s. Earlier full toolkit suite: 72 passed; later review UI focused suite: 23 passed. These are software checks, not medical validation.
+The [current tracker](../PROJECT_COMPLETION_TRACKER.md) is the authoritative status summary. The [faculty-review paper](../paper/professor_review/manuscript.pdf) reports the 590-image selection and the real two-epoch run on 52 TB-labelled training images. The [feasibility report](FEASIBILITY_V2.md) records runtime, memory, provenance and limitations.
 
-The researcher must review the [selection report](DATASET_SELECTION_REPORT.md) and [simplified protocol](EXPERIMENT_PROTOCOL_SIMPLIFIED.md) before approving the first revised run. No new training approval is created. A full-800-image pair review is no longer a prerequisite for this selected-subset proposal.
-
-After approval: adapt and test the existing execution gate for automated exclusion (not fictitious human adjudication), wire the TB-only conventional transforms and count-matched positive augmentation rule, perform the bounded feasibility check, then execute the agreed grid. Finally interpret actual results, complete the manuscript/declarations, choose license/release terms and configure/verify public hosting. No public deployment or paper submission is claimed.
+Remaining work is v2 publication-runner integration, separately authorized experiments, outcome analysis, author declarations and any public deployment. The code is licensed under Apache 2.0. No classifier improvement, image-quality validation, public deployment or paper acceptance is claimed.

@@ -22,7 +22,7 @@ def main():
     if page == "Overview":
         st.markdown("AURORA compares how selected augmentation methods affect TB-manifestation classification under controlled data scarcity. It reports experimental outcomes, including negative or inconclusive findings, without claiming a universally best method.")
         st.markdown("Generators learn from real training images. Synthetic output does not by itself guarantee privacy or preserve diagnostic findings.")
-        st.info("The current NLM research protocol has unresolved duplicate review. Earlier mixed-source smoke results are not final paper evidence.")
+        st.info("The v2 subset contains 590 images selected by automated similarity-based exclusion. A two-epoch DCGAN feasibility run is complete; classification comparisons remain pending.")
         st.markdown("[Project repository](https://github.com/xt67/AURORA)")
     elif page == "Generator":
         checkpoint = Path(os.environ.get("AURORA_CHECKPOINT", str(ROOT / "outputs/gan/models/generator_latest.pth")))
@@ -46,9 +46,9 @@ def main():
                                file_name="aurora_synthetic_grid.png", mime="image/png")
     elif page == "Study workflow":
         st.subheader("From reviewed data to measured results")
-        st.markdown("1. Review candidate duplicates and label conflicts locally.\n2. Approve a canonical dataset and frozen split.\n3. Approve the experiment protocol and first training run.\n4. Run matched comparisons and inspect measured results.")
-        st.info("Publication training is blocked until human review and researcher approval are recorded. This public demo does not accept medical-image uploads or start training jobs.")
-        st.markdown("[Review workflow](https://github.com/xt67/AURORA/blob/master/docs/HUMAN_REVIEW.md) · [Experiment protocol](https://github.com/xt67/AURORA/blob/master/docs/EXPERIMENT_PROTOCOL.md)")
+        st.markdown("1. Inspect the automated-exclusion dataset and image split.\n2. Review the completed two-epoch feasibility evidence.\n3. Complete and authorize the separate publication runner.\n4. Run matched comparisons and inspect measured results.")
+        st.info("The v2 publication runner still requires integration and separate researcher approval. This public demo does not accept medical-image uploads or start training jobs.")
+        st.markdown("[Dataset selection](https://github.com/xt67/AURORA/blob/master/docs/DATASET_SELECTION_REPORT.md) | [Current protocol](https://github.com/xt67/AURORA/blob/master/docs/EXPERIMENT_PROTOCOL_SIMPLIFIED.md)")
     else:
         path = Path(os.environ.get("AURORA_RESULTS", str(ROOT / "outputs/paper_results.json")))
         if not path.is_file():

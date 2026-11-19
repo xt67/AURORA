@@ -10,6 +10,10 @@ This is an experimental comparison: it reports what selected methods do under de
 
 **Status: the approved two-epoch DCGAN feasibility run completed; publication experiments remain pending.** See [execution tracker](PROJECT_COMPLETION_TRACKER.md) and [test report](docs/TEST_REPORT.md) for measured software checks and remaining limitations. The demo displays no invented performance metrics.
 
+## Faculty review
+
+Read the [review manuscript (PDF)](paper/professor_review/manuscript.pdf) or its [editable source](paper/professor_review/manuscript.md). It reports dataset preparation and the completed two-epoch feasibility run. The [review notes](paper/professor_review/REVIEW_NOTES.md) identify the checks performed and the experiments still needed.
+
 ## Project images
 
 ![AURORA dataset selection and experimental workflow](docs/images/aurora-workflow.png)
@@ -28,7 +32,7 @@ Synthetic images are learned from real training images. They do not automaticall
 
 ## Environment
 
-Use Python 3.10â€“3.12 and the pinned dependencies:
+Use Python 3.10–3.12 and the pinned dependencies:
 
 ```powershell
 python -m venv .venv
@@ -68,11 +72,11 @@ Use `configs/wgan_gp.yaml` for WGAN-GP. Both GAN paths currently use full precis
 - `src/study/`: reviewed manifests, publication gate, controlled A0/A1/A2/A3/G1 experiments and reproducible analysis.
 - `app/streamlit_app.py`: research demo.
 - `tests/`: model, training, data and app regression tests.
-- `paper/manuscript.md`: external-review working draft with verified references and implemented methods; research results pending.
+- `paper/professor_review/manuscript.pdf`: current faculty-review manuscript, with measured feasibility results and a concise future-work section.
 
-The revised study runner is implemented and tested on artificial fixtures. Diffusion is an optional, unimplemented extension. Publication experiments have not started. Obsolete exploratory scripts, duplicate planning documents and generated artifacts have been removed from the public branch; local research records are preserved.
+The historical v1 runner is implemented and tested on artificial fixtures. The separate v2 feasibility entry point has completed one real-data run; the v2 publication runner still needs integration. Diffusion is an optional, unimplemented extension. Publication experiments have not started. Obsolete exploratory scripts, duplicate planning documents and generated artifacts have been removed from the public branch; local research records are preserved.
 
-## Current preparation boundary
+## Study progress
 
 The simplified proposal compares real-only training, random real-TB oversampling, TB-only conventional augmentation and one DCGAN method. There are three nested TB budgets and three seeds: 36 proposed classifier fits and nine GAN fits. The separate two-epoch feasibility run completed on the RTX 4050 using 52 real TB training images, with no holdout image reads. Publication training has not started. See [feasibility results](docs/FEASIBILITY_V2.md).
 
@@ -96,4 +100,4 @@ The exporter requires the complete configured run grid, checks frozen-file hashe
 
 Project code and original documentation are licensed under the [Apache License 2.0](LICENSE). Third-party datasets, dependencies and externally sourced model weights retain their respective terms; this license does not grant redistribution rights to them. Raw medical images and trained checkpoints are not included in this repository.
 
-The [research manuscript](paper/manuscript.md) is a working draft, not a published paper. Publication experiments and research conclusions remain pending.
+The [research manuscript](paper/professor_review/manuscript.pdf) is prepared for faculty review, not a published paper. Publication experiments and research conclusions remain pending.

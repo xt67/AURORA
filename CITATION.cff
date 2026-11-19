@@ -3,9 +3,10 @@ message: "Cite the exact software commit used. This is a software citation, not 
 type: software
 title: "AURORA / MediSyn: controlled synthetic chest radiograph augmentation research"
 authors:
-  - name: "AURORA contributors"
+  - family-names: "Rahman"
+    given-names: "Rayan"
 version: 0.2.0
 date-released: 2026-11-10
 repository-code: "https://github.com/xt67/AURORA"
-abstract: "A local research toolkit for reviewed dataset preparation, controlled augmentation experiments and reproducible evaluation. Publication experiments remain pending human review and approval."
+abstract: "A local research toolkit for reviewed dataset preparation, controlled augmentation experiments and reproducible evaluation. A two-epoch execution-feasibility run is complete; publication comparisons remain pending."
 license: Apache-2.0

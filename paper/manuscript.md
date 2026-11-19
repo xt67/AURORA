@@ -1,3 +1,5 @@
+> Superseded for faculty review by [the current manuscript](../paper/professor_review/manuscript.pdf). This earlier draft is retained for traceability.
+
 # AURORA: An Auditable Protocol and DCGAN Execution Feasibility Study for Synthetic Chest Radiograph Augmentation
 
 **Rayan Rahman**
