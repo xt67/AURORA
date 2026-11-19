@@ -45,6 +45,11 @@ def main():
     (out / 'figures').mkdir()
     for name in ['feasibility-losses.png', 'aurora-workflow.png']:
         shutil.copyfile(ROOT / 'docs/images' / name, out / 'figures' / name)
+    figures = [
+        {'name': 'feasibility-losses.png', 'caption': 'Measured batch-mean generator and discriminator losses for two epochs, 52 real TB training images, seed 42. Not evidence of convergence or clinical image quality.'},
+        {'name': 'aurora-workflow.png', 'caption': 'Schematic of automated image selection, fixed image-level split, completed feasibility run and proposed unexecuted four-condition comparison. Counts are images, not unique patients.'},
+    ]
+    (out / 'figures/info.json').write_text(json.dumps(figures, indent=2), encoding='utf-8')
     hashes = {str(p.relative_to(out)).replace('\\', '/'): hashlib.sha256(p.read_bytes()).hexdigest()
               for p in out.rglob('*') if p.is_file()}
     (out / 'input_hashes.json').write_text(json.dumps(hashes, indent=2), encoding='utf-8')

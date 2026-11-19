@@ -40,6 +40,8 @@ Install a trusted TeX distribution providing `pdflatex` and `bibtex` on PATH; ad
 
 Defaults match the inspected upstream CLI (`gemini-3.1-pro-preview` for writing/reflection). Availability must be checked against the configured account; no model call has validated it here. Plotting is disabled and existing measured figures supplied. Research cutoff is explicitly November 2026. The wrapper refuses changed upstream revision, missing credentials/tools, changed bundle hashes and existing output directories. It does not impose a spend limit or guarantee generated claims.
 
+Credential check on 19 November 2026: the configured key was accepted. A minimal Pro generation request returned HTTP 429 with zero free-tier quota; a minimal `gemini-3-flash-preview` generation succeeded. For this account, use `--writer-model gemini-3-flash-preview --reflection-model gemini-3-flash-preview`. This checks one request, not sustained pipeline quota. No key is stored in this documentation. A fresh bundle at `outputs/paper_orchestra/inputs_2026-11-19_v2` includes upstream-compatible `figures/info.json` captions. The earlier dependency installation timed out; a retry and portable TinyTeX download are in progress, so setup is not yet complete and no paper-generation run has started.
+
 ## Evidence review before submission
 
 The only actual experiment is the two-epoch, 52-image feasibility run. No classifier performance, FID/KID, privacy or clinical-validation claim is supported. The proposed 36-classifier/nine-GAN grid remains future work. Future AI output must be reviewed against the run artifacts and primary literature. The historical five-arm protocol must not silently replace v2's four conditions or its selected-positive added-count rule.
