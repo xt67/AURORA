@@ -1,7 +1,7 @@
 # AURORA completion status
 
-Updated 19 November 2026. The toolkit, selected dataset and bounded DCGAN execution test are complete. The comparative augmentation study is not complete.
+Updated 20 November 2026. The planned computational comparison completed: 36 classifiers, nine 200-epoch GANs, validation-selected checkpoints/thresholds and real-test predictions. See the [execution record](PUBLICATION_RESULTS.md), [manuscript](../paper/publication_v2/manuscript.pdf) and [tracker](../PROJECT_COMPLETION_TRACKER.md).
 
-The [current tracker](../PROJECT_COMPLETION_TRACKER.md) is the authoritative status summary. The [faculty-review paper](../paper/professor_review/manuscript.pdf) reports the 590-image selection and the real two-epoch run on 52 TB-labelled training images. The [feasibility report](FEASIBILITY_V2.md) records runtime, memory, provenance and limitations.
+The generator samples were repetitive noise-like patterns rather than convincing chest anatomy. The experiment is complete, but the product objective of generating credible medical images is not achieved. The paper reports that failure and mixed classification outcomes.
 
-Remaining work is v2 publication-runner integration, separately authorized experiments, outcome analysis, author declarations and any public deployment. The code is licensed under Apache 2.0. No classifier improvement, image-quality validation, public deployment or paper acceptance is claimed.
+Still separate: a repaired generator and new evaluation design; fuller reconstruction of the original similarity screen; faculty/scientific review; applicable data-use/ethics decisions; venue submission; optional hosting. No clinical validation, acceptance or public deployment is claimed.

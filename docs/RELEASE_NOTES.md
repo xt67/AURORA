@@ -1,4 +1,10 @@
-# MediSyn 0.2.0 — software release candidate
+# AURORA research and software release notes
+
+## 20 November 2026 research update
+
+Completed the 36-classifier/nine-GAN v2.1 grid, retained the initial AMP-overflow failure and documented its correction, verified artifacts and preserved originals. The current manuscript reports noise-like generator outputs and mixed classification outcomes, not successful medical-image synthesis. See [execution and verification](PUBLICATION_RESULTS.md). Apache 2.0 and author declarations are now established.
+
+## Historical MediSyn 0.2.0 software candidate
 
 Simplified primary-study proposal: added reproducible automated similarity-exclusion preparation, separate retained/exclusion manifests and cohort/class-aware split proposal. Verified 590 retained / 210 excluded from 800 preserved originals. Four proposed conditions replace the previous five-arm design; exact v1.1 protocol/config history is archived. Proposed v2 settings are not executable training authorization. Source images, individual exclusions and review artifacts remain local. No training was launched.
 

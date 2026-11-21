@@ -1,0 +1,6515 @@
+{
+  "status": "measured",
+  "schema_version": 2,
+  "run_count": 36,
+  "generator_count": 9,
+  "experiments": [
+    {
+      "arm": "A",
+      "budget": 0.25,
+      "metrics": {
+        "recall": {
+          "mean": 0.8444444444444444,
+          "std": 0.0587944735792131,
+          "n": 3
+        },
+        "auprc": {
+          "mean": 0.9360397387072545,
+          "std": 0.01632482249632846,
+          "n": 3
+        },
+        "f1": {
+          "mean": 0.8267079396111655,
+          "std": 0.016354014513866307,
+          "n": 3
+        },
+        "specificity": {
+          "mean": 0.7906976744186046,
+          "std": 0.11627906976744184,
+          "n": 3
+        },
+        "roc_auc": {
+          "mean": 0.9250645994832042,
+          "std": 0.015408838776098784,
+          "n": 3
+        }
+      }
+    },
+    {
+      "arm": "A",
+      "budget": 0.5,
+      "metrics": {
+        "recall": {
+          "mean": 0.8000000000000002,
+          "std": 0.022222222222222202,
+          "n": 3
+        },
+        "auprc": {
+          "mean": 0.9239618528531074,
+          "std": 0.01907349954122007,
+          "n": 3
+        },
+        "f1": {
+          "mean": 0.8153571234966583,
+          "std": 0.024879863167772638,
+          "n": 3
+        },
+        "specificity": {
+          "mean": 0.8294573643410853,
+          "std": 0.053707001785081435,
+          "n": 3
+        },
+        "roc_auc": {
+          "mean": 0.9031869078380707,
+          "std": 0.029208492801613462,
+          "n": 3
+        }
+      }
+    },
+    {
+      "arm": "A",
+      "budget": 1.0,
+      "metrics": {
+        "recall": {
+          "mean": 0.8666666666666666,
+          "std": 0.03849001794597504,
+          "n": 3
+        },
+        "auprc": {
+          "mean": 0.9259892079516389,
+          "std": 0.01972806293054636,
+          "n": 3
+        },
+        "f1": {
+          "mean": 0.8238728689856508,
+          "std": 0.015867564536403846,
+          "n": 3
+        },
+        "specificity": {
+          "mean": 0.751937984496124,
+          "std": 0.04841083719688679,
+          "n": 3
+        },
+        "roc_auc": {
+          "mean": 0.9118001722652885,
+          "std": 0.01731330426770333,
+          "n": 3
+        }
+      }
+    },
+    {
+      "arm": "B",
+      "budget": 0.25,
+      "metrics": {
+        "recall": {
+          "mean": 0.8222222222222223,
+          "std": 0.06666666666666665,
+          "n": 3
+        },
+        "auprc": {
+          "mean": 0.91277590759332,
+          "std": 0.017878556625771928,
+          "n": 3
+        },
+        "f1": {
+          "mean": 0.8008645655515639,
+          "std": 0.03202269825013455,
+          "n": 3
+        },
+        "specificity": {
+          "mean": 0.7596899224806202,
+          "std": 0.05852584833543216,
+          "n": 3
+        },
+        "roc_auc": {
+          "mean": 0.8819982773471146,
+          "std": 0.0289789950378741,
+          "n": 3
+        }
+      }
+    },
+    {
+      "arm": "B",
+      "budget": 0.5,
+      "metrics": {
+        "recall": {
+          "mean": 0.7925925925925927,
+          "std": 0.07804187965076102,
+          "n": 3
+        },
+        "auprc": {
+          "mean": 0.9192734528992391,
+          "std": 0.00783103648222405,
+          "n": 3
+        },
+        "f1": {
+          "mean": 0.7894555309189455,
+          "std": 0.009851194271776836,
+          "n": 3
+        },
+        "specificity": {
+          "mean": 0.7751937984496124,
+          "std": 0.11705169667086432,
+          "n": 3
+        },
+        "roc_auc": {
+          "mean": 0.8956072351421188,
+          "std": 0.013673133390514697,
+          "n": 3
+        }
+      }
+    },
+    {
+      "arm": "B",
+      "budget": 1.0,
+      "metrics": {
+        "recall": {
+          "mean": 0.8740740740740741,
+          "std": 0.03394500514782103,
+          "n": 3
+        },
+        "auprc": {
+          "mean": 0.9311510455961676,
+          "std": 0.01994704474451389,
+          "n": 3
+        },
+        "f1": {
+          "mean": 0.8253906635117816,
+          "std": 0.029130391541771956,
+          "n": 3
+        },
+        "specificity": {
+          "mean": 0.7441860465116279,
+          "std": 0.06152910025731606,
+          "n": 3
+        },
+        "roc_auc": {
+          "mean": 0.9123169681309217,
+          "std": 0.019910618489246013,
+          "n": 3
+        }
+      }
+    },
+    {
+      "arm": "C",
+      "budget": 0.25,
+      "metrics": {
+        "recall": {
+          "mean": 0.8222222222222223,
+          "std": 0.06666666666666665,
+          "n": 3
+        },
+        "auprc": {
+          "mean": 0.8717139877225737,
+          "std": 0.07751120307042046,
+          "n": 3
+        },
+        "f1": {
+          "mean": 0.8043956043956045,
+          "std": 0.007613410143159873,
+          "n": 3
+        },
+        "specificity": {
+          "mean": 0.7674418604651162,
+          "std": 0.10657152778967066,
+          "n": 3
+        },
+        "roc_auc": {
+          "mean": 0.8540913006029286,
+          "std": 0.06170536864624777,
+          "n": 3
+        }
+      }
+    },
+    {
+      "arm": "C",
+      "budget": 0.5,
+      "metrics": {
+        "recall": {
+          "mean": 0.8148148148148149,
+          "std": 0.012830005981991638,
+          "n": 3
+        },
+        "auprc": {
+          "mean": 0.8913809509528791,
+          "std": 0.02649293862114704,
+          "n": 3
+        },
+        "f1": {
+          "mean": 0.8016666319234537,
+          "std": 0.04336960543409364,
+          "n": 3
+        },
+        "specificity": {
+          "mean": 0.7674418604651163,
+          "std": 0.12305820051463211,
+          "n": 3
+        },
+        "roc_auc": {
+          "mean": 0.8635658914728682,
+          "std": 0.04180619827629288,
+          "n": 3
+        }
+      }
+    },
+    {
+      "arm": "C",
+      "budget": 1.0,
+      "metrics": {
+        "recall": {
+          "mean": 0.837037037037037,
+          "std": 0.06415002990995838,
+          "n": 3
+        },
+        "auprc": {
+          "mean": 0.8603540579196562,
+          "std": 0.004266479294036675,
+          "n": 3
+        },
+        "f1": {
+          "mean": 0.7917813014106199,
+          "std": 0.022473689632418206,
+          "n": 3
+        },
+        "specificity": {
+          "mean": 0.7054263565891473,
+          "std": 0.16823670088535428,
+          "n": 3
+        },
+        "roc_auc": {
+          "mean": 0.8439276485788114,
+          "std": 0.023772609819121493,
+          "n": 3
+        }
+      }
+    },
+    {
+      "arm": "D",
+      "budget": 0.25,
+      "metrics": {
+        "recall": {
+          "mean": 0.8148148148148149,
+          "std": 0.04625924443258073,
+          "n": 3
+        },
+        "auprc": {
+          "mean": 0.925156767379533,
+          "std": 0.010770119441917858,
+          "n": 3
+        },
+        "f1": {
+          "mean": 0.811764705882353,
+          "std": 0.04241825029957637,
+          "n": 3
+        },
+        "specificity": {
+          "mean": 0.7906976744186046,
+          "std": 0.18163371339317796,
+          "n": 3
+        },
+        "roc_auc": {
+          "mean": 0.9059431524547804,
+          "std": 0.011739345417674922,
+          "n": 3
+        }
+      }
+    },
+    {
+      "arm": "D",
+      "budget": 0.5,
+      "metrics": {
+        "recall": {
+          "mean": 0.8740740740740741,
+          "std": 0.05592469952052409,
+          "n": 3
+        },
+        "auprc": {
+          "mean": 0.9188362209407218,
+          "std": 0.004062428896557148,
+          "n": 3
+        },
+        "f1": {
+          "mean": 0.8139424559406058,
+          "std": 0.013823499344489298,
+          "n": 3
+        },
+        "specificity": {
+          "mean": 0.7131782945736435,
+          "std": 0.0939872531238926,
+          "n": 3
+        },
+        "roc_auc": {
+          "mean": 0.8988802756244616,
+          "std": 0.006724968577413662,
+          "n": 3
+        }
+      }
+    },
+    {
+      "arm": "D",
+      "budget": 1.0,
+      "metrics": {
+        "recall": {
+          "mean": 0.8074074074074075,
+          "std": 0.05592469952052409,
+          "n": 3
+        },
+        "auprc": {
+          "mean": 0.8984045415147994,
+          "std": 0.015824005878969507,
+          "n": 3
+        },
+        "f1": {
+          "mean": 0.798464243055777,
+          "std": 0.04345903857049646,
+          "n": 3
+        },
+        "specificity": {
+          "mean": 0.7751937984496124,
+          "std": 0.06713375223135182,
+          "n": 3
+        },
+        "roc_auc": {
+          "mean": 0.8761412575366063,
+          "std": 0.014998955762990629,
+          "n": 3
+        }
+      }
+    }
+  ],
+  "per_run": [
+    {
+      "arm": "A",
+      "budget": 0.25,
+      "seed": 42,
+      "metrics": {
+        "accuracy": 0.8409090909090909,
+        "precision": 0.8974358974358975,
+        "recall": 0.7777777777777778,
+        "specificity": 0.9069767441860465,
+        "f1": 0.8333333333333334,
+        "confusion_matrix": [
+          [
+            39,
+            4
+          ],
+          [
+            10,
+            35
+          ]
+        ],
+        "roc_auc": 0.9111111111111111,
+        "auprc": 0.9183970073917407
+      },
+      "calibration": {
+        "brier": 0.1475213572032641,
+        "ece_10_bins": 0.15725091151939932
+      },
+      "ci95": {
+        "recall": [
+          0.6666666666666666,
+          0.8888888888888888
+        ],
+        "specificity": [
+          0.813953488372093,
+          0.9767441860465116
+        ],
+        "f1": [
+          0.75,
+          0.8966098411468423
+        ],
+        "roc_auc": [
+          0.8516795865633074,
+          0.9602067183462533
+        ],
+        "auprc": [
+          0.8590566140563992,
+          0.9677802954694861
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 42,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.7368421052631579,
+            "precision": 1.0,
+            "recall": 0.375,
+            "specificity": 1.0,
+            "f1": 0.5454545454545454,
+            "confusion_matrix": [
+              [
+                11,
+                0
+              ],
+              [
+                5,
+                3
+              ]
+            ],
+            "roc_auc": 0.9090909090909091,
+            "auprc": 0.8918650793650793
+          },
+          "calibration": {
+            "brier": 0.2836382091844895,
+            "ece_10_bins": 0.3110691293253407
+          },
+          "ci95": {
+            "recall": [
+              0.0,
+              0.75
+            ],
+            "specificity": [
+              1.0,
+              1.0
+            ],
+            "f1": [
+              0.0,
+              0.8571428571428571
+            ],
+            "roc_auc": [
+              0.75,
+              1.0
+            ],
+            "auprc": [
+              0.7297507440476191,
+              1.0
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 42,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.8695652173913043,
+            "precision": 0.8888888888888888,
+            "recall": 0.8648648648648649,
+            "specificity": 0.875,
+            "f1": 0.8767123287671232,
+            "confusion_matrix": [
+              [
+                28,
+                4
+              ],
+              [
+                5,
+                32
+              ]
+            ],
+            "roc_auc": 0.9222972972972974,
+            "auprc": 0.9352963407943242
+          },
+          "calibration": {
+            "brier": 0.1100399052084339,
+            "ece_10_bins": 0.11669035689714213
+          },
+          "ci95": {
+            "recall": [
+              0.7567567567567568,
+              0.972972972972973
+            ],
+            "specificity": [
+              0.75,
+              0.96875
+            ],
+            "f1": [
+              0.7887323943661971,
+              0.9444444444444444
+            ],
+            "roc_auc": [
+              0.8471072635135134,
+              0.9797508445945947
+            ],
+            "auprc": [
+              0.8727157081371872,
+              0.9843901134113561
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 42,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "B",
+      "budget": 0.25,
+      "seed": 42,
+      "metrics": {
+        "accuracy": 0.8181818181818182,
+        "precision": 0.8222222222222222,
+        "recall": 0.8222222222222222,
+        "specificity": 0.813953488372093,
+        "f1": 0.8222222222222222,
+        "confusion_matrix": [
+          [
+            35,
+            8
+          ],
+          [
+            8,
+            37
+          ]
+        ],
+        "roc_auc": 0.8837209302325582,
+        "auprc": 0.916676281056293
+      },
+      "calibration": {
+        "brier": 0.14421269614466464,
+        "ece_10_bins": 0.15724831505101308
+      },
+      "ci95": {
+        "recall": [
+          0.7105555555555556,
+          0.9333333333333333
+        ],
+        "specificity": [
+          0.6744186046511628,
+          0.9069767441860465
+        ],
+        "f1": [
+          0.7368118572292801,
+          0.8966098411468423
+        ],
+        "roc_auc": [
+          0.8005038759689922,
+          0.9504005167958656
+        ],
+        "auprc": [
+          0.8608512074528873,
+          0.963887680267505
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 42,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.7894736842105263,
+            "precision": 0.75,
+            "recall": 0.75,
+            "specificity": 0.8181818181818182,
+            "f1": 0.75,
+            "confusion_matrix": [
+              [
+                9,
+                2
+              ],
+              [
+                2,
+                6
+              ]
+            ],
+            "roc_auc": 0.875,
+            "auprc": 0.8776785714285714
+          },
+          "calibration": {
+            "brier": 0.21267633291639862,
+            "ece_10_bins": 0.25676680093793514
+          },
+          "ci95": {
+            "recall": [
+              0.375,
+              1.0
+            ],
+            "specificity": [
+              0.6340909090909093,
+              1.0
+            ],
+            "f1": [
+              0.47036199095022624,
+              0.9411764705882353
+            ],
+            "roc_auc": [
+              0.6815340909090909,
+              1.0
+            ],
+            "auprc": [
+              0.7137499999999999,
+              1.0
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 42,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.8260869565217391,
+            "precision": 0.8378378378378378,
+            "recall": 0.8378378378378378,
+            "specificity": 0.8125,
+            "f1": 0.8378378378378378,
+            "confusion_matrix": [
+              [
+                26,
+                6
+              ],
+              [
+                6,
+                31
+              ]
+            ],
+            "roc_auc": 0.8885135135135136,
+            "auprc": 0.9296248111942165
+          },
+          "calibration": {
+            "brier": 0.1253603903669408,
+            "ece_10_bins": 0.133160385808562
+          },
+          "ci95": {
+            "recall": [
+              0.7027027027027027,
+              0.9459459459459459
+            ],
+            "specificity": [
+              0.65625,
+              0.9375
+            ],
+            "f1": [
+              0.7397260273972602,
+              0.918918918918919
+            ],
+            "roc_auc": [
+              0.7955869932432429,
+              0.9636824324324325
+            ],
+            "auprc": [
+              0.8711252956685396,
+              0.9765571075200541
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 42,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "C",
+      "budget": 0.25,
+      "seed": 42,
+      "metrics": {
+        "accuracy": 0.8068181818181818,
+        "precision": 0.8043478260869565,
+        "recall": 0.8222222222222222,
+        "specificity": 0.7906976744186046,
+        "f1": 0.8131868131868132,
+        "confusion_matrix": [
+          [
+            34,
+            9
+          ],
+          [
+            8,
+            37
+          ]
+        ],
+        "roc_auc": 0.8930232558139535,
+        "auprc": 0.9197175478284263
+      },
+      "calibration": {
+        "brier": 0.26615896822519064,
+        "ece_10_bins": 0.3219658161254608
+      },
+      "ci95": {
+        "recall": [
+          0.7111111111111111,
+          0.9116666666666662
+        ],
+        "specificity": [
+          0.6744186046511628,
+          0.9069767441860465
+        ],
+        "f1": [
+          0.7272227772227773,
+          0.8913043478260869
+        ],
+        "roc_auc": [
+          0.8195865633074938,
+          0.9524935400516795
+        ],
+        "auprc": [
+          0.8651854148793058,
+          0.963991540974534
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 42,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.7368421052631579,
+            "precision": 0.6666666666666666,
+            "recall": 0.75,
+            "specificity": 0.7272727272727273,
+            "f1": 0.7058823529411765,
+            "confusion_matrix": [
+              [
+                8,
+                3
+              ],
+              [
+                2,
+                6
+              ]
+            ],
+            "roc_auc": 0.8181818181818181,
+            "auprc": 0.8571428571428572
+          },
+          "calibration": {
+            "brier": 0.19210395730660992,
+            "ece_10_bins": 0.2541809032616488
+          },
+          "ci95": {
+            "recall": [
+              0.375,
+              1.0
+            ],
+            "specificity": [
+              0.45454545454545453,
+              1.0
+            ],
+            "f1": [
+              0.46111111111111114,
+              0.8888888888888888
+            ],
+            "roc_auc": [
+              0.5681818181818181,
+              1.0
+            ],
+            "auprc": [
+              0.6925183823529412,
+              1.0
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 42,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.8260869565217391,
+            "precision": 0.8378378378378378,
+            "recall": 0.8378378378378378,
+            "specificity": 0.8125,
+            "f1": 0.8378378378378378,
+            "confusion_matrix": [
+              [
+                26,
+                6
+              ],
+              [
+                6,
+                31
+              ]
+            ],
+            "roc_auc": 0.9239864864864865,
+            "auprc": 0.9457885744500079
+          },
+          "calibration": {
+            "brier": 0.2865509277534955,
+            "ece_10_bins": 0.3466708359938224
+          },
+          "ci95": {
+            "recall": [
+              0.7027027027027027,
+              0.9459459459459459
+            ],
+            "specificity": [
+              0.6875,
+              0.9375
+            ],
+            "f1": [
+              0.7368421052631579,
+              0.918918918918919
+            ],
+            "roc_auc": [
+              0.8547297297297297,
+              0.9738386824324324
+            ],
+            "auprc": [
+              0.8992690004589446,
+              0.9810947865450124
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 42,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "D",
+      "budget": 0.25,
+      "seed": 42,
+      "metrics": {
+        "accuracy": 0.8522727272727273,
+        "precision": 0.9,
+        "recall": 0.8,
+        "specificity": 0.9069767441860465,
+        "f1": 0.8470588235294118,
+        "confusion_matrix": [
+          [
+            39,
+            4
+          ],
+          [
+            9,
+            36
+          ]
+        ],
+        "roc_auc": 0.9193798449612403,
+        "auprc": 0.9375854810021658
+      },
+      "calibration": {
+        "brier": 0.12902868034836124,
+        "ece_10_bins": 0.12713301499541724
+      },
+      "ci95": {
+        "recall": [
+          0.6888888888888889,
+          0.9111111111111111
+        ],
+        "specificity": [
+          0.813953488372093,
+          0.9767441860465116
+        ],
+        "f1": [
+          0.7631265664160402,
+          0.9195402298850575
+        ],
+        "roc_auc": [
+          0.8558010335917313,
+          0.966937984496124
+        ],
+        "auprc": [
+          0.8925906860665634,
+          0.9756547058330911
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 42,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.7894736842105263,
+            "precision": 0.75,
+            "recall": 0.75,
+            "specificity": 0.8181818181818182,
+            "f1": 0.75,
+            "confusion_matrix": [
+              [
+                9,
+                2
+              ],
+              [
+                2,
+                6
+              ]
+            ],
+            "roc_auc": 0.8636363636363636,
+            "auprc": 0.869724025974026
+          },
+          "calibration": {
+            "brier": 0.16199541321174576,
+            "ece_10_bins": 0.17804666983398706
+          },
+          "ci95": {
+            "recall": [
+              0.375,
+              1.0
+            ],
+            "specificity": [
+              0.5454545454545454,
+              1.0
+            ],
+            "f1": [
+              0.46153846153846156,
+              0.9411764705882353
+            ],
+            "roc_auc": [
+              0.6701704545454545,
+              1.0
+            ],
+            "auprc": [
+              0.7019159226190476,
+              1.0
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 42,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.8695652173913043,
+            "precision": 0.9375,
+            "recall": 0.8108108108108109,
+            "specificity": 0.9375,
+            "f1": 0.8695652173913043,
+            "confusion_matrix": [
+              [
+                30,
+                2
+              ],
+              [
+                7,
+                30
+              ]
+            ],
+            "roc_auc": 0.9324324324324325,
+            "auprc": 0.9528803022070003
+          },
+          "calibration": {
+            "brier": 0.11995088434250172,
+            "ece_10_bins": 0.1289456986615614
+          },
+          "ci95": {
+            "recall": [
+              0.6756756756756757,
+              0.918918918918919
+            ],
+            "specificity": [
+              0.84375,
+              1.0
+            ],
+            "f1": [
+              0.7713736263736264,
+              0.9444444444444444
+            ],
+            "roc_auc": [
+              0.86484375,
+              0.983129222972973
+            ],
+            "auprc": [
+              0.9089305238253734,
+              0.9864676028352853
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 42,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "A",
+      "budget": 0.25,
+      "seed": 123,
+      "metrics": {
+        "accuracy": 0.8295454545454546,
+        "precision": 0.8125,
+        "recall": 0.8666666666666667,
+        "specificity": 0.7906976744186046,
+        "f1": 0.8387096774193549,
+        "confusion_matrix": [
+          [
+            34,
+            9
+          ],
+          [
+            6,
+            39
+          ]
+        ],
+        "roc_auc": 0.9416020671834625,
+        "auprc": 0.950610048036076
+      },
+      "calibration": {
+        "brier": 0.1101370567840134,
+        "ece_10_bins": 0.09518071930770845
+      },
+      "ci95": {
+        "recall": [
+          0.7777777777777778,
+          0.9555555555555556
+        ],
+        "specificity": [
+          0.6738372093023256,
+          0.9069767441860465
+        ],
+        "f1": [
+          0.7640449438202247,
+          0.9072633552014995
+        ],
+        "roc_auc": [
+          0.8919896640826874,
+          0.9808785529715762
+        ],
+        "auprc": [
+          0.9116832913365499,
+          0.9834789507542806
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 123,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.7368421052631579,
+            "precision": 0.6363636363636364,
+            "recall": 0.875,
+            "specificity": 0.6363636363636364,
+            "f1": 0.7368421052631579,
+            "confusion_matrix": [
+              [
+                7,
+                4
+              ],
+              [
+                1,
+                7
+              ]
+            ],
+            "roc_auc": 0.9318181818181818,
+            "auprc": 0.9305555555555556
+          },
+          "calibration": {
+            "brier": 0.1223988728867791,
+            "ece_10_bins": 0.1840245505169916
+          },
+          "ci95": {
+            "recall": [
+              0.625,
+              1.0
+            ],
+            "specificity": [
+              0.36363636363636365,
+              0.9090909090909091
+            ],
+            "f1": [
+              0.5714285714285714,
+              0.8888888888888888
+            ],
+            "roc_auc": [
+              0.8068181818181818,
+              1.0
+            ],
+            "auprc": [
+              0.8181439393939394,
+              1.0
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 123,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.855072463768116,
+            "precision": 0.8648648648648649,
+            "recall": 0.8648648648648649,
+            "specificity": 0.84375,
+            "f1": 0.8648648648648649,
+            "confusion_matrix": [
+              [
+                27,
+                5
+              ],
+              [
+                5,
+                32
+              ]
+            ],
+            "roc_auc": 0.9467905405405406,
+            "auprc": 0.959514876998621
+          },
+          "calibration": {
+            "brier": 0.10676061466875908,
+            "ece_10_bins": 0.09687413739722113
+          },
+          "ci95": {
+            "recall": [
+              0.7297297297297297,
+              0.972972972972973
+            ],
+            "specificity": [
+              0.71875,
+              0.9375
+            ],
+            "f1": [
+              0.7714285714285715,
+              0.9333333333333333
+            ],
+            "roc_auc": [
+              0.8969383445945945,
+              0.987352195945946
+            ],
+            "auprc": [
+              0.9226125589214114,
+              0.9897087081955503
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 123,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "B",
+      "budget": 0.25,
+      "seed": 123,
+      "metrics": {
+        "accuracy": 0.7954545454545454,
+        "precision": 0.7547169811320755,
+        "recall": 0.8888888888888888,
+        "specificity": 0.6976744186046512,
+        "f1": 0.8163265306122449,
+        "confusion_matrix": [
+          [
+            30,
+            13
+          ],
+          [
+            5,
+            40
+          ]
+        ],
+        "roc_auc": 0.9100775193798449,
+        "auprc": 0.9283822894946254
+      },
+      "calibration": {
+        "brier": 0.15747696697617694,
+        "ece_10_bins": 0.15941216879441938
+      },
+      "ci95": {
+        "recall": [
+          0.8,
+          0.9777777777777777
+        ],
+        "specificity": [
+          0.5581395348837209,
+          0.8372093023255814
+        ],
+        "f1": [
+          0.7450980392156863,
+          0.8842702116115029
+        ],
+        "roc_auc": [
+          0.8480620155038759,
+          0.9612403100775194
+        ],
+        "auprc": [
+          0.8828548339566001,
+          0.968238978996507
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 123,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.7368421052631579,
+            "precision": 0.6363636363636364,
+            "recall": 0.875,
+            "specificity": 0.6363636363636364,
+            "f1": 0.7368421052631579,
+            "confusion_matrix": [
+              [
+                7,
+                4
+              ],
+              [
+                1,
+                7
+              ]
+            ],
+            "roc_auc": 0.8068181818181818,
+            "auprc": 0.7561709124209124
+          },
+          "calibration": {
+            "brier": 0.31860609376985494,
+            "ece_10_bins": 0.32547265052256225
+          },
+          "ci95": {
+            "recall": [
+              0.625,
+              1.0
+            ],
+            "specificity": [
+              0.36363636363636365,
+              0.9090909090909091
+            ],
+            "f1": [
+              0.5555555555555556,
+              0.8888888888888888
+            ],
+            "roc_auc": [
+              0.6022727272727273,
+              0.9659090909090909
+            ],
+            "auprc": [
+              0.5714596861471861,
+              0.9659090909090909
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 123,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.8115942028985508,
+            "precision": 0.7857142857142857,
+            "recall": 0.8918918918918919,
+            "specificity": 0.71875,
+            "f1": 0.8354430379746836,
+            "confusion_matrix": [
+              [
+                23,
+                9
+              ],
+              [
+                4,
+                33
+              ]
+            ],
+            "roc_auc": 0.9282094594594595,
+            "auprc": 0.9511716466148572
+          },
+          "calibration": {
+            "brier": 0.11310807698951197,
+            "ece_10_bins": 0.11368536947797424
+          },
+          "ci95": {
+            "recall": [
+              0.7837837837837838,
+              0.972972972972973
+            ],
+            "specificity": [
+              0.5625,
+              0.875
+            ],
+            "f1": [
+              0.759493670886076,
+              0.9113924050632911
+            ],
+            "roc_auc": [
+              0.8614864864864864,
+              0.9848184121621623
+            ],
+            "auprc": [
+              0.9096633319554621,
+              0.9881675792621908
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 123,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "C",
+      "budget": 0.25,
+      "seed": 123,
+      "metrics": {
+        "accuracy": 0.8068181818181818,
+        "precision": 0.85,
+        "recall": 0.7555555555555555,
+        "specificity": 0.8604651162790697,
+        "f1": 0.8,
+        "confusion_matrix": [
+          [
+            37,
+            6
+          ],
+          [
+            11,
+            34
+          ]
+        ],
+        "roc_auc": 0.8863049095607235,
+        "auprc": 0.9131318550570859
+      },
+      "calibration": {
+        "brier": 0.1937106060969904,
+        "ece_10_bins": 0.20720447671516826
+      },
+      "ci95": {
+        "recall": [
+          0.6444444444444445,
+          0.8666666666666667
+        ],
+        "specificity": [
+          0.7674418604651163,
+          0.9534883720930233
+        ],
+        "f1": [
+          0.716005291005291,
+          0.8809523809523809
+        ],
+        "roc_auc": [
+          0.8128940568475452,
+          0.9452454780361759
+        ],
+        "auprc": [
+          0.8624113503425752,
+          0.9569477019897586
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 123,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.7368421052631579,
+            "precision": 0.8,
+            "recall": 0.5,
+            "specificity": 0.9090909090909091,
+            "f1": 0.6153846153846154,
+            "confusion_matrix": [
+              [
+                10,
+                1
+              ],
+              [
+                4,
+                4
+              ]
+            ],
+            "roc_auc": 0.9318181818181818,
+            "auprc": 0.9085317460317461
+          },
+          "calibration": {
+            "brier": 0.2841017394535906,
+            "ece_10_bins": 0.3004871497044549
+          },
+          "ci95": {
+            "recall": [
+              0.125,
+              0.875
+            ],
+            "specificity": [
+              0.7272727272727273,
+              1.0
+            ],
+            "f1": [
+              0.2222222222222222,
+              0.875
+            ],
+            "roc_auc": [
+              0.7840909090909092,
+              1.0
+            ],
+            "auprc": [
+              0.7387087391774891,
+              1.0
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 123,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.8260869565217391,
+            "precision": 0.8571428571428571,
+            "recall": 0.8108108108108109,
+            "specificity": 0.84375,
+            "f1": 0.8333333333333334,
+            "confusion_matrix": [
+              [
+                27,
+                5
+              ],
+              [
+                7,
+                30
+              ]
+            ],
+            "roc_auc": 0.8885135135135135,
+            "auprc": 0.9250464745265021
+          },
+          "calibration": {
+            "brier": 0.1688202940132889,
+            "ece_10_bins": 0.18151794357319076
+          },
+          "ci95": {
+            "recall": [
+              0.6756756756756757,
+              0.918918918918919
+            ],
+            "specificity": [
+              0.71875,
+              0.96875
+            ],
+            "f1": [
+              0.7428571428571429,
+              0.918918918918919
+            ],
+            "roc_auc": [
+              0.8082559121621622,
+              0.9603040540540541
+            ],
+            "auprc": [
+              0.8738498273138599,
+              0.9716366320229511
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 123,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "D",
+      "budget": 0.25,
+      "seed": 123,
+      "metrics": {
+        "accuracy": 0.7272727272727273,
+        "precision": 0.6842105263157895,
+        "recall": 0.8666666666666667,
+        "specificity": 0.5813953488372093,
+        "f1": 0.7647058823529411,
+        "confusion_matrix": [
+          [
+            25,
+            18
+          ],
+          [
+            6,
+            39
+          ]
+        ],
+        "roc_auc": 0.8976744186046512,
+        "auprc": 0.9185672025484299
+      },
+      "calibration": {
+        "brier": 0.17634752003711368,
+        "ece_10_bins": 0.192120741065953
+      },
+      "ci95": {
+        "recall": [
+          0.7777777777777778,
+          0.9555555555555556
+        ],
+        "specificity": [
+          0.4418604651162791,
+          0.7209302325581395
+        ],
+        "f1": [
+          0.693050266565118,
+          0.8283204384268213
+        ],
+        "roc_auc": [
+          0.8382170542635657,
+          0.9498708010335917
+        ],
+        "auprc": [
+          0.8730543705737155,
+          0.9579831933200569
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 123,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.631578947368421,
+            "precision": 0.5555555555555556,
+            "recall": 0.625,
+            "specificity": 0.6363636363636364,
+            "f1": 0.5882352941176471,
+            "confusion_matrix": [
+              [
+                7,
+                4
+              ],
+              [
+                3,
+                5
+              ]
+            ],
+            "roc_auc": 0.7727272727272727,
+            "auprc": 0.7235930735930736
+          },
+          "calibration": {
+            "brier": 0.24054277069401125,
+            "ece_10_bins": 0.31216453068957073
+          },
+          "ci95": {
+            "recall": [
+              0.25,
+              0.875
+            ],
+            "specificity": [
+              0.36363636363636365,
+              0.9090909090909091
+            ],
+            "f1": [
+              0.3076923076923077,
+              0.8
+            ],
+            "roc_auc": [
+              0.5568181818181819,
+              0.9545454545454545
+            ],
+            "auprc": [
+              0.5366602397806441,
+              0.9472222222222222
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 123,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.7536231884057971,
+            "precision": 0.7083333333333334,
+            "recall": 0.918918918918919,
+            "specificity": 0.5625,
+            "f1": 0.8,
+            "confusion_matrix": [
+              [
+                18,
+                14
+              ],
+              [
+                3,
+                34
+              ]
+            ],
+            "roc_auc": 0.9307432432432432,
+            "auprc": 0.9502793107542455
+          },
+          "calibration": {
+            "brier": 0.15867056695767812,
+            "ece_10_bins": 0.15906520479278285
+          },
+          "ci95": {
+            "recall": [
+              0.8378378378378378,
+              1.0
+            ],
+            "specificity": [
+              0.40625,
+              0.75
+            ],
+            "f1": [
+              0.7294117647058823,
+              0.8705882352941177
+            ],
+            "roc_auc": [
+              0.8665329391891892,
+              0.9780827702702704
+            ],
+            "auprc": [
+              0.9091231369280071,
+              0.9842482807747003
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 123,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "A",
+      "budget": 0.25,
+      "seed": 999,
+      "metrics": {
+        "accuracy": 0.7840909090909091,
+        "precision": 0.7407407407407407,
+        "recall": 0.8888888888888888,
+        "specificity": 0.6744186046511628,
+        "f1": 0.8080808080808081,
+        "confusion_matrix": [
+          [
+            29,
+            14
+          ],
+          [
+            5,
+            40
+          ]
+        ],
+        "roc_auc": 0.9224806201550387,
+        "auprc": 0.9391121606939468
+      },
+      "calibration": {
+        "brier": 0.1259663727623975,
+        "ece_10_bins": 0.11694255169938766
+      },
+      "ci95": {
+        "recall": [
+          0.8,
+          0.9777777777777777
+        ],
+        "specificity": [
+          0.5348837209302325,
+          0.813953488372093
+        ],
+        "f1": [
+          0.7346938775510204,
+          0.8775510204081632
+        ],
+        "roc_auc": [
+          0.8598966408268733,
+          0.9710594315245478
+        ],
+        "auprc": [
+          0.8933309197339665,
+          0.9766817867560843
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 999,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.7894736842105263,
+            "precision": 0.7,
+            "recall": 0.875,
+            "specificity": 0.7272727272727273,
+            "f1": 0.7777777777777778,
+            "confusion_matrix": [
+              [
+                8,
+                3
+              ],
+              [
+                1,
+                7
+              ]
+            ],
+            "roc_auc": 0.8749999999999999,
+            "auprc": 0.8470619658119658
+          },
+          "calibration": {
+            "brier": 0.18437492037148775,
+            "ece_10_bins": 0.21963065636564832
+          },
+          "ci95": {
+            "recall": [
+              0.625,
+              1.0
+            ],
+            "specificity": [
+              0.45454545454545453,
+              1.0
+            ],
+            "f1": [
+              0.5882352941176471,
+              0.9411764705882353
+            ],
+            "roc_auc": [
+              0.6818181818181818,
+              1.0
+            ],
+            "auprc": [
+              0.6535250946969697,
+              1.0
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 999,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.782608695652174,
+            "precision": 0.75,
+            "recall": 0.8918918918918919,
+            "specificity": 0.65625,
+            "f1": 0.8148148148148148,
+            "confusion_matrix": [
+              [
+                21,
+                11
+              ],
+              [
+                4,
+                33
+              ]
+            ],
+            "roc_auc": 0.9290540540540541,
+            "auprc": 0.951573366367078
+          },
+          "calibration": {
+            "brier": 0.10988285965264799,
+            "ece_10_bins": 0.13526182699243308
+          },
+          "ci95": {
+            "recall": [
+              0.7837837837837838,
+              0.972972972972973
+            ],
+            "specificity": [
+              0.49921875000000004,
+              0.8125
+            ],
+            "f1": [
+              0.7341154677369559,
+              0.8860759493670886
+            ],
+            "roc_auc": [
+              0.8589527027027026,
+              0.9788851351351351
+            ],
+            "auprc": [
+              0.9055669287311932,
+              0.9843841453927561
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 999,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "B",
+      "budget": 0.25,
+      "seed": 999,
+      "metrics": {
+        "accuracy": 0.7613636363636364,
+        "precision": 0.7727272727272727,
+        "recall": 0.7555555555555555,
+        "specificity": 0.7674418604651163,
+        "f1": 0.7640449438202247,
+        "confusion_matrix": [
+          [
+            33,
+            10
+          ],
+          [
+            11,
+            34
+          ]
+        ],
+        "roc_auc": 0.8521963824289406,
+        "auprc": 0.8932691522290415
+      },
+      "calibration": {
+        "brier": 0.18708160473155439,
+        "ece_10_bins": 0.17535673628968984
+      },
+      "ci95": {
+        "recall": [
+          0.643888888888889,
+          0.8666666666666667
+        ],
+        "specificity": [
+          0.627906976744186,
+          0.8837209302325582
+        ],
+        "f1": [
+          0.6741511968734734,
+          0.8478260869565217
+        ],
+        "roc_auc": [
+          0.7730749354005167,
+          0.9235271317829459
+        ],
+        "auprc": [
+          0.8412818897199793,
+          0.9417361222662501
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 999,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.6842105263157895,
+            "precision": 0.6666666666666666,
+            "recall": 0.5,
+            "specificity": 0.8181818181818182,
+            "f1": 0.5714285714285714,
+            "confusion_matrix": [
+              [
+                9,
+                2
+              ],
+              [
+                4,
+                4
+              ]
+            ],
+            "roc_auc": 0.8068181818181819,
+            "auprc": 0.6968614718614718
+          },
+          "calibration": {
+            "brier": 0.37351102305292627,
+            "ece_10_bins": 0.39722499202386974
+          },
+          "ci95": {
+            "recall": [
+              0.125,
+              0.875
+            ],
+            "specificity": [
+              0.5454545454545454,
+              1.0
+            ],
+            "f1": [
+              0.19954545454545458,
+              0.8571428571428571
+            ],
+            "roc_auc": [
+              0.5568181818181819,
+              1.0
+            ],
+            "auprc": [
+              0.4894687864219114,
+              1.0
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 999,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.782608695652174,
+            "precision": 0.7894736842105263,
+            "recall": 0.8108108108108109,
+            "specificity": 0.75,
+            "f1": 0.8,
+            "confusion_matrix": [
+              [
+                24,
+                8
+              ],
+              [
+                7,
+                30
+              ]
+            ],
+            "roc_auc": 0.8606418918918919,
+            "auprc": 0.9192379210248918
+          },
+          "calibration": {
+            "brier": 0.13574596780248097,
+            "ece_10_bins": 0.13210983702531626
+          },
+          "ci95": {
+            "recall": [
+              0.6756756756756757,
+              0.918918918918919
+            ],
+            "specificity": [
+              0.59375,
+              0.90625
+            ],
+            "f1": [
+              0.7026050146532075,
+              0.8860759493670886
+            ],
+            "roc_auc": [
+              0.7609797297297298,
+              0.9485219594594594
+            ],
+            "auprc": [
+              0.862187095781307,
+              0.9687402922433556
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 999,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "C",
+      "budget": 0.25,
+      "seed": 999,
+      "metrics": {
+        "accuracy": 0.7727272727272727,
+        "precision": 0.7272727272727273,
+        "recall": 0.8888888888888888,
+        "specificity": 0.6511627906976745,
+        "f1": 0.8,
+        "confusion_matrix": [
+          [
+            28,
+            15
+          ],
+          [
+            5,
+            40
+          ]
+        ],
+        "roc_auc": 0.7829457364341085,
+        "auprc": 0.7822925602822087
+      },
+      "calibration": {
+        "brier": 0.38614178907511715,
+        "ece_10_bins": 0.40565840560574623
+      },
+      "ci95": {
+        "recall": [
+          0.8,
+          0.9777777777777777
+        ],
+        "specificity": [
+          0.5116279069767442,
+          0.7906976744186046
+        ],
+        "f1": [
+          0.7291617990654206,
+          0.8686868686868687
+        ],
+        "roc_auc": [
+          0.6821317829457364,
+          0.8723514211886304
+        ],
+        "auprc": [
+          0.6864403360147134,
+          0.874127440365453
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 999,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.6842105263157895,
+            "precision": 0.5714285714285714,
+            "recall": 1.0,
+            "specificity": 0.45454545454545453,
+            "f1": 0.7272727272727273,
+            "confusion_matrix": [
+              [
+                5,
+                6
+              ],
+              [
+                0,
+                8
+              ]
+            ],
+            "roc_auc": 0.8977272727272727,
+            "auprc": 0.8668650793650794
+          },
+          "calibration": {
+            "brier": 0.2685579024144115,
+            "ece_10_bins": 0.2899089270429517
+          },
+          "ci95": {
+            "recall": [
+              1.0,
+              1.0
+            ],
+            "specificity": [
+              0.18181818181818182,
+              0.7272727272727273
+            ],
+            "f1": [
+              0.64,
+              0.8421052631578947
+            ],
+            "roc_auc": [
+              0.7386363636363636,
+              1.0
+            ],
+            "auprc": [
+              0.6781270292207793,
+              1.0
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 999,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.7971014492753623,
+            "precision": 0.7804878048780488,
+            "recall": 0.8648648648648649,
+            "specificity": 0.71875,
+            "f1": 0.8205128205128205,
+            "confusion_matrix": [
+              [
+                23,
+                9
+              ],
+              [
+                5,
+                32
+              ]
+            ],
+            "roc_auc": 0.7787162162162162,
+            "auprc": 0.7843041294414852
+          },
+          "calibration": {
+            "brier": 0.418519960764297,
+            "ece_10_bins": 0.4375314504273854
+          },
+          "ci95": {
+            "recall": [
+              0.7567567567567568,
+              0.972972972972973
+            ],
+            "specificity": [
+              0.5625,
+              0.875
+            ],
+            "f1": [
+              0.7297297297297297,
+              0.8974358974358975
+            ],
+            "roc_auc": [
+              0.6520059121621621,
+              0.8809121621621622
+            ],
+            "auprc": [
+              0.6763331209374791,
+              0.894329945932085
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 999,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "D",
+      "budget": 0.25,
+      "seed": 999,
+      "metrics": {
+        "accuracy": 0.8295454545454546,
+        "precision": 0.875,
+        "recall": 0.7777777777777778,
+        "specificity": 0.8837209302325582,
+        "f1": 0.8235294117647058,
+        "confusion_matrix": [
+          [
+            38,
+            5
+          ],
+          [
+            10,
+            35
+          ]
+        ],
+        "roc_auc": 0.9007751937984496,
+        "auprc": 0.919317618588003
+      },
+      "calibration": {
+        "brier": 0.13901636300442127,
+        "ece_10_bins": 0.1180323949689866
+      },
+      "ci95": {
+        "recall": [
+          0.6666666666666666,
+          0.8888888888888888
+        ],
+        "specificity": [
+          0.7906976744186046,
+          0.9767441860465116
+        ],
+        "f1": [
+          0.7316578773895847,
+          0.896551724137931
+        ],
+        "roc_auc": [
+          0.8299483204134366,
+          0.9581524547803618
+        ],
+        "auprc": [
+          0.8620427875174439,
+          0.9661931697002542
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 999,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.7368421052631579,
+            "precision": 0.8,
+            "recall": 0.5,
+            "specificity": 0.9090909090909091,
+            "f1": 0.6153846153846154,
+            "confusion_matrix": [
+              [
+                10,
+                1
+              ],
+              [
+                4,
+                4
+              ]
+            ],
+            "roc_auc": 0.8409090909090908,
+            "auprc": 0.832521645021645
+          },
+          "calibration": {
+            "brier": 0.22387885804147187,
+            "ece_10_bins": 0.28176699227486485
+          },
+          "ci95": {
+            "recall": [
+              0.125,
+              0.875
+            ],
+            "specificity": [
+              0.7272727272727273,
+              1.0
+            ],
+            "f1": [
+              0.2,
+              0.8571428571428571
+            ],
+            "roc_auc": [
+              0.6360795454545455,
+              1.0
+            ],
+            "auprc": [
+              0.6367979242979243,
+              1.0
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 999,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.855072463768116,
+            "precision": 0.8857142857142857,
+            "recall": 0.8378378378378378,
+            "specificity": 0.875,
+            "f1": 0.8611111111111112,
+            "confusion_matrix": [
+              [
+                28,
+                4
+              ],
+              [
+                6,
+                31
+              ]
+            ],
+            "roc_auc": 0.9214527027027026,
+            "auprc": 0.9409075772888187
+          },
+          "calibration": {
+            "brier": 0.11564842958842186,
+            "ece_10_bins": 0.11133441768197656
+          },
+          "ci95": {
+            "recall": [
+              0.7027027027027027,
+              0.9459459459459459
+            ],
+            "specificity": [
+              0.75,
+              0.96875
+            ],
+            "f1": [
+              0.7671232876712328,
+              0.9333333333333333
+            ],
+            "roc_auc": [
+              0.8445945945945945,
+              0.9788851351351351
+            ],
+            "auprc": [
+              0.8868115851534653,
+              0.9840528622286733
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 999,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "A",
+      "budget": 0.5,
+      "seed": 42,
+      "metrics": {
+        "accuracy": 0.8181818181818182,
+        "precision": 0.8536585365853658,
+        "recall": 0.7777777777777778,
+        "specificity": 0.8604651162790697,
+        "f1": 0.813953488372093,
+        "confusion_matrix": [
+          [
+            37,
+            6
+          ],
+          [
+            10,
+            35
+          ]
+        ],
+        "roc_auc": 0.8744186046511627,
+        "auprc": 0.9047390062631147
+      },
+      "calibration": {
+        "brier": 0.15080482771935613,
+        "ece_10_bins": 0.13337788773291814
+      },
+      "ci95": {
+        "recall": [
+          0.6444444444444445,
+          0.8888888888888888
+        ],
+        "specificity": [
+          0.7441860465116279,
+          0.9534883720930233
+        ],
+        "f1": [
+          0.7208845048340736,
+          0.8941176470588236
+        ],
+        "roc_auc": [
+          0.798940568475452,
+          0.9405943152454782
+        ],
+        "auprc": [
+          0.8455142801647717,
+          0.9536954170397905
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 42,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.7368421052631579,
+            "precision": 0.7142857142857143,
+            "recall": 0.625,
+            "specificity": 0.8181818181818182,
+            "f1": 0.6666666666666666,
+            "confusion_matrix": [
+              [
+                9,
+                2
+              ],
+              [
+                3,
+                5
+              ]
+            ],
+            "roc_auc": 0.7954545454545454,
+            "auprc": 0.7756410256410257
+          },
+          "calibration": {
+            "brier": 0.21151196055412752,
+            "ece_10_bins": 0.23887005924418767
+          },
+          "ci95": {
+            "recall": [
+              0.25,
+              0.875
+            ],
+            "specificity": [
+              0.5454545454545454,
+              1.0
+            ],
+            "f1": [
+              0.36363636363636365,
+              0.8888888888888888
+            ],
+            "roc_auc": [
+              0.5565340909090909,
+              0.9661931818181816
+            ],
+            "auprc": [
+              0.5745416531997414,
+              0.9660669191919191
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 42,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.8405797101449275,
+            "precision": 0.8823529411764706,
+            "recall": 0.8108108108108109,
+            "specificity": 0.875,
+            "f1": 0.8450704225352113,
+            "confusion_matrix": [
+              [
+                28,
+                4
+              ],
+              [
+                7,
+                30
+              ]
+            ],
+            "roc_auc": 0.8927364864864866,
+            "auprc": 0.9266188847336108
+          },
+          "calibration": {
+            "brier": 0.1340883708518104,
+            "ece_10_bins": 0.13073428351713842
+          },
+          "ci95": {
+            "recall": [
+              0.6756756756756757,
+              0.918918918918919
+            ],
+            "specificity": [
+              0.75,
+              0.96875
+            ],
+            "f1": [
+              0.746268656716418,
+              0.9315068493150684
+            ],
+            "roc_auc": [
+              0.8006334459459458,
+              0.9628378378378378
+            ],
+            "auprc": [
+              0.865609080277727,
+              0.9749603460300404
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 42,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "B",
+      "budget": 0.5,
+      "seed": 42,
+      "metrics": {
+        "accuracy": 0.7954545454545454,
+        "precision": 0.8648648648648649,
+        "recall": 0.7111111111111111,
+        "specificity": 0.8837209302325582,
+        "f1": 0.7804878048780488,
+        "confusion_matrix": [
+          [
+            38,
+            5
+          ],
+          [
+            13,
+            32
+          ]
+        ],
+        "roc_auc": 0.9007751937984496,
+        "auprc": 0.9225204240612401
+      },
+      "calibration": {
+        "brier": 0.14806368036148507,
+        "ece_10_bins": 0.1640643148959559
+      },
+      "ci95": {
+        "recall": [
+          0.6,
+          0.8222222222222222
+        ],
+        "specificity": [
+          0.7906976744186046,
+          0.9534883720930233
+        ],
+        "f1": [
+          0.6904761904761905,
+          0.8571428571428571
+        ],
+        "roc_auc": [
+          0.8294573643410853,
+          0.9545348837209304
+        ],
+        "auprc": [
+          0.8721809839735467,
+          0.9630770839860359
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 42,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.6842105263157895,
+            "precision": 1.0,
+            "recall": 0.25,
+            "specificity": 1.0,
+            "f1": 0.4,
+            "confusion_matrix": [
+              [
+                11,
+                0
+              ],
+              [
+                6,
+                2
+              ]
+            ],
+            "roc_auc": 0.9204545454545454,
+            "auprc": 0.9308035714285714
+          },
+          "calibration": {
+            "brier": 0.10357183827804371,
+            "ece_10_bins": 0.166999070981738
+          },
+          "ci95": {
+            "recall": [
+              0.0,
+              0.5
+            ],
+            "specificity": [
+              1.0,
+              1.0
+            ],
+            "f1": [
+              0.0,
+              0.6666666666666666
+            ],
+            "roc_auc": [
+              0.7272727272727273,
+              1.0
+            ],
+            "auprc": [
+              0.7923921130952382,
+              1.0
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 42,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.8260869565217391,
+            "precision": 0.8571428571428571,
+            "recall": 0.8108108108108109,
+            "specificity": 0.84375,
+            "f1": 0.8333333333333334,
+            "confusion_matrix": [
+              [
+                27,
+                5
+              ],
+              [
+                7,
+                30
+              ]
+            ],
+            "roc_auc": 0.914695945945946,
+            "auprc": 0.9422578170644764
+          },
+          "calibration": {
+            "brier": 0.16031505716707034,
+            "ece_10_bins": 0.16480276660279114
+          },
+          "ci95": {
+            "recall": [
+              0.6756756756756757,
+              0.918918918918919
+            ],
+            "specificity": [
+              0.71875,
+              0.9382812499999993
+            ],
+            "f1": [
+              0.7323943661971831,
+              0.9166666666666666
+            ],
+            "roc_auc": [
+              0.8319256756756755,
+              0.9771959459459459
+            ],
+            "auprc": [
+              0.8906726587573446,
+              0.9822279999488776
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 42,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "C",
+      "budget": 0.5,
+      "seed": 42,
+      "metrics": {
+        "accuracy": 0.8409090909090909,
+        "precision": 0.8604651162790697,
+        "recall": 0.8222222222222222,
+        "specificity": 0.8604651162790697,
+        "f1": 0.8409090909090909,
+        "confusion_matrix": [
+          [
+            37,
+            6
+          ],
+          [
+            8,
+            37
+          ]
+        ],
+        "roc_auc": 0.9111111111111111,
+        "auprc": 0.9214545639544883
+      },
+      "calibration": {
+        "brier": 0.15450416547581733,
+        "ece_10_bins": 0.16750849264973572
+      },
+      "ci95": {
+        "recall": [
+          0.7111111111111111,
+          0.9333333333333333
+        ],
+        "specificity": [
+          0.7441860465116279,
+          0.9534883720930233
+        ],
+        "f1": [
+          0.7585576114381833,
+          0.9130434782608695
+        ],
+        "roc_auc": [
+          0.8459948320413437,
+          0.96797157622739
+        ],
+        "auprc": [
+          0.8635942441094691,
+          0.9735269778710687
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 42,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.6842105263157895,
+            "precision": 0.625,
+            "recall": 0.625,
+            "specificity": 0.7272727272727273,
+            "f1": 0.625,
+            "confusion_matrix": [
+              [
+                8,
+                3
+              ],
+              [
+                3,
+                5
+              ]
+            ],
+            "roc_auc": 0.8068181818181819,
+            "auprc": 0.7641369047619048
+          },
+          "calibration": {
+            "brier": 0.24784242534217715,
+            "ece_10_bins": 0.309472783780381
+          },
+          "ci95": {
+            "recall": [
+              0.25,
+              0.875
+            ],
+            "specificity": [
+              0.45454545454545453,
+              1.0
+            ],
+            "f1": [
+              0.3076923076923077,
+              0.875
+            ],
+            "roc_auc": [
+              0.5795454545454546,
+              0.9772727272727273
+            ],
+            "auprc": [
+              0.5587103154198743,
+              0.9704861111111112
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 42,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.8840579710144928,
+            "precision": 0.9142857142857143,
+            "recall": 0.8648648648648649,
+            "specificity": 0.90625,
+            "f1": 0.8888888888888888,
+            "confusion_matrix": [
+              [
+                29,
+                3
+              ],
+              [
+                5,
+                32
+              ]
+            ],
+            "roc_auc": 0.9375,
+            "auprc": 0.9587423249369176
+          },
+          "calibration": {
+            "brier": 0.12880232580247183,
+            "ece_10_bins": 0.17162337967726138
+          },
+          "ci95": {
+            "recall": [
+              0.7567567567567568,
+              0.972972972972973
+            ],
+            "specificity": [
+              0.78125,
+              1.0
+            ],
+            "f1": [
+              0.8054166666666667,
+              0.958904109589041
+            ],
+            "roc_auc": [
+              0.8682432432432433,
+              0.9856418918918919
+            ],
+            "auprc": [
+              0.917312575657418,
+              0.9891196186185289
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 42,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "D",
+      "budget": 0.5,
+      "seed": 42,
+      "metrics": {
+        "accuracy": 0.7954545454545454,
+        "precision": 0.7872340425531915,
+        "recall": 0.8222222222222222,
+        "specificity": 0.7674418604651163,
+        "f1": 0.8043478260869565,
+        "confusion_matrix": [
+          [
+            33,
+            10
+          ],
+          [
+            8,
+            37
+          ]
+        ],
+        "roc_auc": 0.8992248062015504,
+        "auprc": 0.9233277833684459
+      },
+      "calibration": {
+        "brier": 0.15256603804412658,
+        "ece_10_bins": 0.15174982194986858
+      },
+      "ci95": {
+        "recall": [
+          0.7111111111111111,
+          0.9333333333333333
+        ],
+        "specificity": [
+          0.627906976744186,
+          0.8837209302325582
+        ],
+        "f1": [
+          0.7311385199240987,
+          0.876433157532676
+        ],
+        "roc_auc": [
+          0.8382428940568477,
+          0.9504005167958656
+        ],
+        "auprc": [
+          0.8796222478350909,
+          0.9612506850325553
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 42,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.631578947368421,
+            "precision": 0.5714285714285714,
+            "recall": 0.5,
+            "specificity": 0.7272727272727273,
+            "f1": 0.5333333333333333,
+            "confusion_matrix": [
+              [
+                8,
+                3
+              ],
+              [
+                4,
+                4
+              ]
+            ],
+            "roc_auc": 0.6590909090909091,
+            "auprc": 0.5753472222222222
+          },
+          "calibration": {
+            "brier": 0.2906218641164663,
+            "ece_10_bins": 0.3311979961803636
+          },
+          "ci95": {
+            "recall": [
+              0.125,
+              0.875
+            ],
+            "specificity": [
+              0.45454545454545453,
+              1.0
+            ],
+            "f1": [
+              0.16666666666666666,
+              0.8
+            ],
+            "roc_auc": [
+              0.3860795454545455,
+              0.8977272727272727
+            ],
+            "auprc": [
+              0.4145281587016784,
+              0.8988355654761904
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 42,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.8405797101449275,
+            "precision": 0.825,
+            "recall": 0.8918918918918919,
+            "specificity": 0.78125,
+            "f1": 0.8571428571428571,
+            "confusion_matrix": [
+              [
+                25,
+                7
+              ],
+              [
+                4,
+                33
+              ]
+            ],
+            "roc_auc": 0.9459459459459459,
+            "auprc": 0.9622620496481078
+          },
+          "calibration": {
+            "brier": 0.11455066564739533,
+            "ece_10_bins": 0.11492399676870366
+          },
+          "ci95": {
+            "recall": [
+              0.7567567567567568,
+              0.972972972972973
+            ],
+            "specificity": [
+              0.625,
+              0.90625
+            ],
+            "f1": [
+              0.7710379981464319,
+              0.9230769230769231
+            ],
+            "roc_auc": [
+              0.8867609797297297,
+              0.9881756756756757
+            ],
+            "auprc": [
+              0.9216775821262551,
+              0.9908672960919975
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 42,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "A",
+      "budget": 0.5,
+      "seed": 123,
+      "metrics": {
+        "accuracy": 0.8409090909090909,
+        "precision": 0.8604651162790697,
+        "recall": 0.8222222222222222,
+        "specificity": 0.8604651162790697,
+        "f1": 0.8409090909090909,
+        "confusion_matrix": [
+          [
+            37,
+            6
+          ],
+          [
+            8,
+            37
+          ]
+        ],
+        "roc_auc": 0.9328165374677002,
+        "auprc": 0.9428824120630062
+      },
+      "calibration": {
+        "brier": 0.13085658137731873,
+        "ece_10_bins": 0.13394384072490179
+      },
+      "ci95": {
+        "recall": [
+          0.7111111111111111,
+          0.9111111111111111
+        ],
+        "specificity": [
+          0.7441860465116279,
+          0.9534883720930233
+        ],
+        "f1": [
+          0.7608351678591084,
+          0.9111111111111111
+        ],
+        "roc_auc": [
+          0.8863049095607235,
+          0.9731266149870801
+        ],
+        "auprc": [
+          0.9052330018606353,
+          0.9759163941595682
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 123,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.7894736842105263,
+            "precision": 0.8333333333333334,
+            "recall": 0.625,
+            "specificity": 0.9090909090909091,
+            "f1": 0.7142857142857143,
+            "confusion_matrix": [
+              [
+                10,
+                1
+              ],
+              [
+                3,
+                5
+              ]
+            ],
+            "roc_auc": 0.8977272727272727,
+            "auprc": 0.8821428571428571
+          },
+          "calibration": {
+            "brier": 0.1770262009193051,
+            "ece_10_bins": 0.1785359428958097
+          },
+          "ci95": {
+            "recall": [
+              0.25,
+              1.0
+            ],
+            "specificity": [
+              0.7272727272727273,
+              1.0
+            ],
+            "f1": [
+              0.36363636363636365,
+              0.9333333333333333
+            ],
+            "roc_auc": [
+              0.7272727272727273,
+              1.0
+            ],
+            "auprc": [
+              0.7261607142857142,
+              1.0
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 123,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.855072463768116,
+            "precision": 0.8648648648648649,
+            "recall": 0.8648648648648649,
+            "specificity": 0.84375,
+            "f1": 0.8648648648648649,
+            "confusion_matrix": [
+              [
+                27,
+                5
+              ],
+              [
+                5,
+                32
+              ]
+            ],
+            "roc_auc": 0.9459459459459459,
+            "auprc": 0.9595558292123977
+          },
+          "calibration": {
+            "brier": 0.11814320788025003,
+            "ece_10_bins": 0.1303110972019083
+          },
+          "ci95": {
+            "recall": [
+              0.7567567567567568,
+              0.972972972972973
+            ],
+            "specificity": [
+              0.71875,
+              0.96875
+            ],
+            "f1": [
+              0.7837837837837838,
+              0.935106033207299
+            ],
+            "roc_auc": [
+              0.8944256756756757,
+              0.9847972972972974
+            ],
+            "auprc": [
+              0.9248428851522019,
+              0.9882763007963237
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 123,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "B",
+      "budget": 0.5,
+      "seed": 123,
+      "metrics": {
+        "accuracy": 0.7613636363636364,
+        "precision": 0.7222222222222222,
+        "recall": 0.8666666666666667,
+        "specificity": 0.6511627906976745,
+        "f1": 0.7878787878787878,
+        "confusion_matrix": [
+          [
+            28,
+            15
+          ],
+          [
+            6,
+            39
+          ]
+        ],
+        "roc_auc": 0.9059431524547803,
+        "auprc": 0.9249587302840747
+      },
+      "calibration": {
+        "brier": 0.16289737703869403,
+        "ece_10_bins": 0.15932107021821668
+      },
+      "ci95": {
+        "recall": [
+          0.7777777777777778,
+          0.9333333333333333
+        ],
+        "specificity": [
+          0.5116279069767442,
+          0.7906976744186046
+        ],
+        "f1": [
+          0.7157518796992481,
+          0.8571428571428571
+        ],
+        "roc_auc": [
+          0.8542506459948319,
+          0.9534883720930232
+        ],
+        "auprc": [
+          0.885658122560786,
+          0.9610213751473892
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 123,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.6842105263157895,
+            "precision": 0.6666666666666666,
+            "recall": 0.5,
+            "specificity": 0.8181818181818182,
+            "f1": 0.5714285714285714,
+            "confusion_matrix": [
+              [
+                9,
+                2
+              ],
+              [
+                4,
+                4
+              ]
+            ],
+            "roc_auc": 0.8977272727272727,
+            "auprc": 0.8711670274170275
+          },
+          "calibration": {
+            "brier": 0.26123964029707886,
+            "ece_10_bins": 0.2883514972139941
+          },
+          "ci95": {
+            "recall": [
+              0.125,
+              0.875
+            ],
+            "specificity": [
+              0.5454545454545454,
+              1.0
+            ],
+            "f1": [
+              0.2,
+              0.8235294117647058
+            ],
+            "roc_auc": [
+              0.7272727272727273,
+              1.0
+            ],
+            "auprc": [
+              0.6939448051948053,
+              1.0
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 123,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.782608695652174,
+            "precision": 0.7291666666666666,
+            "recall": 0.9459459459459459,
+            "specificity": 0.59375,
+            "f1": 0.8235294117647058,
+            "confusion_matrix": [
+              [
+                19,
+                13
+              ],
+              [
+                2,
+                35
+              ]
+            ],
+            "roc_auc": 0.9315878378378379,
+            "auprc": 0.9529005245288689
+          },
+          "calibration": {
+            "brier": 0.13581762338783446,
+            "ece_10_bins": 0.14001463637699563
+          },
+          "ci95": {
+            "recall": [
+              0.8648648648648649,
+              1.0
+            ],
+            "specificity": [
+              0.4375,
+              0.75
+            ],
+            "f1": [
+              0.7586206896551724,
+              0.8889558232931726
+            ],
+            "roc_auc": [
+              0.8732896959459459,
+              0.9788851351351351
+            ],
+            "auprc": [
+              0.9144894728603882,
+              0.98502609595289
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 123,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "C",
+      "budget": 0.5,
+      "seed": 123,
+      "metrics": {
+        "accuracy": 0.7272727272727273,
+        "precision": 0.6981132075471698,
+        "recall": 0.8222222222222222,
+        "specificity": 0.627906976744186,
+        "f1": 0.7551020408163265,
+        "confusion_matrix": [
+          [
+            27,
+            16
+          ],
+          [
+            8,
+            37
+          ]
+        ],
+        "roc_auc": 0.8325581395348837,
+        "auprc": 0.8714903678239276
+      },
+      "calibration": {
+        "brier": 0.282588439901469,
+        "ece_10_bins": 0.3134026126418764
+      },
+      "ci95": {
+        "recall": [
+          0.7111111111111111,
+          0.9111111111111111
+        ],
+        "specificity": [
+          0.4883720930232558,
+          0.7674418604651163
+        ],
+        "f1": [
+          0.6804123711340206,
+          0.8283204384268213
+        ],
+        "roc_auc": [
+          0.7514082687338499,
+          0.9080232558139536
+        ],
+        "auprc": [
+          0.8150438436170341,
+          0.9298195537512218
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 123,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.5789473684210527,
+            "precision": 0.5,
+            "recall": 0.5,
+            "specificity": 0.6363636363636364,
+            "f1": 0.5,
+            "confusion_matrix": [
+              [
+                7,
+                4
+              ],
+              [
+                4,
+                4
+              ]
+            ],
+            "roc_auc": 0.7386363636363636,
+            "auprc": 0.7511846405228758
+          },
+          "calibration": {
+            "brier": 0.34590337445493846,
+            "ece_10_bins": 0.36832681857910493
+          },
+          "ci95": {
+            "recall": [
+              0.125,
+              0.875
+            ],
+            "specificity": [
+              0.36363636363636365,
+              0.9090909090909091
+            ],
+            "f1": [
+              0.16666666666666666,
+              0.7502976190476188
+            ],
+            "roc_auc": [
+              0.4772727272727273,
+              0.9434659090909089
+            ],
+            "auprc": [
+              0.523210340007215,
+              0.9444940476190475
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 123,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.7681159420289855,
+            "precision": 0.7333333333333333,
+            "recall": 0.8918918918918919,
+            "specificity": 0.625,
+            "f1": 0.8048780487804879,
+            "confusion_matrix": [
+              [
+                20,
+                12
+              ],
+              [
+                4,
+                33
+              ]
+            ],
+            "roc_auc": 0.8614864864864865,
+            "auprc": 0.8984335004297395
+          },
+          "calibration": {
+            "brier": 0.26515389270558604,
+            "ece_10_bins": 0.2982785559345236
+          },
+          "ci95": {
+            "recall": [
+              0.7837837837837838,
+              0.972972972972973
+            ],
+            "specificity": [
+              0.46875,
+              0.78125
+            ],
+            "f1": [
+              0.7316499282639886,
+              0.8780487804878049
+            ],
+            "roc_auc": [
+              0.775295608108108,
+              0.9425886824324325
+            ],
+            "auprc": [
+              0.8322237645029098,
+              0.9582340845712024
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 123,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "D",
+      "budget": 0.5,
+      "seed": 123,
+      "metrics": {
+        "accuracy": 0.7727272727272727,
+        "precision": 0.711864406779661,
+        "recall": 0.9333333333333333,
+        "specificity": 0.6046511627906976,
+        "f1": 0.8076923076923077,
+        "confusion_matrix": [
+          [
+            26,
+            17
+          ],
+          [
+            3,
+            42
+          ]
+        ],
+        "roc_auc": 0.9054263565891473,
+        "auprc": 0.9177620748057025
+      },
+      "calibration": {
+        "brier": 0.14714468662529168,
+        "ece_10_bins": 0.153243726597615
+      },
+      "ci95": {
+        "recall": [
+          0.8444444444444444,
+          1.0
+        ],
+        "specificity": [
+          0.46511627906976744,
+          0.7441860465116279
+        ],
+        "f1": [
+          0.7454545454545455,
+          0.8686868686868687
+        ],
+        "roc_auc": [
+          0.8397932816537469,
+          0.9591860465116279
+        ],
+        "auprc": [
+          0.8517608868762077,
+          0.9684740668735096
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 123,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.7894736842105263,
+            "precision": 0.7,
+            "recall": 0.875,
+            "specificity": 0.7272727272727273,
+            "f1": 0.7777777777777778,
+            "confusion_matrix": [
+              [
+                8,
+                3
+              ],
+              [
+                1,
+                7
+              ]
+            ],
+            "roc_auc": 0.8522727272727272,
+            "auprc": 0.8930555555555555
+          },
+          "calibration": {
+            "brier": 0.2106803554293183,
+            "ece_10_bins": 0.24656087525918818
+          },
+          "ci95": {
+            "recall": [
+              0.625,
+              1.0
+            ],
+            "specificity": [
+              0.45454545454545453,
+              0.9090909090909091
+            ],
+            "f1": [
+              0.6,
+              0.9411764705882353
+            ],
+            "roc_auc": [
+              0.6136363636363636,
+              1.0
+            ],
+            "auprc": [
+              0.7358758223684211,
+              1.0
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 123,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.7681159420289855,
+            "precision": 0.7142857142857143,
+            "recall": 0.9459459459459459,
+            "specificity": 0.5625,
+            "f1": 0.813953488372093,
+            "confusion_matrix": [
+              [
+                18,
+                14
+              ],
+              [
+                2,
+                35
+              ]
+            ],
+            "roc_auc": 0.9155405405405406,
+            "auprc": 0.9293337395899903
+          },
+          "calibration": {
+            "brier": 0.12964935753432785,
+            "ece_10_bins": 0.12834908201207196
+          },
+          "ci95": {
+            "recall": [
+              0.8648648648648649,
+              1.0
+            ],
+            "specificity": [
+              0.40625,
+              0.71875
+            ],
+            "f1": [
+              0.7560975609756098,
+              0.875
+            ],
+            "roc_auc": [
+              0.8461993243243242,
+              0.9721494932432434
+            ],
+            "auprc": [
+              0.8627719020502385,
+              0.9808699314501436
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 123,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "A",
+      "budget": 0.5,
+      "seed": 999,
+      "metrics": {
+        "accuracy": 0.7840909090909091,
+        "precision": 0.782608695652174,
+        "recall": 0.8,
+        "specificity": 0.7674418604651163,
+        "f1": 0.7912087912087912,
+        "confusion_matrix": [
+          [
+            33,
+            10
+          ],
+          [
+            9,
+            36
+          ]
+        ],
+        "roc_auc": 0.9023255813953488,
+        "auprc": 0.9242641402332012
+      },
+      "calibration": {
+        "brier": 0.15827913875798594,
+        "ece_10_bins": 0.15288773154911312
+      },
+      "ci95": {
+        "recall": [
+          0.7111111111111111,
+          0.8888888888888888
+        ],
+        "specificity": [
+          0.6511627906976745,
+          0.8837209302325582
+        ],
+        "f1": [
+          0.7126053639846743,
+          0.8636363636363636
+        ],
+        "roc_auc": [
+          0.8408268733850133,
+          0.9555684754521964
+        ],
+        "auprc": [
+          0.8814780491045235,
+          0.9639256045727568
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 999,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.6842105263157895,
+            "precision": 0.75,
+            "recall": 0.375,
+            "specificity": 0.9090909090909091,
+            "f1": 0.5,
+            "confusion_matrix": [
+              [
+                10,
+                1
+              ],
+              [
+                5,
+                3
+              ]
+            ],
+            "roc_auc": 0.875,
+            "auprc": 0.8491883116883117
+          },
+          "calibration": {
+            "brier": 0.22937305739943964,
+            "ece_10_bins": 0.25918745635824864
+          },
+          "ci95": {
+            "recall": [
+              0.125,
+              0.75
+            ],
+            "specificity": [
+              0.7272727272727273,
+              1.0
+            ],
+            "f1": [
+              0.16666666666666666,
+              0.7692307692307693
+            ],
+            "roc_auc": [
+              0.6818181818181819,
+              1.0
+            ],
+            "auprc": [
+              0.6724206349206349,
+              1.0
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 999,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.8115942028985508,
+            "precision": 0.7857142857142857,
+            "recall": 0.8918918918918919,
+            "specificity": 0.71875,
+            "f1": 0.8354430379746836,
+            "confusion_matrix": [
+              [
+                23,
+                9
+              ],
+              [
+                4,
+                33
+              ]
+            ],
+            "roc_auc": 0.9256756756756757,
+            "auprc": 0.9508573667902003
+          },
+          "calibration": {
+            "brier": 0.13870255246541174,
+            "ece_10_bins": 0.13639133286399205
+          },
+          "ci95": {
+            "recall": [
+              0.7837837837837838,
+              0.972972972972973
+            ],
+            "specificity": [
+              0.5625,
+              0.875
+            ],
+            "f1": [
+              0.7560975609756098,
+              0.9066666666666666
+            ],
+            "roc_auc": [
+              0.8554898648648651,
+              0.9805743243243243
+            ],
+            "auprc": [
+              0.9071087398442236,
+              0.9845777079283811
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 999,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "B",
+      "budget": 0.5,
+      "seed": 999,
+      "metrics": {
+        "accuracy": 0.7954545454545454,
+        "precision": 0.8,
+        "recall": 0.8,
+        "specificity": 0.7906976744186046,
+        "f1": 0.8,
+        "confusion_matrix": [
+          [
+            34,
+            9
+          ],
+          [
+            9,
+            36
+          ]
+        ],
+        "roc_auc": 0.8801033591731265,
+        "auprc": 0.9103412043524028
+      },
+      "calibration": {
+        "brier": 0.1679433682718085,
+        "ece_10_bins": 0.16933724071038175
+      },
+      "ci95": {
+        "recall": [
+          0.7111111111111111,
+          0.8888888888888888
+        ],
+        "specificity": [
+          0.6744186046511628,
+          0.9069767441860465
+        ],
+        "f1": [
+          0.7272727272727273,
+          0.8723709953533871
+        ],
+        "roc_auc": [
+          0.8232558139534885,
+          0.9281653746770027
+        ],
+        "auprc": [
+          0.8708608649352624,
+          0.9450069833248301
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 999,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.6842105263157895,
+            "precision": 1.0,
+            "recall": 0.25,
+            "specificity": 1.0,
+            "f1": 0.4,
+            "confusion_matrix": [
+              [
+                11,
+                0
+              ],
+              [
+                6,
+                2
+              ]
+            ],
+            "roc_auc": 0.8181818181818181,
+            "auprc": 0.8338235294117647
+          },
+          "calibration": {
+            "brier": 0.32771975411989906,
+            "ece_10_bins": 0.35021337843969186
+          },
+          "ci95": {
+            "recall": [
+              0.0,
+              0.5
+            ],
+            "specificity": [
+              1.0,
+              1.0
+            ],
+            "f1": [
+              0.0,
+              0.6666666666666666
+            ],
+            "roc_auc": [
+              0.5681818181818181,
+              0.9886363636363636
+            ],
+            "auprc": [
+              0.655210562463852,
+              0.9861111111111112
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 999,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.8260869565217391,
+            "precision": 0.7906976744186046,
+            "recall": 0.918918918918919,
+            "specificity": 0.71875,
+            "f1": 0.85,
+            "confusion_matrix": [
+              [
+                23,
+                9
+              ],
+              [
+                3,
+                34
+              ]
+            ],
+            "roc_auc": 0.9383445945945946,
+            "auprc": 0.9543890409446245
+          },
+          "calibration": {
+            "brier": 0.12394697216871109,
+            "ece_10_bins": 0.12428225160165574
+          },
+          "ci95": {
+            "recall": [
+              0.8108108108108109,
+              1.0
+            ],
+            "specificity": [
+              0.56171875,
+              0.875
+            ],
+            "f1": [
+              0.7733333333333333,
+              0.9113924050632911
+            ],
+            "roc_auc": [
+              0.8783361486486486,
+              0.9814400337837839
+            ],
+            "auprc": [
+              0.9108600202869847,
+              0.9867295430304576
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 999,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "C",
+      "budget": 0.5,
+      "seed": 999,
+      "metrics": {
+        "accuracy": 0.8068181818181818,
+        "precision": 0.8181818181818182,
+        "recall": 0.8,
+        "specificity": 0.813953488372093,
+        "f1": 0.8089887640449438,
+        "confusion_matrix": [
+          [
+            35,
+            8
+          ],
+          [
+            9,
+            36
+          ]
+        ],
+        "roc_auc": 0.8470284237726099,
+        "auprc": 0.8811979210802213
+      },
+      "calibration": {
+        "brier": 0.24949920721780777,
+        "ece_10_bins": 0.27805436460564625
+      },
+      "ci95": {
+        "recall": [
+          0.6666666666666666,
+          0.9111111111111111
+        ],
+        "specificity": [
+          0.6976744186046512,
+          0.9302325581395349
+        ],
+        "f1": [
+          0.7142857142857143,
+          0.8863636363636364
+        ],
+        "roc_auc": [
+          0.7529457364341087,
+          0.918359173126615
+        ],
+        "auprc": [
+          0.8078019563525979,
+          0.9420431375112489
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 999,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.7368421052631579,
+            "precision": 0.7142857142857143,
+            "recall": 0.625,
+            "specificity": 0.8181818181818182,
+            "f1": 0.6666666666666666,
+            "confusion_matrix": [
+              [
+                9,
+                2
+              ],
+              [
+                3,
+                5
+              ]
+            ],
+            "roc_auc": 0.7613636363636364,
+            "auprc": 0.7710259103641457
+          },
+          "calibration": {
+            "brier": 0.3137805709505135,
+            "ece_10_bins": 0.3403612119421412
+          },
+          "ci95": {
+            "recall": [
+              0.25,
+              1.0
+            ],
+            "specificity": [
+              0.5454545454545454,
+              1.0
+            ],
+            "f1": [
+              0.3333333333333333,
+              0.8888888888888888
+            ],
+            "roc_auc": [
+              0.4883522727272727,
+              0.9545454545454545
+            ],
+            "auprc": [
+              0.5452430555555556,
+              0.9500071022727272
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 999,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.8260869565217391,
+            "precision": 0.8378378378378378,
+            "recall": 0.8378378378378378,
+            "specificity": 0.8125,
+            "f1": 0.8378378378378378,
+            "confusion_matrix": [
+              [
+                26,
+                6
+              ],
+              [
+                6,
+                31
+              ]
+            ],
+            "roc_auc": 0.8665540540540541,
+            "auprc": 0.9033395255379117
+          },
+          "calibration": {
+            "brier": 0.2317985418421352,
+            "ece_10_bins": 0.2608974066434231
+          },
+          "ci95": {
+            "recall": [
+              0.7027027027027027,
+              0.9459459459459459
+            ],
+            "specificity": [
+              0.65625,
+              0.9375
+            ],
+            "f1": [
+              0.7466666666666667,
+              0.9142857142857143
+            ],
+            "roc_auc": [
+              0.7685177364864866,
+              0.9476562500000002
+            ],
+            "auprc": [
+              0.8299297146617011,
+              0.9648908335580373
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 999,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "D",
+      "budget": 0.5,
+      "seed": 999,
+      "metrics": {
+        "accuracy": 0.8181818181818182,
+        "precision": 0.7959183673469388,
+        "recall": 0.8666666666666667,
+        "specificity": 0.7674418604651163,
+        "f1": 0.8297872340425532,
+        "confusion_matrix": [
+          [
+            33,
+            10
+          ],
+          [
+            6,
+            39
+          ]
+        ],
+        "roc_auc": 0.8919896640826873,
+        "auprc": 0.9154188046480168
+      },
+      "calibration": {
+        "brier": 0.12602069095859533,
+        "ece_10_bins": 0.12997267285325878
+      },
+      "ci95": {
+        "recall": [
+          0.7777777777777778,
+          0.9555555555555556
+        ],
+        "specificity": [
+          0.627906976744186,
+          0.8837209302325582
+        ],
+        "f1": [
+          0.7586206896551724,
+          0.9052631578947369
+        ],
+        "roc_auc": [
+          0.815439276485788,
+          0.9591860465116278
+        ],
+        "auprc": [
+          0.8508970732183764,
+          0.9717900104496248
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 999,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.7368421052631579,
+            "precision": 0.6666666666666666,
+            "recall": 0.75,
+            "specificity": 0.7272727272727273,
+            "f1": 0.7058823529411765,
+            "confusion_matrix": [
+              [
+                8,
+                3
+              ],
+              [
+                2,
+                6
+              ]
+            ],
+            "roc_auc": 0.7954545454545454,
+            "auprc": 0.8638888888888889
+          },
+          "calibration": {
+            "brier": 0.151312600311408,
+            "ece_10_bins": 0.22610327936069405
+          },
+          "ci95": {
+            "recall": [
+              0.375,
+              1.0
+            ],
+            "specificity": [
+              0.45454545454545453,
+              1.0
+            ],
+            "f1": [
+              0.46153846153846156,
+              0.8888888888888888
+            ],
+            "roc_auc": [
+              0.5113636363636364,
+              1.0
+            ],
+            "auprc": [
+              0.6803685897435898,
+              1.0
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 999,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.8405797101449275,
+            "precision": 0.825,
+            "recall": 0.8918918918918919,
+            "specificity": 0.78125,
+            "f1": 0.8571428571428571,
+            "confusion_matrix": [
+              [
+                25,
+                7
+              ],
+              [
+                4,
+                33
+              ]
+            ],
+            "roc_auc": 0.9197635135135136,
+            "auprc": 0.9366286860953317
+          },
+          "calibration": {
+            "brier": 0.11905625215129909,
+            "ece_10_bins": 0.12442443319874999
+          },
+          "ci95": {
+            "recall": [
+              0.7837837837837838,
+              0.972972972972973
+            ],
+            "specificity": [
+              0.625,
+              0.90625
+            ],
+            "f1": [
+              0.775,
+              0.9211032388663967
+            ],
+            "roc_auc": [
+              0.8353040540540543,
+              0.9788851351351351
+            ],
+            "auprc": [
+              0.8685844322483928,
+              0.9856585769442913
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 999,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "A",
+      "budget": 1.0,
+      "seed": 42,
+      "metrics": {
+        "accuracy": 0.7954545454545454,
+        "precision": 0.7547169811320755,
+        "recall": 0.8888888888888888,
+        "specificity": 0.6976744186046512,
+        "f1": 0.8163265306122449,
+        "confusion_matrix": [
+          [
+            30,
+            13
+          ],
+          [
+            5,
+            40
+          ]
+        ],
+        "roc_auc": 0.8930232558139535,
+        "auprc": 0.9035848756934631
+      },
+      "calibration": {
+        "brier": 0.12677709087847971,
+        "ece_10_bins": 0.09255191268598877
+      },
+      "ci95": {
+        "recall": [
+          0.8,
+          0.9777777777777777
+        ],
+        "specificity": [
+          0.5581395348837209,
+          0.8372093023255814
+        ],
+        "f1": [
+          0.7450980392156863,
+          0.8842105263157894
+        ],
+        "roc_auc": [
+          0.8144444444444445,
+          0.9555555555555555
+        ],
+        "auprc": [
+          0.8295815197417242,
+          0.9596278839558696
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 42,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.7894736842105263,
+            "precision": 0.75,
+            "recall": 0.75,
+            "specificity": 0.8181818181818182,
+            "f1": 0.75,
+            "confusion_matrix": [
+              [
+                9,
+                2
+              ],
+              [
+                2,
+                6
+              ]
+            ],
+            "roc_auc": 0.9318181818181818,
+            "auprc": 0.9305555555555556
+          },
+          "calibration": {
+            "brier": 0.10999752696143016,
+            "ece_10_bins": 0.14532786640142573
+          },
+          "ci95": {
+            "recall": [
+              0.375,
+              1.0
+            ],
+            "specificity": [
+              0.5454545454545454,
+              1.0
+            ],
+            "f1": [
+              0.5,
+              0.9411764705882353
+            ],
+            "roc_auc": [
+              0.7954545454545454,
+              1.0
+            ],
+            "auprc": [
+              0.8038461538461539,
+              1.0
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 42,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.7971014492753623,
+            "precision": 0.7555555555555555,
+            "recall": 0.918918918918919,
+            "specificity": 0.65625,
+            "f1": 0.8292682926829268,
+            "confusion_matrix": [
+              [
+                21,
+                11
+              ],
+              [
+                3,
+                34
+              ]
+            ],
+            "roc_auc": 0.8817567567567567,
+            "auprc": 0.9024597104062786
+          },
+          "calibration": {
+            "brier": 0.13139755050781218,
+            "ece_10_bins": 0.08772838095578966
+          },
+          "ci95": {
+            "recall": [
+              0.8108108108108109,
+              1.0
+            ],
+            "specificity": [
+              0.49921875000000004,
+              0.8125
+            ],
+            "f1": [
+              0.7560975609756098,
+              0.9
+            ],
+            "roc_auc": [
+              0.7862753378378378,
+              0.9569256756756757
+            ],
+            "auprc": [
+              0.8226419457960263,
+              0.9663544011779898
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 42,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "B",
+      "budget": 1.0,
+      "seed": 42,
+      "metrics": {
+        "accuracy": 0.8409090909090909,
+        "precision": 0.803921568627451,
+        "recall": 0.9111111111111111,
+        "specificity": 0.7674418604651163,
+        "f1": 0.8541666666666666,
+        "confusion_matrix": [
+          [
+            33,
+            10
+          ],
+          [
+            4,
+            41
+          ]
+        ],
+        "roc_auc": 0.9317829457364342,
+        "auprc": 0.9493385014542577
+      },
+      "calibration": {
+        "brier": 0.11227164680545973,
+        "ece_10_bins": 0.1050277743882704
+      },
+      "ci95": {
+        "recall": [
+          0.8222222222222222,
+          0.9777777777777777
+        ],
+        "specificity": [
+          0.6511627906976745,
+          0.8837209302325582
+        ],
+        "f1": [
+          0.7872340425531915,
+          0.9166666666666666
+        ],
+        "roc_auc": [
+          0.8779974160206717,
+          0.9751937984496124
+        ],
+        "auprc": [
+          0.9117397546114439,
+          0.9798309196917628
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 42,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.8947368421052632,
+            "precision": 1.0,
+            "recall": 0.75,
+            "specificity": 1.0,
+            "f1": 0.8571428571428571,
+            "confusion_matrix": [
+              [
+                11,
+                0
+              ],
+              [
+                2,
+                6
+              ]
+            ],
+            "roc_auc": 0.9431818181818181,
+            "auprc": 0.9519230769230769
+          },
+          "calibration": {
+            "brier": 0.18206250348021377,
+            "ece_10_bins": 0.20522622419056652
+          },
+          "ci95": {
+            "recall": [
+              0.375,
+              1.0
+            ],
+            "specificity": [
+              1.0,
+              1.0
+            ],
+            "f1": [
+              0.5454545454545454,
+              1.0
+            ],
+            "roc_auc": [
+              0.7954545454545455,
+              1.0
+            ],
+            "auprc": [
+              0.8392857142857143,
+              1.0
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 42,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.8260869565217391,
+            "precision": 0.7777777777777778,
+            "recall": 0.9459459459459459,
+            "specificity": 0.6875,
+            "f1": 0.8536585365853658,
+            "confusion_matrix": [
+              [
+                22,
+                10
+              ],
+              [
+                2,
+                35
+              ]
+            ],
+            "roc_auc": 0.9459459459459458,
+            "auprc": 0.9651897611562548
+          },
+          "calibration": {
+            "brier": 0.0930538746776289,
+            "ece_10_bins": 0.08735188207601388
+          },
+          "ci95": {
+            "recall": [
+              0.8648648648648649,
+              1.0
+            ],
+            "specificity": [
+              0.53125,
+              0.84375
+            ],
+            "f1": [
+              0.7857142857142857,
+              0.9135802469135802
+            ],
+            "roc_auc": [
+              0.8834459459459462,
+              0.9932432432432432
+            ],
+            "auprc": [
+              0.9268266923457442,
+              0.9942674483215025
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 42,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "C",
+      "budget": 1.0,
+      "seed": 42,
+      "metrics": {
+        "accuracy": 0.8068181818181818,
+        "precision": 0.8181818181818182,
+        "recall": 0.8,
+        "specificity": 0.813953488372093,
+        "f1": 0.8089887640449438,
+        "confusion_matrix": [
+          [
+            35,
+            8
+          ],
+          [
+            9,
+            36
+          ]
+        ],
+        "roc_auc": 0.8677002583979329,
+        "auprc": 0.8611141920907082
+      },
+      "calibration": {
+        "brier": 0.2281033930420171,
+        "ece_10_bins": 0.2729700127718209
+      },
+      "ci95": {
+        "recall": [
+          0.6888888888888889,
+          0.8888888888888888
+        ],
+        "specificity": [
+          0.6976744186046512,
+          0.9302325581395349
+        ],
+        "f1": [
+          0.7209302325581395,
+          0.8837209302325582
+        ],
+        "roc_auc": [
+          0.7865633074935401,
+          0.931782945736434
+        ],
+        "auprc": [
+          0.7704017738375647,
+          0.946033618090461
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 42,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.6842105263157895,
+            "precision": 0.625,
+            "recall": 0.625,
+            "specificity": 0.7272727272727273,
+            "f1": 0.625,
+            "confusion_matrix": [
+              [
+                8,
+                3
+              ],
+              [
+                3,
+                5
+              ]
+            ],
+            "roc_auc": 0.7272727272727273,
+            "auprc": 0.7296897546897547
+          },
+          "calibration": {
+            "brier": 0.2966670503403902,
+            "ece_10_bins": 0.32657318049118544
+          },
+          "ci95": {
+            "recall": [
+              0.25,
+              0.875
+            ],
+            "specificity": [
+              0.45454545454545453,
+              1.0
+            ],
+            "f1": [
+              0.3076923076923077,
+              0.875
+            ],
+            "roc_auc": [
+              0.4659090909090909,
+              0.9431818181818181
+            ],
+            "auprc": [
+              0.5192471569967699,
+              0.9427083333333334
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 42,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.8405797101449275,
+            "precision": 0.8611111111111112,
+            "recall": 0.8378378378378378,
+            "specificity": 0.84375,
+            "f1": 0.8493150684931506,
+            "confusion_matrix": [
+              [
+                27,
+                5
+              ],
+              [
+                6,
+                31
+              ]
+            ],
+            "roc_auc": 0.9028716216216216,
+            "auprc": 0.8961851376976
+          },
+          "calibration": {
+            "brier": 0.20922354538014623,
+            "ece_10_bins": 0.25820972021141614
+          },
+          "ci95": {
+            "recall": [
+              0.7027027027027027,
+              0.9459459459459459
+            ],
+            "specificity": [
+              0.6875,
+              0.9375
+            ],
+            "f1": [
+              0.75,
+              0.9211032388663967
+            ],
+            "roc_auc": [
+              0.8141680743243244,
+              0.9670608108108109
+            ],
+            "auprc": [
+              0.7857558114093337,
+              0.9768657935721159
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 42,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "D",
+      "budget": 1.0,
+      "seed": 42,
+      "metrics": {
+        "accuracy": 0.7840909090909091,
+        "precision": 0.8095238095238095,
+        "recall": 0.7555555555555555,
+        "specificity": 0.813953488372093,
+        "f1": 0.7816091954022989,
+        "confusion_matrix": [
+          [
+            35,
+            8
+          ],
+          [
+            11,
+            34
+          ]
+        ],
+        "roc_auc": 0.883204134366925,
+        "auprc": 0.9084584559640467
+      },
+      "calibration": {
+        "brier": 0.16845979216219018,
+        "ece_10_bins": 0.1670255665143635
+      },
+      "ci95": {
+        "recall": [
+          0.6444444444444445,
+          0.8444444444444444
+        ],
+        "specificity": [
+          0.6976744186046512,
+          0.9069767441860465
+        ],
+        "f1": [
+          0.6987671616699356,
+          0.8506586594343276
+        ],
+        "roc_auc": [
+          0.8211757105943153,
+          0.9390439276485788
+        ],
+        "auprc": [
+          0.8618674715342717,
+          0.9491149257836733
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 42,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.6842105263157895,
+            "precision": 1.0,
+            "recall": 0.25,
+            "specificity": 1.0,
+            "f1": 0.4,
+            "confusion_matrix": [
+              [
+                11,
+                0
+              ],
+              [
+                6,
+                2
+              ]
+            ],
+            "roc_auc": 0.7840909090909091,
+            "auprc": 0.7817982456140351
+          },
+          "calibration": {
+            "brier": 0.2712495525920609,
+            "ece_10_bins": 0.2724258270925647
+          },
+          "ci95": {
+            "recall": [
+              0.0,
+              0.5
+            ],
+            "specificity": [
+              1.0,
+              1.0
+            ],
+            "f1": [
+              0.0,
+              0.6666666666666666
+            ],
+            "roc_auc": [
+              0.48863636363636365,
+              0.9886363636363636
+            ],
+            "auprc": [
+              0.5677347488038278,
+              0.9861111111111112
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 42,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.8115942028985508,
+            "precision": 0.8,
+            "recall": 0.8648648648648649,
+            "specificity": 0.75,
+            "f1": 0.8311688311688312,
+            "confusion_matrix": [
+              [
+                24,
+                8
+              ],
+              [
+                5,
+                32
+              ]
+            ],
+            "roc_auc": 0.9172297297297298,
+            "auprc": 0.938849513947609
+          },
+          "calibration": {
+            "brier": 0.14015536537715328,
+            "ece_10_bins": 0.14861577805667395
+          },
+          "ci95": {
+            "recall": [
+              0.7297297297297297,
+              0.972972972972973
+            ],
+            "specificity": [
+              0.59375,
+              0.8757812499999993
+            ],
+            "f1": [
+              0.7435897435897436,
+              0.9113924050632911
+            ],
+            "roc_auc": [
+              0.8428631756756757,
+              0.9729729729729729
+            ],
+            "auprc": [
+              0.8846705075956003,
+              0.9799679357859505
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 42,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "A",
+      "budget": 1.0,
+      "seed": 123,
+      "metrics": {
+        "accuracy": 0.8068181818181818,
+        "precision": 0.8043478260869565,
+        "recall": 0.8222222222222222,
+        "specificity": 0.7906976744186046,
+        "f1": 0.8131868131868132,
+        "confusion_matrix": [
+          [
+            34,
+            9
+          ],
+          [
+            8,
+            37
+          ]
+        ],
+        "roc_auc": 0.9152454780361757,
+        "auprc": 0.933623336939588
+      },
+      "calibration": {
+        "brier": 0.14163748261529702,
+        "ece_10_bins": 0.12668666394913472
+      },
+      "ci95": {
+        "recall": [
+          0.7111111111111111,
+          0.9111111111111111
+        ],
+        "specificity": [
+          0.6744186046511628,
+          0.9069767441860465
+        ],
+        "f1": [
+          0.735632183908046,
+          0.8863636363636364
+        ],
+        "roc_auc": [
+          0.8614987080103359,
+          0.9586821705426356
+        ],
+        "auprc": [
+          0.8944167502966203,
+          0.9677240229925534
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 123,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.7894736842105263,
+            "precision": 1.0,
+            "recall": 0.5,
+            "specificity": 1.0,
+            "f1": 0.6666666666666666,
+            "confusion_matrix": [
+              [
+                11,
+                0
+              ],
+              [
+                4,
+                4
+              ]
+            ],
+            "roc_auc": 0.9431818181818181,
+            "auprc": 0.9427083333333333
+          },
+          "calibration": {
+            "brier": 0.19438369652646018,
+            "ece_10_bins": 0.23352470865976283
+          },
+          "ci95": {
+            "recall": [
+              0.125,
+              0.875
+            ],
+            "specificity": [
+              1.0,
+              1.0
+            ],
+            "f1": [
+              0.2222222222222222,
+              0.9333333333333333
+            ],
+            "roc_auc": [
+              0.8181818181818182,
+              1.0
+            ],
+            "auprc": [
+              0.8392857142857143,
+              1.0
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 123,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.8115942028985508,
+            "precision": 0.7857142857142857,
+            "recall": 0.8918918918918919,
+            "specificity": 0.71875,
+            "f1": 0.8354430379746836,
+            "confusion_matrix": [
+              [
+                23,
+                9
+              ],
+              [
+                4,
+                33
+              ]
+            ],
+            "roc_auc": 0.9358108108108109,
+            "auprc": 0.9571665579663514
+          },
+          "calibration": {
+            "brier": 0.12711316284265786,
+            "ece_10_bins": 0.12625542424965563
+          },
+          "ci95": {
+            "recall": [
+              0.7837837837837838,
+              0.972972972972973
+            ],
+            "specificity": [
+              0.5625,
+              0.875
+            ],
+            "f1": [
+              0.759493670886076,
+              0.9113924050632911
+            ],
+            "roc_auc": [
+              0.8783783783783784,
+              0.9839527027027027
+            ],
+            "auprc": [
+              0.9189349486819646,
+              0.9887930143729201
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 123,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "B",
+      "budget": 1.0,
+      "seed": 123,
+      "metrics": {
+        "accuracy": 0.7727272727272727,
+        "precision": 0.7358490566037735,
+        "recall": 0.8666666666666667,
+        "specificity": 0.6744186046511628,
+        "f1": 0.7959183673469388,
+        "confusion_matrix": [
+          [
+            29,
+            14
+          ],
+          [
+            6,
+            39
+          ]
+        ],
+        "roc_auc": 0.8919896640826873,
+        "auprc": 0.9098181620141718
+      },
+      "calibration": {
+        "brier": 0.15772700187028332,
+        "ece_10_bins": 0.15818938098664148
+      },
+      "ci95": {
+        "recall": [
+          0.7777777777777778,
+          0.9555555555555556
+        ],
+        "specificity": [
+          0.5348837209302325,
+          0.813953488372093
+        ],
+        "f1": [
+          0.7272727272727273,
+          0.865979381443299
+        ],
+        "roc_auc": [
+          0.8227131782945737,
+          0.946782945736434
+        ],
+        "auprc": [
+          0.85294117733122,
+          0.9553405132986973
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 123,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.7894736842105263,
+            "precision": 0.75,
+            "recall": 0.75,
+            "specificity": 0.8181818181818182,
+            "f1": 0.75,
+            "confusion_matrix": [
+              [
+                9,
+                2
+              ],
+              [
+                2,
+                6
+              ]
+            ],
+            "roc_auc": 0.8409090909090908,
+            "auprc": 0.8092261904761905
+          },
+          "calibration": {
+            "brier": 0.2359414158029429,
+            "ece_10_bins": 0.2726677161515813
+          },
+          "ci95": {
+            "recall": [
+              0.4968750000000002,
+              1.0
+            ],
+            "specificity": [
+              0.5454545454545454,
+              1.0
+            ],
+            "f1": [
+              0.5,
+              0.9411764705882353
+            ],
+            "roc_auc": [
+              0.6363636363636364,
+              1.0
+            ],
+            "auprc": [
+              0.6175162337662338,
+              1.0
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 123,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.7681159420289855,
+            "precision": 0.7333333333333333,
+            "recall": 0.8918918918918919,
+            "specificity": 0.625,
+            "f1": 0.8048780487804879,
+            "confusion_matrix": [
+              [
+                20,
+                12
+              ],
+              [
+                4,
+                33
+              ]
+            ],
+            "roc_auc": 0.9087837837837838,
+            "auprc": 0.9324067848435404
+          },
+          "calibration": {
+            "brier": 0.1361896994830292,
+            "ece_10_bins": 0.13811941265658542
+          },
+          "ci95": {
+            "recall": [
+              0.7837837837837838,
+              0.972972972972973
+            ],
+            "specificity": [
+              0.46875,
+              0.78125
+            ],
+            "f1": [
+              0.7294117647058823,
+              0.875
+            ],
+            "roc_auc": [
+              0.8395059121621622,
+              0.96875
+            ],
+            "auprc": [
+              0.8823841671911548,
+              0.9777617338755602
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 123,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "C",
+      "budget": 1.0,
+      "seed": 123,
+      "metrics": {
+        "accuracy": 0.7954545454545454,
+        "precision": 0.8,
+        "recall": 0.8,
+        "specificity": 0.7906976744186046,
+        "f1": 0.8,
+        "confusion_matrix": [
+          [
+            34,
+            9
+          ],
+          [
+            9,
+            36
+          ]
+        ],
+        "roc_auc": 0.8439276485788114,
+        "auprc": 0.8641893784317236
+      },
+      "calibration": {
+        "brier": 0.21215880905272028,
+        "ece_10_bins": 0.22600017286597393
+      },
+      "ci95": {
+        "recall": [
+          0.6888888888888889,
+          0.8894444444444439
+        ],
+        "specificity": [
+          0.6744186046511628,
+          0.9069767441860465
+        ],
+        "f1": [
+          0.7142857142857143,
+          0.8736342502905851
+        ],
+        "roc_auc": [
+          0.7689664082687339,
+          0.9142764857881135
+        ],
+        "auprc": [
+          0.7895021604523397,
+          0.9344922041935582
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 123,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.6842105263157895,
+            "precision": 0.6666666666666666,
+            "recall": 0.5,
+            "specificity": 0.8181818181818182,
+            "f1": 0.5714285714285714,
+            "confusion_matrix": [
+              [
+                9,
+                2
+              ],
+              [
+                4,
+                4
+              ]
+            ],
+            "roc_auc": 0.6477272727272727,
+            "auprc": 0.68070923046252
+          },
+          "calibration": {
+            "brier": 0.32326356373444587,
+            "ece_10_bins": 0.30642198282883426
+          },
+          "ci95": {
+            "recall": [
+              0.125,
+              0.875
+            ],
+            "specificity": [
+              0.6340909090909093,
+              1.0
+            ],
+            "f1": [
+              0.2,
+              0.8424812030075184
+            ],
+            "roc_auc": [
+              0.375,
+              0.9090909090909091
+            ],
+            "auprc": [
+              0.46132633904837855,
+              0.9166666666666666
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 123,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.8260869565217391,
+            "precision": 0.8205128205128205,
+            "recall": 0.8648648648648649,
+            "specificity": 0.78125,
+            "f1": 0.8421052631578947,
+            "confusion_matrix": [
+              [
+                25,
+                7
+              ],
+              [
+                5,
+                32
+              ]
+            ],
+            "roc_auc": 0.8935810810810811,
+            "auprc": 0.9081295244381036
+          },
+          "calibration": {
+            "brier": 0.1815647461693466,
+            "ece_10_bins": 0.2038550367892442
+          },
+          "ci95": {
+            "recall": [
+              0.7297297297297297,
+              0.972972972972973
+            ],
+            "specificity": [
+              0.65625,
+              0.90625
+            ],
+            "f1": [
+              0.7630930318754634,
+              0.9210526315789473
+            ],
+            "roc_auc": [
+              0.8141469594594594,
+              0.9619932432432432
+            ],
+            "auprc": [
+              0.8316839196962357,
+              0.970796946590033
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 123,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "D",
+      "budget": 1.0,
+      "seed": 123,
+      "metrics": {
+        "accuracy": 0.8409090909090909,
+        "precision": 0.8297872340425532,
+        "recall": 0.8666666666666667,
+        "specificity": 0.813953488372093,
+        "f1": 0.8478260869565217,
+        "confusion_matrix": [
+          [
+            35,
+            8
+          ],
+          [
+            6,
+            39
+          ]
+        ],
+        "roc_auc": 0.8863049095607234,
+        "auprc": 0.9065907695701556
+      },
+      "calibration": {
+        "brier": 0.1322054564140296,
+        "ece_10_bins": 0.12917718009005374
+      },
+      "ci95": {
+        "recall": [
+          0.7777777777777778,
+          0.9555555555555556
+        ],
+        "specificity": [
+          0.7209302325581395,
+          0.9069767441860465
+        ],
+        "f1": [
+          0.7789181286549708,
+          0.9148936170212766
+        ],
+        "roc_auc": [
+          0.8149741602067182,
+          0.9540051679586563
+        ],
+        "auprc": [
+          0.8506909166434431,
+          0.9643670887086847
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 123,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.9473684210526315,
+            "precision": 1.0,
+            "recall": 0.875,
+            "specificity": 1.0,
+            "f1": 0.9333333333333333,
+            "confusion_matrix": [
+              [
+                11,
+                0
+              ],
+              [
+                1,
+                7
+              ]
+            ],
+            "roc_auc": 0.8977272727272727,
+            "auprc": 0.9338235294117647
+          },
+          "calibration": {
+            "brier": 0.07010273002323186,
+            "ece_10_bins": 0.10613592072556344
+          },
+          "ci95": {
+            "recall": [
+              0.625,
+              1.0
+            ],
+            "specificity": [
+              1.0,
+              1.0
+            ],
+            "f1": [
+              0.7692307692307693,
+              1.0
+            ],
+            "roc_auc": [
+              0.6590909090909092,
+              1.0
+            ],
+            "auprc": [
+              0.7916666666666666,
+              1.0
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 123,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.8115942028985508,
+            "precision": 0.8,
+            "recall": 0.8648648648648649,
+            "specificity": 0.75,
+            "f1": 0.8311688311688312,
+            "confusion_matrix": [
+              [
+                24,
+                8
+              ],
+              [
+                5,
+                32
+              ]
+            ],
+            "roc_auc": 0.8783783783783785,
+            "auprc": 0.9055215615268004
+          },
+          "calibration": {
+            "brier": 0.14930620715932172,
+            "ece_10_bins": 0.1432139262361897
+          },
+          "ci95": {
+            "recall": [
+              0.7567567567567568,
+              0.972972972972973
+            ],
+            "specificity": [
+              0.59375,
+              0.90625
+            ],
+            "f1": [
+              0.7435897435897436,
+              0.9067272727272726
+            ],
+            "roc_auc": [
+              0.7846072635135134,
+              0.9577913851351351
+            ],
+            "auprc": [
+              0.8336492403215984,
+              0.9682722871628918
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 123,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "A",
+      "budget": 1.0,
+      "seed": 999,
+      "metrics": {
+        "accuracy": 0.8295454545454546,
+        "precision": 0.8,
+        "recall": 0.8888888888888888,
+        "specificity": 0.7674418604651163,
+        "f1": 0.8421052631578947,
+        "confusion_matrix": [
+          [
+            33,
+            10
+          ],
+          [
+            5,
+            40
+          ]
+        ],
+        "roc_auc": 0.9271317829457364,
+        "auprc": 0.9407594112218656
+      },
+      "calibration": {
+        "brier": 0.17837024453331932,
+        "ece_10_bins": 0.18498594537595633
+      },
+      "ci95": {
+        "recall": [
+          0.8,
+          0.9777777777777777
+        ],
+        "specificity": [
+          0.6511627906976745,
+          0.8837209302325582
+        ],
+        "f1": [
+          0.7708333333333334,
+          0.9052631578947369
+        ],
+        "roc_auc": [
+          0.8733720930232558,
+          0.9679586563307493
+        ],
+        "auprc": [
+          0.9001282501885822,
+          0.973376584968743
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 999,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.8421052631578947,
+            "precision": 0.8571428571428571,
+            "recall": 0.75,
+            "specificity": 0.9090909090909091,
+            "f1": 0.8,
+            "confusion_matrix": [
+              [
+                10,
+                1
+              ],
+              [
+                2,
+                6
+              ]
+            ],
+            "roc_auc": 0.9204545454545454,
+            "auprc": 0.9241452991452992
+          },
+          "calibration": {
+            "brier": 0.14384564013164478,
+            "ece_10_bins": 0.1505007048759389
+          },
+          "ci95": {
+            "recall": [
+              0.375,
+              1.0
+            ],
+            "specificity": [
+              0.7272727272727273,
+              1.0
+            ],
+            "f1": [
+              0.5,
+              1.0
+            ],
+            "roc_auc": [
+              0.75,
+              1.0
+            ],
+            "auprc": [
+              0.7856799450549451,
+              1.0
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 999,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.8260869565217391,
+            "precision": 0.7906976744186046,
+            "recall": 0.918918918918919,
+            "specificity": 0.71875,
+            "f1": 0.85,
+            "confusion_matrix": [
+              [
+                23,
+                9
+              ],
+              [
+                3,
+                34
+              ]
+            ],
+            "roc_auc": 0.9425675675675675,
+            "auprc": 0.9595483264809305
+          },
+          "calibration": {
+            "brier": 0.1878770196584181,
+            "ece_10_bins": 0.20393253261631736
+          },
+          "ci95": {
+            "recall": [
+              0.8108108108108109,
+              1.0
+            ],
+            "specificity": [
+              0.5625,
+              0.875
+            ],
+            "f1": [
+              0.773277108433735,
+              0.9210526315789473
+            ],
+            "roc_auc": [
+              0.8817356418918918,
+              0.9847972972972974
+            ],
+            "auprc": [
+              0.9208489661419249,
+              0.9877998903319951
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 999,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "B",
+      "budget": 1.0,
+      "seed": 999,
+      "metrics": {
+        "accuracy": 0.8181818181818182,
+        "precision": 0.8085106382978723,
+        "recall": 0.8444444444444444,
+        "specificity": 0.7906976744186046,
+        "f1": 0.8260869565217391,
+        "confusion_matrix": [
+          [
+            34,
+            9
+          ],
+          [
+            7,
+            38
+          ]
+        ],
+        "roc_auc": 0.9131782945736434,
+        "auprc": 0.9342964733200734
+      },
+      "calibration": {
+        "brier": 0.1446933777003032,
+        "ece_10_bins": 0.12568462740349867
+      },
+      "ci95": {
+        "recall": [
+          0.7333333333333333,
+          0.9333333333333333
+        ],
+        "specificity": [
+          0.6744186046511628,
+          0.9069767441860465
+        ],
+        "f1": [
+          0.75,
+          0.9010989010989011
+        ],
+        "roc_auc": [
+          0.8537338501291991,
+          0.9664082687338501
+        ],
+        "auprc": [
+          0.8915618595968681,
+          0.9731633214754467
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 999,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.7894736842105263,
+            "precision": 0.8333333333333334,
+            "recall": 0.625,
+            "specificity": 0.9090909090909091,
+            "f1": 0.7142857142857143,
+            "confusion_matrix": [
+              [
+                10,
+                1
+              ],
+              [
+                3,
+                5
+              ]
+            ],
+            "roc_auc": 0.8636363636363635,
+            "auprc": 0.8784722222222222
+          },
+          "calibration": {
+            "brier": 0.1489352433849934,
+            "ece_10_bins": 0.14642714853643587
+          },
+          "ci95": {
+            "recall": [
+              0.25,
+              0.875
+            ],
+            "specificity": [
+              0.7272727272727273,
+              1.0
+            ],
+            "f1": [
+              0.36363636363636365,
+              0.9333333333333333
+            ],
+            "roc_auc": [
+              0.6477272727272727,
+              1.0
+            ],
+            "auprc": [
+              0.7120388862781954,
+              1.0
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 999,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.8260869565217391,
+            "precision": 0.8048780487804879,
+            "recall": 0.8918918918918919,
+            "specificity": 0.75,
+            "f1": 0.8461538461538461,
+            "confusion_matrix": [
+              [
+                24,
+                8
+              ],
+              [
+                4,
+                33
+              ]
+            ],
+            "roc_auc": 0.9290540540540541,
+            "auprc": 0.9503277322773447
+          },
+          "calibration": {
+            "brier": 0.1435253277291566,
+            "ece_10_bins": 0.14174027321557026
+          },
+          "ci95": {
+            "recall": [
+              0.7837837837837838,
+              0.972972972972973
+            ],
+            "specificity": [
+              0.59375,
+              0.90625
+            ],
+            "f1": [
+              0.7654320987654321,
+              0.918918918918919
+            ],
+            "roc_auc": [
+              0.8564189189189191,
+              0.9805954391891892
+            ],
+            "auprc": [
+              0.9006326802098312,
+              0.9854678840026746
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 999,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "C",
+      "budget": 1.0,
+      "seed": 999,
+      "metrics": {
+        "accuracy": 0.7159090909090909,
+        "precision": 0.6612903225806451,
+        "recall": 0.9111111111111111,
+        "specificity": 0.5116279069767442,
+        "f1": 0.7663551401869159,
+        "confusion_matrix": [
+          [
+            22,
+            21
+          ],
+          [
+            4,
+            41
+          ]
+        ],
+        "roc_auc": 0.8201550387596899,
+        "auprc": 0.8557586032365371
+      },
+      "calibration": {
+        "brier": 0.23917722798517513,
+        "ece_10_bins": 0.2458330293418408
+      },
+      "ci95": {
+        "recall": [
+          0.8222222222222222,
+          0.9777777777777777
+        ],
+        "specificity": [
+          0.37209302325581395,
+          0.6511627906976745
+        ],
+        "f1": [
+          0.7047619047619048,
+          0.8269230769230769
+        ],
+        "roc_auc": [
+          0.728669250645995,
+          0.9033591731266151
+        ],
+        "auprc": [
+          0.7807851650611347,
+          0.9218245428708817
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 999,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.5263157894736842,
+            "precision": 0.47058823529411764,
+            "recall": 1.0,
+            "specificity": 0.18181818181818182,
+            "f1": 0.64,
+            "confusion_matrix": [
+              [
+                2,
+                9
+              ],
+              [
+                0,
+                8
+              ]
+            ],
+            "roc_auc": 0.7272727272727272,
+            "auprc": 0.7676776960784314
+          },
+          "calibration": {
+            "brier": 0.21691981722697265,
+            "ece_10_bins": 0.27838331225868723
+          },
+          "ci95": {
+            "recall": [
+              1.0,
+              1.0
+            ],
+            "specificity": [
+              0.0,
+              0.45454545454545453
+            ],
+            "f1": [
+              0.5925925925925926,
+              0.7272727272727273
+            ],
+            "roc_auc": [
+              0.4431818181818182,
+              0.9434659090909089
+            ],
+            "auprc": [
+              0.5386344537815125,
+              0.939296875
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 999,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.7681159420289855,
+            "precision": 0.7333333333333333,
+            "recall": 0.8918918918918919,
+            "specificity": 0.625,
+            "f1": 0.8048780487804879,
+            "confusion_matrix": [
+              [
+                20,
+                12
+              ],
+              [
+                4,
+                33
+              ]
+            ],
+            "roc_auc": 0.8403716216216216,
+            "auprc": 0.8817363294842853
+          },
+          "calibration": {
+            "brier": 0.24530608022294104,
+            "ece_10_bins": 0.2799428395354072
+          },
+          "ci95": {
+            "recall": [
+              0.7837837837837838,
+              0.972972972972973
+            ],
+            "specificity": [
+              0.4375,
+              0.78125
+            ],
+            "f1": [
+              0.7228915662650602,
+              0.875
+            ],
+            "roc_auc": [
+              0.7381756756756758,
+              0.9265413851351353
+            ],
+            "auprc": [
+              0.8056280991060812,
+              0.9466960784999091
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 999,
+          "group_count": 69
+        }
+      }
+    },
+    {
+      "arm": "D",
+      "budget": 1.0,
+      "seed": 999,
+      "metrics": {
+        "accuracy": 0.75,
+        "precision": 0.7346938775510204,
+        "recall": 0.8,
+        "specificity": 0.6976744186046512,
+        "f1": 0.7659574468085106,
+        "confusion_matrix": [
+          [
+            30,
+            13
+          ],
+          [
+            9,
+            36
+          ]
+        ],
+        "roc_auc": 0.8589147286821706,
+        "auprc": 0.880164399010196
+      },
+      "calibration": {
+        "brier": 0.2174348060371671,
+        "ece_10_bins": 0.19450981397610367
+      },
+      "ci95": {
+        "recall": [
+          0.6888888888888889,
+          0.9111111111111111
+        ],
+        "specificity": [
+          0.5581395348837209,
+          0.8372093023255814
+        ],
+        "f1": [
+          0.6823395721925134,
+          0.8478260869565217
+        ],
+        "roc_auc": [
+          0.7844832041343668,
+          0.9255943152454782
+        ],
+        "auprc": [
+          0.8152568717680934,
+          0.9395346861044459
+        ]
+      },
+      "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+      "bootstrap_repetitions": 1000,
+      "bootstrap_seed": 999,
+      "group_count": 88,
+      "cohorts": {
+        "montgomery": {
+          "metrics": {
+            "accuracy": 0.631578947368421,
+            "precision": 0.5555555555555556,
+            "recall": 0.625,
+            "specificity": 0.6363636363636364,
+            "f1": 0.5882352941176471,
+            "confusion_matrix": [
+              [
+                7,
+                4
+              ],
+              [
+                3,
+                5
+              ]
+            ],
+            "roc_auc": 0.6931818181818181,
+            "auprc": 0.6516369047619048
+          },
+          "calibration": {
+            "brier": 0.31256384237787765,
+            "ece_10_bins": 0.32705967716480555
+          },
+          "ci95": {
+            "recall": [
+              0.25,
+              0.875
+            ],
+            "specificity": [
+              0.3613636363636365,
+              0.9090909090909091
+            ],
+            "f1": [
+              0.2857142857142857,
+              0.8235294117647058
+            ],
+            "roc_auc": [
+              0.4204545454545455,
+              0.8977272727272727
+            ],
+            "auprc": [
+              0.44700912751464217,
+              0.9038461538461539
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 999,
+          "group_count": 19
+        },
+        "shenzhen": {
+          "metrics": {
+            "accuracy": 0.782608695652174,
+            "precision": 0.775,
+            "recall": 0.8378378378378378,
+            "specificity": 0.71875,
+            "f1": 0.8051948051948052,
+            "confusion_matrix": [
+              [
+                23,
+                9
+              ],
+              [
+                6,
+                31
+              ]
+            ],
+            "roc_auc": 0.8978040540540541,
+            "auprc": 0.9272576329316653
+          },
+          "calibration": {
+            "brier": 0.1912398540013193,
+            "ece_10_bins": 0.1723625819634079
+          },
+          "ci95": {
+            "recall": [
+              0.7027027027027027,
+              0.9459459459459459
+            ],
+            "specificity": [
+              0.5625,
+              0.875
+            ],
+            "f1": [
+              0.7105263157894737,
+              0.8860759493670886
+            ],
+            "roc_auc": [
+              0.8099239864864864,
+              0.9594805743243243
+            ],
+            "auprc": [
+              0.8654526947008617,
+              0.9702209263828998
+            ]
+          },
+          "ci_method": "percentile bootstrap of duplicate groups within cohort-composition/label strata; conditional on trained model",
+          "bootstrap_repetitions": 1000,
+          "bootstrap_seed": 999,
+          "group_count": 69
+        }
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "arm": "D",
+      "baseline": "A",
+      "budget": 0.25,
+      "paired_seeds": [
+        42,
+        123,
+        999
+      ],
+      "metrics": {
+        "recall": {
+          "mean_difference": -0.0296296296296296,
+          "seed_bootstrap_ci95": [
+            -0.11111111111111105,
+            0.022222222222222254
+          ]
+        },
+        "auprc": {
+          "mean_difference": -0.010882971327721572,
+          "seed_bootstrap_ci95": [
+            -0.03204284548764602,
+            0.019188473610425083
+          ]
+        },
+        "f1": {
+          "mean_difference": -0.01494323372881253,
+          "seed_bootstrap_ci95": [
+            -0.07400379506641375,
+            0.015448603683897777
+          ]
+        },
+        "specificity": {
+          "mean_difference": 3.700743415417188e-17,
+          "seed_bootstrap_ci95": [
+            -0.20930232558139528,
+            0.2093023255813954
+          ]
+        },
+        "roc_auc": {
+          "mean_difference": -0.01912144702842374,
+          "seed_bootstrap_ci95": [
+            -0.04392764857881126,
+            0.008268733850129162
+          ]
+        }
+      }
+    },
+    {
+      "arm": "D",
+      "baseline": "A",
+      "budget": 0.5,
+      "paired_seeds": [
+        42,
+        123,
+        999
+      ],
+      "metrics": {
+        "recall": {
+          "mean_difference": 0.07407407407407407,
+          "seed_bootstrap_ci95": [
+            0.0444444444444444,
+            0.11111111111111116
+          ]
+        },
+        "auprc": {
+          "mean_difference": -0.005125631912385613,
+          "seed_bootstrap_ci95": [
+            -0.02512033725730367,
+            0.018588777105331244
+          ]
+        },
+        "f1": {
+          "mean_difference": -0.0014146675560525734,
+          "seed_bootstrap_ci95": [
+            -0.03321678321678323,
+            0.038578442833761994
+          ]
+        },
+        "specificity": {
+          "mean_difference": -0.11627906976744184,
+          "seed_bootstrap_ci95": [
+            -0.2558139534883721,
+            0.0
+          ]
+        },
+        "roc_auc": {
+          "mean_difference": -0.0043066322136089035,
+          "seed_bootstrap_ci95": [
+            -0.02739018087855294,
+            0.024806201550387708
+          ]
+        }
+      }
+    },
+    {
+      "arm": "D",
+      "baseline": "A",
+      "budget": 1.0,
+      "paired_seeds": [
+        42,
+        123,
+        999
+      ],
+      "metrics": {
+        "recall": {
+          "mean_difference": -0.0592592592592592,
+          "seed_bootstrap_ci95": [
+            -0.1333333333333333,
+            0.04444444444444451
+          ]
+        },
+        "auprc": {
+          "mean_difference": -0.027584666436839433,
+          "seed_bootstrap_ci95": [
+            -0.06059501221166952,
+            0.0048735802705835995
+          ]
+        },
+        "f1": {
+          "mean_difference": -0.025408625929873845,
+          "seed_bootstrap_ci95": [
+            -0.07614781634938406,
+            0.034639273769708545
+          ]
+        },
+        "specificity": {
+          "mean_difference": 0.023255813953488375,
+          "seed_bootstrap_ci95": [
+            -0.06976744186046513,
+            0.11627906976744184
+          ]
+        },
+        "roc_auc": {
+          "mean_difference": -0.03565891472868221,
+          "seed_bootstrap_ci95": [
+            -0.06821705426356584,
+            -0.009819121447028456
+          ]
+        }
+      }
+    },
+    {
+      "arm": "D",
+      "baseline": "B",
+      "budget": 0.25,
+      "paired_seeds": [
+        42,
+        123,
+        999
+      ],
+      "metrics": {
+        "recall": {
+          "mean_difference": -0.007407407407407344,
+          "seed_bootstrap_ci95": [
+            -0.022222222222222143,
+            0.022222222222222254
+          ]
+        },
+        "auprc": {
+          "mean_difference": 0.01238085978621295,
+          "seed_bootstrap_ci95": [
+            -0.009815086946195484,
+            0.02604846635896152
+          ]
+        },
+        "f1": {
+          "mean_difference": 0.010900140330788973,
+          "seed_bootstrap_ci95": [
+            -0.05162064825930379,
+            0.059484467944481145
+          ]
+        },
+        "specificity": {
+          "mean_difference": 0.03100775193798448,
+          "seed_bootstrap_ci95": [
+            -0.11627906976744184,
+            0.11627906976744184
+          ]
+        },
+        "roc_auc": {
+          "mean_difference": 0.023944875107665815,
+          "seed_bootstrap_ci95": [
+            -0.012403100775193687,
+            0.048578811369509034
+          ]
+        }
+      }
+    },
+    {
+      "arm": "D",
+      "baseline": "B",
+      "budget": 0.5,
+      "paired_seeds": [
+        42,
+        123,
+        999
+      ],
+      "metrics": {
+        "recall": {
+          "mean_difference": 0.08148148148148145,
+          "seed_bootstrap_ci95": [
+            0.06666666666666665,
+            0.11111111111111105
+          ]
+        },
+        "auprc": {
+          "mean_difference": -0.0004372319585174885,
+          "seed_bootstrap_ci95": [
+            -0.007196655478372227,
+            0.005077600295613993
+          ]
+        },
+        "f1": {
+          "mean_difference": 0.02448692502166024,
+          "seed_bootstrap_ci95": [
+            0.019813519813519864,
+            0.029787234042553123
+          ]
+        },
+        "specificity": {
+          "mean_difference": -0.06201550387596899,
+          "seed_bootstrap_ci95": [
+            -0.11627906976744184,
+            -0.023255813953488302
+          ]
+        },
+        "roc_auc": {
+          "mean_difference": 0.003273040482342856,
+          "seed_bootstrap_ci95": [
+            -0.0015503875968991832,
+            0.011886304909560774
+          ]
+        }
+      }
+    },
+    {
+      "arm": "D",
+      "baseline": "B",
+      "budget": 1.0,
+      "paired_seeds": [
+        42,
+        123,
+        999
+      ],
+      "metrics": {
+        "recall": {
+          "mean_difference": -0.06666666666666665,
+          "seed_bootstrap_ci95": [
+            -0.15555555555555556,
+            0.0
+          ]
+        },
+        "auprc": {
+          "mean_difference": -0.032746504081368144,
+          "seed_bootstrap_ci95": [
+            -0.05413207430987732,
+            -0.0032273924440161528
+          ]
+        },
+        "f1": {
+          "mean_difference": -0.026926420456004425,
+          "seed_bootstrap_ci95": [
+            -0.07255747126436773,
+            0.05190771960958296
+          ]
+        },
+        "specificity": {
+          "mean_difference": 0.031007751937984513,
+          "seed_bootstrap_ci95": [
+            -0.09302325581395343,
+            0.13953488372093026
+          ]
+        },
+        "roc_auc": {
+          "mean_difference": -0.03617571059431531,
+          "seed_bootstrap_ci95": [
+            -0.054263565891472854,
+            -0.005684754521963931
+          ]
+        }
+      }
+    }
+  ],
+  "generator_diagnostics": [
+    {
+      "budget": 0.25,
+      "seed": 42,
+      "real_training_count": 52,
+      "synthetic_count": 52,
+      "feature_space": "64x64 grayscale pixels [0,1], Pillow default bicubic diagnostic resize; RMSE",
+      "mean_nearest_training_rmse": 0.3354357320528764,
+      "min_nearest_training_rmse": 0.3323323726654053,
+      "diversity_mean_pairwise_rmse": 0.00839774776250124,
+      "synthetic_duplicate_count": 0,
+      "exact_matches_to_resized_training": 0,
+      "limitations": "Exploratory pixel diagnostics; no clinical fidelity assessment or privacy guarantee. No FID/KID computed.",
+      "runtime_seconds": 65.73280410000007
+    },
+    {
+      "budget": 0.25,
+      "seed": 123,
+      "real_training_count": 52,
+      "synthetic_count": 52,
+      "feature_space": "64x64 grayscale pixels [0,1], Pillow default bicubic diagnostic resize; RMSE",
+      "mean_nearest_training_rmse": 0.3279702136149773,
+      "min_nearest_training_rmse": 0.3234052360057831,
+      "diversity_mean_pairwise_rmse": 0.01054625865072012,
+      "synthetic_duplicate_count": 0,
+      "exact_matches_to_resized_training": 0,
+      "limitations": "Exploratory pixel diagnostics; no clinical fidelity assessment or privacy guarantee. No FID/KID computed.",
+      "runtime_seconds": 75.68465840000135
+    },
+    {
+      "budget": 0.25,
+      "seed": 999,
+      "real_training_count": 52,
+      "synthetic_count": 52,
+      "feature_space": "64x64 grayscale pixels [0,1], Pillow default bicubic diagnostic resize; RMSE",
+      "mean_nearest_training_rmse": 0.33119506331590504,
+      "min_nearest_training_rmse": 0.3266054093837738,
+      "diversity_mean_pairwise_rmse": 0.009468764998018742,
+      "synthetic_duplicate_count": 0,
+      "exact_matches_to_resized_training": 0,
+      "limitations": "Exploratory pixel diagnostics; no clinical fidelity assessment or privacy guarantee. No FID/KID computed.",
+      "runtime_seconds": 134.0023702000035
+    },
+    {
+      "budget": 0.5,
+      "seed": 42,
+      "real_training_count": 105,
+      "synthetic_count": 105,
+      "feature_space": "64x64 grayscale pixels [0,1], Pillow default bicubic diagnostic resize; RMSE",
+      "mean_nearest_training_rmse": 0.3347644073622567,
+      "min_nearest_training_rmse": 0.3293931484222412,
+      "diversity_mean_pairwise_rmse": 0.01736561395227909,
+      "synthetic_duplicate_count": 0,
+      "exact_matches_to_resized_training": 0,
+      "limitations": "Exploratory pixel diagnostics; no clinical fidelity assessment or privacy guarantee. No FID/KID computed.",
+      "runtime_seconds": 157.3192401999986
+    },
+    {
+      "budget": 0.5,
+      "seed": 123,
+      "real_training_count": 105,
+      "synthetic_count": 105,
+      "feature_space": "64x64 grayscale pixels [0,1], Pillow default bicubic diagnostic resize; RMSE",
+      "mean_nearest_training_rmse": 0.3235364235582806,
+      "min_nearest_training_rmse": 0.3170832693576813,
+      "diversity_mean_pairwise_rmse": 0.010029864497482777,
+      "synthetic_duplicate_count": 0,
+      "exact_matches_to_resized_training": 0,
+      "limitations": "Exploratory pixel diagnostics; no clinical fidelity assessment or privacy guarantee. No FID/KID computed.",
+      "runtime_seconds": 84.10172880000027
+    },
+    {
+      "budget": 0.5,
+      "seed": 999,
+      "real_training_count": 105,
+      "synthetic_count": 105,
+      "feature_space": "64x64 grayscale pixels [0,1], Pillow default bicubic diagnostic resize; RMSE",
+      "mean_nearest_training_rmse": 0.3321815414088113,
+      "min_nearest_training_rmse": 0.327455997467041,
+      "diversity_mean_pairwise_rmse": 0.009993611834943295,
+      "synthetic_duplicate_count": 0,
+      "exact_matches_to_resized_training": 0,
+      "limitations": "Exploratory pixel diagnostics; no clinical fidelity assessment or privacy guarantee. No FID/KID computed.",
+      "runtime_seconds": 86.24925969999458
+    },
+    {
+      "budget": 1.0,
+      "seed": 42,
+      "real_training_count": 210,
+      "synthetic_count": 210,
+      "feature_space": "64x64 grayscale pixels [0,1], Pillow default bicubic diagnostic resize; RMSE",
+      "mean_nearest_training_rmse": 0.3199823644899187,
+      "min_nearest_training_rmse": 0.3190779387950897,
+      "diversity_mean_pairwise_rmse": 0.00554640730842948,
+      "synthetic_duplicate_count": 0,
+      "exact_matches_to_resized_training": 0,
+      "limitations": "Exploratory pixel diagnostics; no clinical fidelity assessment or privacy guarantee. No FID/KID computed.",
+      "runtime_seconds": 155.81846490000316
+    },
+    {
+      "budget": 1.0,
+      "seed": 123,
+      "real_training_count": 210,
+      "synthetic_count": 210,
+      "feature_space": "64x64 grayscale pixels [0,1], Pillow default bicubic diagnostic resize; RMSE",
+      "mean_nearest_training_rmse": 0.31770763170151484,
+      "min_nearest_training_rmse": 0.31554287672042847,
+      "diversity_mean_pairwise_rmse": 0.009571081958711147,
+      "synthetic_duplicate_count": 0,
+      "exact_matches_to_resized_training": 0,
+      "limitations": "Exploratory pixel diagnostics; no clinical fidelity assessment or privacy guarantee. No FID/KID computed.",
+      "runtime_seconds": 163.88484600000083
+    },
+    {
+      "budget": 1.0,
+      "seed": 999,
+      "real_training_count": 210,
+      "synthetic_count": 210,
+      "feature_space": "64x64 grayscale pixels [0,1], Pillow default bicubic diagnostic resize; RMSE",
+      "mean_nearest_training_rmse": 0.34649979245095025,
+      "min_nearest_training_rmse": 0.33710405230522156,
+      "diversity_mean_pairwise_rmse": 0.012996010482311249,
+      "synthetic_duplicate_count": 0,
+      "exact_matches_to_resized_training": 0,
+      "limitations": "Exploratory pixel diagnostics; no clinical fidelity assessment or privacy guarantee. No FID/KID computed.",
+      "runtime_seconds": 147.79051320000144
+    }
+  ],
+  "limitations": "Image-group intervals do not establish patient independence. Seed bootstrap intervals with few seeds are unstable; no hypothesis-test significance is claimed. Missing runs are not imputed.",
+  "runtime_seconds_total_fits": 8540.75607899997,
+  "max_allocated_gpu_bytes": 262545408,
+  "analysis_implementation": {
+    "method": "Identical RNG order and bootstrap estimators; batched metric arithmetic validated against original sklearn implementation",
+    "source_sha256": {
+      "src/study/fast_analysis.py": "9d1994ffff1abc1fc4bc3518add4f1f99c0425a5ca08ca3379a78636e20fd5f4",
+      "src/study/analysis.py": "a5fad7eea6a7a78998f8d20cd18935cc6d7922cd091073500e44fda06c0236dd",
+      "src/study/publication_analysis.py": "efc872de2f64eac7258379e8723b0aed5ea34a94a2da573743c86832381cd6b1"
+    }
+  },
+  "provenance": {
+    "hashes": {
+      "publication_config": "107cdff3224a1acc3f53955167ae95c74ab5dd51ce291353af632afaff66e6a8",
+      "publication_protocol": "93fa2ae6904bd51bff6dc772a77a04eb589aee7028d8bfe84ab690902e28c035",
+      "publication_design": "dc47987285f29b3ff79ec7e931583bc4929a167dc468c4716191312e0e682bbb",
+      "proposal_config": "4a31371da490c929e812d3f0eee09af8f2a0c637e65a8a84dd7ef38157140df6",
+      "proposal_protocol": "8a0f0ae4f59e13708ec5ac07ae32f59ff74e678d8efb705693fc489335d46405",
+      "proposal_original_reference": "c8592c06e852f8166cebdde73b937b85b56110941c7a3fc03b3a67f943201347",
+      "proposal_candidate_pairs": "a0e46a33ea0cf6a3df1f2fb3f7260a7e79ff206a0268f8ac24bc725f466e3266",
+      "proposal_retained_manifest": "2fca5f823ffb22344783d61d4646110c7e6cd9f04fcc2f8c82291a473396befd",
+      "proposal_exclusion_manifest": "52fefa2f9a53e95abc34a905215e241b346787443dfced5aa217fe6f233d2e79",
+      "proposal_split_manifest": "a7bcb397098246309a4cfc07ed1376ba5b1babab789ee81b05a22dbccebc8775"
+    },
+    "implementation": {
+      "commit": "c915a7bd880dade0ec7d3e875d2e05579f60e9e8",
+      "sha256": "154c0eb0f22b3902a5cec074c0e9092b31e00ec97edb59dcb109c64b11284192"
+    },
+    "pretrained_weights_sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+    "selection_sha256": "dbdde6b4e0aa730ef13d8339841796379373fc789051240922ca56dfaa161d08"
+  },
+  "protocol": "sha256:93fa2ae6904bd51bff6dc772a77a04eb589aee7028d8bfe84ab690902e28c035",
+  "generation_finding": "Fixed-order grids from all nine fits showed repetitive noise-like patterns, not convincing chest anatomy. No successful disease-preserving synthesis is established."
+}

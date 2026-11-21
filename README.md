@@ -1,103 +1,70 @@
 # AURORA
 
-**Synthetic chest X-ray augmentation research · MediSyn demo**
+**Controlled evaluation of a DCGAN augmentation pipeline for TB chest radiograph classification**
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 
-A research prototype for evaluating synthetic chest X-ray augmentation under limited TB-labelled training data. MediSyn is the companion Streamlit demo.
+The planned experiment completed: **36 classifiers, nine 200-epoch GANs, three TB training budgets and three seeds**. Saved GAN grids showed repetitive noise-like patterns rather than convincing chest anatomy. This project reports that failure; it does **not** demonstrate successful medical-image synthesis or clinical readiness.
 
-This is an experimental comparison: it reports what selected methods do under defined conditions. Positive, negative and inconclusive findings are valid outcomes. Demonstrating a universally best method or clinical readiness is not a completion requirement.
+## Read the research
 
-**Status: the approved two-epoch DCGAN feasibility run completed; publication experiments remain pending.** See [execution tracker](PROJECT_COMPLETION_TRACKER.md) and [test report](docs/TEST_REPORT.md) for measured software checks and remaining limitations. The demo displays no invented performance metrics.
+- [Current manuscript (PDF)](paper/publication_v2/manuscript.pdf)
+- [Editable manuscript source](paper/publication_v2/manuscript.md)
+- [Measured outcomes and uncertainty](paper/publication_v2/paper_results.json)
+- [Execution and verification record](docs/PUBLICATION_RESULTS.md)
+- [Project status](PROJECT_COMPLETION_TRACKER.md)
 
-## Faculty review
+Rayan Rahman · Marathwada Mitra Mandal Institute of Technology. The manuscript is for faculty review; no publication acceptance or institutional approval is claimed. The earlier feasibility-only draft is preserved in `paper/professor_review/`.
 
-Read the [review manuscript (PDF)](paper/professor_review/manuscript.pdf) or its [editable source](paper/professor_review/manuscript.md). It reports dataset preparation and the completed two-epoch feasibility run. The [review notes](paper/professor_review/REVIEW_NOTES.md) identify the checks performed and the experiments still needed.
+## Findings
 
-## Project images
+![Measured classifier outcomes](paper/publication_v2/images/classification.png)
 
-![AURORA dataset selection and experimental workflow](docs/images/aurora-workflow.png)
+A: real only; B: repeated real TB images; C: mild TB-only conventional transforms; D: DCGAN outputs assigned the positive label. B and D add identical counts. Error bars show sample standard deviation across three seeds.
 
-The workflow distinguishes the completed feasibility run from the proposed four-condition publication study. Counts refer to images, not unique patients.
+D had lower mean recall than A at 25% and 100% TB budgets. At 50%, D increased mean recall from 0.800 to 0.874 while specificity decreased from 0.829 to 0.713. This is a trade-off under one fixed split, not a consistent augmentation benefit. The outputs were not convincing radiographs, so classification differences cannot be attributed to preserved TB findings.
 
-![Measured losses from the two-epoch DCGAN feasibility run](docs/images/feasibility-losses.png)
+![Unfiltered generated examples showing the synthesis failure](paper/publication_v2/images/synthetic_examples.png)
 
-Actual epoch means from the approved run on 52 TB training images (seed 42). Two epochs establish execution feasibility only; these losses do not measure image quality or clinical utility. [Execution details](docs/FEASIBILITY_V2.md#first-real-feasibility-execution).
+These are generated research outputs, not patient images or validated TB examples. Negative and inconclusive findings are retained.
 
-## Research scope
+## Design and reproducibility
 
-The current v2 proposal retains 590 of 800 original NLM images after automated exclusion of all 210 images participating in the 206 flagged candidate pairs. These are not confirmed duplicates; no original image was deleted. See the [verified dataset report](docs/DATASET_SELECTION_REPORT.md), [simplified protocol](docs/EXPERIMENT_PROTOCOL_SIMPLIFIED.md) and [proposed configuration](configs/study_simplified_proposal.yaml). Patient independence and a duplicate-free subset are not claimed.
+The study retained 590 of 800 NLM images by excluding all 210 images involved in a frozen 206-pair similarity audit. No original image was deleted or relabelled. The split is 413/89/88; TB training budgets are 52/105/210 with all 203 normal training images retained. Patient identifiers are unavailable, so image disjointness is not patient independence.
 
-Synthetic images are learned from real training images. They do not automatically guarantee privacy, diagnostic validity or improved classifier performance. The current implementation is for chest X-ray research; MRI and clinical deployment have not been validated.
+Each pretrained ResNet-18 received 1000 updates. Validation selected checkpoints and thresholds; testing occurred after all 36 fits. GANs received only selected real TB training tensors. Original hashes are unchanged. The grid used commit `c915a7b` and the [v2.1 numerical correction](docs/PUBLICATION_V2_1.md) to the [execution design](docs/PUBLICATION_V2.md). The initial AMP-overflow failure is preserved and disclosed.
 
-## Environment
+The initial candidate-screening implementation and thresholds have not been fully recovered. Source-level manifests, images and weights remain local, so public aggregates alone cannot recreate the selected population. Dataset/model redistribution rights are separate from the software license.
+
+## Run locally
 
 Use Python 3.10–3.12 and the pinned dependencies:
 
 ```powershell
 python -m venv .venv
-.venv\Scripts\Activate.ps1
+.venv/Scripts/Activate.ps1
 python -m pip install -r requirements.txt
 python -m pip install -e . --no-deps
 python -m pytest -q
-```
-
-On the current development machine, the existing `aurora-cuda` Conda environment has the required dependencies and CUDA PyTorch. The default system Python lacks the test dependencies.
-
-## Demo
-
-```powershell
 python -m streamlit run app/streamlit_app.py
 ```
 
-The app works without a checkpoint and explains that generation/results are unavailable. See [deployment preparation](docs/DEPLOYMENT.md) for environment variables and the untested container candidate.
+MediSyn displays the measured aggregate report. Generation requires a locally configured checkpoint via `AURORA_CHECKPOINT`; no trained weights or medical-image upload feature are provided. Public hosting has not been deployed.
 
-## Historical toolkit GAN training and export (not authorized for v2 yet)
+## Experiment commands
 
-Only use a directory containing the approved **training partition**, with class folders such as `Normal/` and `Tuberculosis/`. Do not point this command at the full dataset. These commands do not perform data adjudication or establish leakage-free splits for you.
-
-```powershell
-python -m src.gan.train_gan --config configs/dcgan.yaml --data-dir data/final/train --target-class Tuberculosis --output-dir outputs/gan
-python -m src.gan.inference --checkpoint outputs/gan/models/generator_latest.pth --output-dir data/synthetic/run_01 --count 100 --seed 42
-```
-
-Use `configs/wgan_gp.yaml` for WGAN-GP. Both GAN paths currently use full precision. Checkpoints include architecture metadata; the most recent checkpoint is not necessarily the best-quality model. Exported files are explicitly named synthetic and include a generation provenance manifest.
-
-## Components
-
-- `src/data_loader.py`: exploratory loaders and GAN/classifier transforms. Random splitting is not the final NLM study protocol.
-- `src/gan/`: DCGAN/WGAN-GP training, checkpoint inference and PNG export.
-- `src/classifier/`: ResNet-18 training and evaluation.
-- `src/evaluate/`: classification metrics and FID.
-- `src/study/`: reviewed manifests, publication gate, controlled A0/A1/A2/A3/G1 experiments and reproducible analysis.
-- `app/streamlit_app.py`: research demo.
-- `tests/`: model, training, data and app regression tests.
-- `paper/professor_review/manuscript.pdf`: current faculty-review manuscript, with measured feasibility results and a concise future-work section.
-
-The historical v1 runner is implemented and tested on artificial fixtures. The separate v2 feasibility entry point has completed one real-data run; the v2 publication runner still needs integration. Diffusion is an optional, unimplemented extension. Publication experiments have not started. Obsolete exploratory scripts, duplicate planning documents and generated artifacts have been removed from the public branch; local research records are preserved.
-
-## Study progress
-
-The simplified proposal compares real-only training, random real-TB oversampling, TB-only conventional augmentation and one DCGAN method. There are three nested TB budgets and three seeds: 36 proposed classifier fits and nine GAN fits. The separate two-epoch feasibility run completed on the RTX 4050 using 52 real TB training images, with no holdout image reads. Publication training has not started. See [feasibility results](docs/FEASIBILITY_V2.md).
+These require the original local data/audit inputs and explicit hash-bound approval for the exact implementation. Historical v1 and two-epoch feasibility approvals cannot authorize this runner.
 
 ```powershell
-python -m src.study.selection --reference data/reference/nlm_original/reference_manifest.csv --index outputs/provenance/manual_review_index.csv --root data/reference/nlm_original --output outputs/provenance
+python -m src.study.publication --config configs/study_publication_v2_1.yaml --approval outputs/publication_v2_1_approved_20261119.json --output outputs/publication_v2/new_run --check-only
+python -m src.study.publication --config configs/study_publication_v2_1.yaml --approval outputs/publication_v2_1_approved_20261119.json --output outputs/publication_v2/new_run
+python -m src.study.fast_analysis --run outputs/publication_v2/new_run --output outputs/publication_v2/new_analysis
 ```
 
-The command verifies original hashes/dimensions, preserves all source files, writes retained/exclusion manifests and a proposed 413/89/88 split, and refuses existing output files. Use a new directory for reproduction. Review reproduced outputs before granting approval for a new run. The v2 configuration is proposal-only; the historical runner has not been adapted to its automated-exclusion gate, TB-only transforms or revised count rule. Do not use fabricated human decisions to pass the old gate. [Prior protocol history](docs/protocol_history/EXPERIMENT_PROTOCOL_v1_1.md) is preserved.
+Do not reuse the exposed test set for repeated model selection. A repaired generator needs a separately documented evaluation. Computational completion is not scientific acceptance, privacy protection or diagnostic validity.
 
-Further documentation: [architecture](docs/ARCHITECTURE.md), [NLM dataset card](docs/DATASET_NLM.md), [model card](docs/MODEL_CARD.md), [release notes](docs/RELEASE_NOTES.md), [software citation](CITATION.cff). Raw/reference datasets and private reviewer records stay local.
+## Code and license
 
-For completed historical-runner experiments, the existing reporting utility exports measured tables and demo reports (v2 integration follows approval):
+`src/study/` contains gates, experiments and analysis; `src/gan/` and `src/classifier/` contain models; `app/` contains the demo; `tests/` contains software checks. See the [model card](docs/MODEL_CARD.md), [dataset card](docs/DATASET_NLM.md), [verification history](docs/TEST_REPORT.md) and [deployment notes](docs/DEPLOYMENT.md).
 
-```powershell
-python -m src.study.report --run outputs/publication_v1 --output outputs/report_v1
-```
-
-The exporter requires the complete configured run grid, checks frozen-file hashes and recomputes metrics. It writes `results_table.md` and `paper_results.json`, including all arms, seed variability, cohort results and A0/A3 contrasts. Source image IDs and local paths are omitted. Set `AURORA_RESULTS` to the exported JSON after inspecting it. Exporting does not independently validate the science or submit the paper.
-
-## Release and license
-
-Project code and original documentation are licensed under the [Apache License 2.0](LICENSE). Third-party datasets, dependencies and externally sourced model weights retain their respective terms; this license does not grant redistribution rights to them. Raw medical images and trained checkpoints are not included in this repository.
-
-The [research manuscript](paper/professor_review/manuscript.pdf) is prepared for faculty review, not a published paper. Publication experiments and research conclusions remain pending.
+Code is licensed under [Apache 2.0](LICENSE). Cite the exact commit using [CITATION.cff](CITATION.cff). Raw images, credentials, private review decisions and model checkpoints are not released.

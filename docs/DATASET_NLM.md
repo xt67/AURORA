@@ -1,4 +1,10 @@
-# Candidate primary dataset: NLM chest radiographs
+# NLM chest radiograph dataset card
+
+## Current study selection — 20 November 2026
+
+The completed v2.1 comparison used 590 images selected from the 800 originals by excluding every image in the frozen 206-pair similarity audit. The researcher approved this automated-exclusion study; no human pair decisions were fabricated. All 800 originals remain unchanged. The fixed image split is 413/89/88. See [selection counts](DATASET_SELECTION_REPORT.md), [execution protocol](PUBLICATION_V2_1.md) and [results](PUBLICATION_RESULTS.md). The initial screening implementation/thresholds are incompletely recovered; subsequent exclusion and splitting are deterministic and hash-bound. Patient independence is not established.
+
+## Historical source inventory and v1 review context
 
 This card supersedes the mixed-source Kaggle card for the proposed primary study. The older card and exploratory results remain historical records.
 

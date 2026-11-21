@@ -1,4 +1,10 @@
-# Software verification report — 10 November 2026
+# Software verification history
+
+## Publication update — 20 November 2026
+
+All 19 v2.1 publication tests passed after the documented AMP correction, including an artificial CUDA test of exact update counts and loss scaling. Four demo navigation/empty-state tests passed after the status change. The initial broader focused suite had 51 passes and one floating-point tolerance assertion; the assertion was corrected and three focused checks, including historical gate regressions, passed. The actual 36-classifier/nine-GAN grid then completed. All thresholds, predictions, checkpoint selections and protected original hashes were reconciled independently: see [execution verification](PUBLICATION_RESULTS.md). Software tests and real experimental evidence remain distinct.
+
+## Historical verification — 10 November 2026
 
 Simplified dataset preparation: **12 focused selection/data tests passed in 2.34s**. Tests cover union exclusion with repeated pair membership, rejection of absent/mislabelled audit identities, seeded split and nested budgets, exact-hash collision refusal, source preservation, byte-identical audit copying, changed-image refusal and overwrite protection. Independently verified the actual 800-image reference, filename-label suffixes, 206-pair union, 590/210 partition, unique original SHA-256 values and proposed split. No classifier/GAN feasibility or publication training ran in this preparation phase.
 

@@ -8,5 +8,5 @@ authors:
 version: 0.2.0
 date-released: 2026-11-10
 repository-code: "https://github.com/xt67/AURORA"
-abstract: "A local research toolkit for reviewed dataset preparation, controlled augmentation experiments and reproducible evaluation. A two-epoch execution-feasibility run is complete; publication comparisons remain pending."
+abstract: "A research toolkit with a completed 36-classifier and nine-GAN comparison under limited TB training data. The study reports failed radiograph synthesis and mixed classification outcomes; it does not claim clinical validity."
 license: Apache-2.0

@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "classifier_results_verified": 36,
+  "generator_results_verified": 9,
+  "synthetic_images_verified": 1101,
+  "classifier_updates": 36000,
+  "original_images_hash_verified_unchanged": 800,
+  "protected_files_verified": 811,
+  "all_thresholds_recomputed_from_validation": true,
+  "all_test_metrics_recomputed": true,
+  "all_checkpoints_match_validation_selection": true,
+  "generator_holdout_overlap": 0
+}

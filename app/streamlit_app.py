@@ -22,7 +22,8 @@ def main():
     if page == "Overview":
         st.markdown("AURORA compares how selected augmentation methods affect TB-manifestation classification under controlled data scarcity. It reports experimental outcomes, including negative or inconclusive findings, without claiming a universally best method.")
         st.markdown("Generators learn from real training images. Synthetic output does not by itself guarantee privacy or preserve diagnostic findings.")
-        st.info("The v2 subset contains 590 images selected by automated similarity-based exclusion. A two-epoch DCGAN feasibility run is complete; classification comparisons remain pending.")
+        st.info("The 590-image study completed 36 classifier fits and nine 200-epoch GAN fits. Results cover four conditions, three TB training budgets and three seeds.")
+        st.warning("The saved GAN samples showed repetitive noise-like patterns rather than convincing chest anatomy. The study reports this synthesis failure; it does not demonstrate successful medical-image generation.")
         st.markdown("[Project repository](https://github.com/xt67/AURORA)")
     elif page == "Generator":
         checkpoint = Path(os.environ.get("AURORA_CHECKPOINT", str(ROOT / "outputs/gan/models/generator_latest.pth")))
@@ -46,11 +47,11 @@ def main():
                                file_name="aurora_synthetic_grid.png", mime="image/png")
     elif page == "Study workflow":
         st.subheader("From reviewed data to measured results")
-        st.markdown("1. Inspect the automated-exclusion dataset and image split.\n2. Review the completed two-epoch feasibility evidence.\n3. Complete and authorize the separate publication runner.\n4. Run matched comparisons and inspect measured results.")
-        st.info("The v2 publication runner still requires integration and separate researcher approval. This public demo does not accept medical-image uploads or start training jobs.")
-        st.markdown("[Dataset selection](https://github.com/xt67/AURORA/blob/master/docs/DATASET_SELECTION_REPORT.md) | [Current protocol](https://github.com/xt67/AURORA/blob/master/docs/EXPERIMENT_PROTOCOL_SIMPLIFIED.md)")
+        st.markdown("1. Review the automated exclusion and fixed image split.\n2. Inspect the completed feasibility and publication experiments.\n3. Compare matched conditions, seed variation and generator failures.\n4. Review the manuscript's limitations before interpreting the findings.")
+        st.info("The completed grid used a separate v2 approval, with all checkpoint selections finished before test evaluation. This demo does not accept medical-image uploads or start training jobs.")
+        st.markdown("[Dataset selection](https://github.com/xt67/AURORA/blob/master/docs/DATASET_SELECTION_REPORT.md) | [Execution protocol](https://github.com/xt67/AURORA/blob/master/docs/PUBLICATION_V2_1.md)")
     else:
-        path = Path(os.environ.get("AURORA_RESULTS", str(ROOT / "outputs/paper_results.json")))
+        path = Path(os.environ.get("AURORA_RESULTS", str(ROOT / "paper/publication_v2/paper_results.json")))
         if not path.is_file():
             st.info("No measured study results have been published. Positive, negative and inconclusive outcomes will be reported after experiments.")
             return
@@ -63,6 +64,8 @@ def main():
             return
         st.caption(f"Protocol: {report['protocol']}")
         st.info("These are experimental results under the stated conditions. Measured status does not mean independent clinical validation or universal superiority.")
+        if report.get("generation_finding"):
+            st.warning(report["generation_finding"])
         st.json(report)
 
 

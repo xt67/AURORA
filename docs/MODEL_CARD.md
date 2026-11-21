@@ -12,6 +12,8 @@ DCGAN and WGAN-GP share the existing 128px grayscale generator with a noise-vect
 The selected primary subset contains 590 NLM images after automated similarity-based exclusion. A two-epoch feasibility run used 52 TB-labelled training images; no publication-trained model is released. The generator is restricted to the selected positive real training subset. The configured final generator epoch is retained; it is not called a best-quality checkpoint. Classifier checkpoints use validation loss; operating thresholds use validation F1. Test data are excluded from training and selection.
 
 ## Evidence and limitations
+
+Update 20 November 2026: the v2.1 study completed nine 200-epoch GAN fits and 36 classifiers. Inspected grids from every GAN showed repetitive noise-like patterns, not convincing radiographs. The intended synthesis objective is unmet. D's classification outcomes were mixed and cannot be attributed to preserved TB anatomy. Final generators were fixed-epoch checkpoints; all classifiers were selected before test evaluation. No trained weights are publicly released. The earlier feasibility record below is historical.
 Software fixtures test CPU/CUDA execution, checkpoints, image export and metrics. They are not evidence of medical fidelity, privacy or downstream improvement. Small-data memorization, cohort confounding, low resolution and lack of patient identifiers remain limitations. FID/KID and pixel-neighbour screens do not prove clinical validity or privacy.
 
 ## Required checkpoint release metadata
